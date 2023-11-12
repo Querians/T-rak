@@ -11,22 +11,47 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
-  token     String?
-  image     String?
-  aboutme   String?
-  tierlist  Tierlist[]
+  userId    String     @id @default(uuid()) @db.Uuid
+  email     String     @unique @db.VarChar(254)
+  name      String     @db.VarChar(50)
+  token     String     @db.Text
+  image     String?    @db.Text
+  aboutMe   String?    @db.Text
+  tierlists Tierlist[]
 }
 
 model Tierlist {
-  id        String   @id @default(uuid())
-  name      String
-  description String?
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  categories Category @relation("Category")
-  categoriesId String[]
-  rows      Row[]
+  tierlistId    String   @id @default(uuid()) @db.Uuid
+  category      Category @relation(fields: [categoryId], references: [categoryId])
+  categoryId    String
+  user          User     @relation(fields: [userId], references: [userId])
+  userId        String
+  name          String   @db.VarChar(50)
+  description   String?  @db.Text
+  coverPhotoUrl String?  @db.Text
+  rows          Row[]
+}
+
+model Category {
+  categoryId   String     @id @default(uuid()) @db.Uuid
+  categoryName String     @db.VarChar(50)
+  tierlists    Tierlist[]
+}
+
+model Row {
+  rowId      String    @id @default(uuid()) @db.Uuid
+  tierlist   Tierlist  @relation(fields: [tierlistId], references: [tierlistId])
+  tierlistId String
+  label      String?   @db.VarChar(50)
+  color      String?   @db.VarChar(6)
+  order      Int       @db.SmallInt
+  elements   Element[]
+}
+
+model Element {
+  elementId  String @id @default(uuid()) @db.Uuid
+  row        Row    @relation(fields: [rowId], references: [rowId])
+  rowId      String
+  pictureUrl String @db.Text
+  order      Int    @db.SmallInt
 }
