@@ -7,6 +7,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    require.resolve('react-widgets/styles.css'),
   ],
   theme: {
     extend: {
@@ -21,5 +22,5 @@ module.exports = {
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [ nextui(), require('react-widgets-tailwind') ]
 };

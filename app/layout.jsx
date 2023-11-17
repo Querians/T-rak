@@ -1,4 +1,5 @@
 import './globals.css';
+import 'react-widgets/styles.css';
 import Providers from './providers.jsx';
 import localFont from 'next/font/local';
 

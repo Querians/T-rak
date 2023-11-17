@@ -21,7 +21,9 @@
     "next": "14.0.1",
     "prettier": "^3.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-widgets": "^5.8.4",
+    "react-widgets-tailwind": "^1.1.5"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.2",
