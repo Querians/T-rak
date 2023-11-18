@@ -5,12 +5,12 @@ export default function Home() {
     <main className='flex min-h-screen flex-col items-center justify-center p-24'>
       <Image
         src="/logoTRak.svg"
-        alt="Vercel Logo"
+        alt="T-Rak Logo"
         width={124}
         height={124}
         priority
       />
-      <p className='text-3xl text-white'>T-rak</p>
+      <p className='text-3xl text-white text-bold'>T-rak</p>
       <p className='text-xl text-white'>sort your favourite</p>
     </main>
   );
