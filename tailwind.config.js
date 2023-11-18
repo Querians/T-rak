@@ -28,6 +28,9 @@ module.exports = {
         '4xl': '2.441rem',
         '5xl': '3rem',
       },
+      fontFamily:{
+        subjectRounded: ['var(--font-subjectRounded)']
+      },
     },
   },
   plugins: [nextui()],
