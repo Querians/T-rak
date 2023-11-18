@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
 }
 
 datasource db {
@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  userId    String     @id @default(dbgenerated("uuid_generate_v1()")) @db.Uuid
+  userId    String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email     String     @unique @db.VarChar(254)
   name      String     @db.VarChar(50)
   token     String     @db.Text
@@ -21,7 +21,7 @@ model User {
 }
 
 model Tierlist {
-  tierlistId    String   @id @default(dbgenerated("uuid_generate_v1()")) @db.Uuid
+  tierlistId    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   category      Category @relation(fields: [categoryId], references: [categoryId])
   categoryId    String   @db.Uuid
   user          User     @relation(fields: [userId], references: [userId])
@@ -33,13 +33,13 @@ model Tierlist {
 }
 
 model Category {
-  categoryId   String     @id @default(dbgenerated("uuid_generate_v1()")) @db.Uuid
+  categoryId   String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   categoryName String     @db.VarChar(50)
   tierlists    Tierlist[]
 }
 
 model Row {
-  rowId      String    @id @default(dbgenerated("uuid_generate_v1()")) @db.Uuid
+  rowId      String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   tierlist   Tierlist  @relation(fields: [tierlistId], references: [tierlistId])
   tierlistId String    @db.Uuid
   label      String?   @db.VarChar(50)
@@ -49,7 +49,7 @@ model Row {
 }
 
 model Element {
-  elementId  String @id @default(dbgenerated("uuid_generate_v1()")) @db.Uuid
+  elementId  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   row        Row    @relation(fields: [rowId], references: [rowId])
   rowId      String @db.Uuid
   pictureUrl String @db.Text
