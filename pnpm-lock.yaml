@@ -20,6 +20,9 @@ dependencies:
   '@tanstack/react-query-devtools':
     specifier: ^5.4.3
     version: 5.4.3(@tanstack/react-query@5.4.3)(react-dom@18.2.0)(react@18.2.0)
+  '@tracksuitdev/use-select':
+    specifier: ^1.1.1
+    version: 1.1.1(react@18.2.0)
   framer-motion:
     specifier: ^10.16.4
     version: 10.16.4(react-dom@18.2.0)(react@18.2.0)
@@ -2712,6 +2715,15 @@ packages:
       '@tanstack/query-core': 5.4.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@tracksuitdev/use-select@1.1.1(react@18.2.0):
+    resolution: {integrity: sha512-J6VhxRULANleCUUGOweVqPX6Sxu/ouf5Xo97XhQj/IGAogqZrHOvOxAroOtNn9sNTu0/uwb9iaoLPBZqZPw+NA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@types/classnames@2.3.1:
