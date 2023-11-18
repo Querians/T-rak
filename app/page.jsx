@@ -10,7 +10,7 @@ export default function Home() {
         height={124}
         priority
       />
-      <p className='text-3xl text-white text-bold'>T-rak</p>
+      <p className='text-3xl text-white font-bold'>T-rak</p>
       <p className='text-xl text-white'>sort your favourite</p>
     </main>
   );
