@@ -71,9 +71,7 @@ export const Button = ({onClick, text, type }) => {
 
         {type == 'logoutbtn' ? (
             <button
-            className="flex gap-2 items-center justify-center h-fit w-full rounded-full border border-1 
-            border-littlepink bg-winered px-20 py-2 text-base 
-            font-bold text-white drop-shadow-md"
+            className="flex gap-2 items-center justify-center h-fit w-full rounded-full border border-1 border-littlepink bg-winered px-20 py-2 text-base font-bold text-white drop-shadow-md"
             onClick={onClick}
             >
                 <Image
