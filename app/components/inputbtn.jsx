@@ -1,7 +1,7 @@
 'use client'
 import {useState} from 'react'
 
-export default function Inputbox({text}) {
+export default function Inputbutton({text}) {
 
     const [value, setValue] = useState("")
 
