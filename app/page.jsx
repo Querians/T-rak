@@ -1,5 +1,4 @@
 'use client'
-import Combobox from './components/combobox.jsx';
 
 const data = [
   {

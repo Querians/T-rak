@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image'
 import {useState} from 'react'
-import Combobox from 'react-widgets/Combobox';
 
 export function DropButton({onClick, open}) {
     return(
@@ -18,7 +17,7 @@ export function DropButton({onClick, open}) {
     );
 }
 
-export default function AutoBox({data}) {
+export default function Combobox({data}) {
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState("")
     const [filteredCategory, setFilteredCategory] = useState(data)
