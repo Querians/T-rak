@@ -7,7 +7,7 @@ export const Button = ({onClick, text, type }) => {
       <>
         {type == 'btnpeach' ? (
             <button
-            className="h-fit w-full rounded-full border border-1 border-littlepink bg-peach px-20 py-2 text-base font-bold text-white drop-shadow-md"
+            className="h-fit w-full rounded-[0.625rem] border border-1 border-littlepink bg-peach px-20 py-2 text-base font-bold text-white drop-shadow-md"
             onClick={onClick}
             >
                 {text}
@@ -18,7 +18,7 @@ export const Button = ({onClick, text, type }) => {
 
         {type == 'btncherry' ? (
             <button
-            className="h-fit w-full rounded-full border border-1 border-littlepink bg-cherry px-20 py-2 text-base font-bold text-white drop-shadow-md"
+            className="h-fit w-full rounded-[0.625rem] border border-1 border-littlepink bg-cherry px-20 py-2 text-base font-bold text-white drop-shadow-md"
             onClick={onClick}
             >
                 {text}
@@ -30,7 +30,7 @@ export const Button = ({onClick, text, type }) => {
        
         {type == 'addtextbtn' ? (
             <button
-            className="flex gap-2 items-center justify-center h-fit w-full rounded-full border border-1 border-littlepink bg-peach px-20 py-2 text-base font-bold text-white drop-shadow-md"
+            className="flex gap-2 items-center justify-center h-fit w-full rounded-[0.625rem] border border-1 border-littlepink bg-peach px-20 py-2 text-base font-bold text-white drop-shadow-md"
             onClick={onClick}
             >
                 <Image
@@ -50,9 +50,7 @@ export const Button = ({onClick, text, type }) => {
 
         {type == 'deletebtn' ? (
             <button
-            className="flex gap-2 items-center justify-center h-fit w-full rounded-full border border-1 
-            border-littlepink bg-winered px-20 py-2 text-base 
-            font-bold text-white drop-shadow-md"
+            className="flex gap-2 items-center justify-center h-fit w-full rounded-[0.625rem] border border-1 border-littlepink bg-winered px-20 py-2 text-base font-bold text-white drop-shadow-md"
             onClick={onClick}
             >
                 <Image
@@ -71,7 +69,7 @@ export const Button = ({onClick, text, type }) => {
 
         {type == 'logoutbtn' ? (
             <button
-            className="flex gap-2 items-center justify-center h-fit w-full rounded-full border border-1 border-littlepink bg-winered px-20 py-2 text-base font-bold text-white drop-shadow-md"
+            className="flex gap-2 items-center justify-center h-fit w-full rounded-[0.625rem] border border-1 border-littlepink bg-winered px-20 py-2 text-base font-bold text-white drop-shadow-md"
             onClick={onClick}
             >
                 <Image
