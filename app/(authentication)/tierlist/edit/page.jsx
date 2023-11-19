@@ -358,7 +358,7 @@ export default function TierList() {
       autoScroll={true}
       sensors={sensors}
     >
-      <div className='flex w-full flex-col gap-y-2 bg-green-400 px-[5px] '>
+      <div className='mt-3.5 flex w-full flex-col gap-y-2 rounded-[20px] bg-cream px-4 pt-[27px]'>
         <SortableContext strategy={verticalListSortingStrategy} items={items}>
           {items.map((row, index) => {
             if (index == items.length - 1) {
@@ -373,7 +373,7 @@ export default function TierList() {
                 items={row.elements}
                 row={row}
                 isRow={true}
-                className={`flex h-[90px] w-full gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-[5px] shadow-lg`}
+                className={`flex h-[90px] w-full gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-1 shadow-lg`}
               >
                 <Container
                   parentIndex={index}
@@ -429,7 +429,7 @@ export default function TierList() {
                   }
                   fill={true}
                   quality={100}
-                  className='rounded-lg object-cover shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]'
+                  className='rounded-lg object-cover shadow-lg'
                   alt={'sdfsdf'}
                 />
               </div>
@@ -441,7 +441,7 @@ export default function TierList() {
                   items={items.find((row) => row.id == activeId).elements}
                   row={items.find((row) => row.id == activeId)}
                   isRow={true}
-                  className={`flex h-[90px] w-full gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-[5px] shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]`}
+                  className={`flex h-[90px] w-full gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-[5px] shadow-lg`}
                 >
                   <Container
                     parentIndex={items.findIndex((row) => row.id == activeId)}
@@ -449,7 +449,7 @@ export default function TierList() {
                     id={activeId}
                     items={items.find((row) => row.id == activeId).elements}
                     className={`flex h-full w-full shrink-0 items-center gap-x-[5px] `}
-                    itemClassName={`relative min-w-[70px] min-h-[70px] max-w-[70px] max-h-[70px] rounded-xl shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]`}
+                    itemClassName={`relative min-w-[70px] min-h-[70px] max-w-[70px] max-h-[70px] rounded-xl shadow-lg`}
                   />
                 </SortableItem>
               </div>
