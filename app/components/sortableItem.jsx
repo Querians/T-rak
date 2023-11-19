@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSortable, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import Image from 'next/image';
 
 const animateLayoutChanges = (args) => {
   return args.isSorting || args.wasDragging
@@ -24,6 +25,7 @@ export default function SortableItem(props) {
     id: props.id,
     disabled: props.isDisable,
   });
+  const [isClick, setIsClick] = useState(false);
 
   const { children } = props;
 
@@ -33,7 +35,6 @@ export default function SortableItem(props) {
   };
 
   return (
-    // <div ref={setDroppableNodeRef}  className={`${isDragging && 'opacity-50'} w-full `}>
     <div
       ref={setNodeRef}
       style={style}
@@ -45,43 +46,46 @@ export default function SortableItem(props) {
             ref={setActivatorNodeRef}
             {...listeners}
             {...attributes}
-            className={`h-full w-[100px] basis-1/4 rounded-md bg-gray-400`}
+            className={`flex h-full w-[90px] shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg text-center text-lg font-bold text-darkgrey ${props.row.color} shadow-lg`}
           >
-            drag me
+            {props?.row?.label}
           </div>
-          <div className='basis-3/4 overflow-auto'>{children}</div>
+          <div className='w-full overflow-auto '>{children}</div>
         </>
       ) : (
         <div
-          ref={setActivatorNodeRef}
-          {...listeners}
-          {...attributes}
-          className={`flex h-full w-full flex-nowrap overflow-auto rounded-md bg-gray-400 `}
+        // className={`flex h-full w-full rounded-md`}
         >
-          {children}
+          {props.onRemove && isClick && (
+            <button
+              onClick={() => {
+                props.onRemove(props.id, props.parentIndex);
+              }}
+            >
+              <Image
+                src='/delete.svg'
+                width={20}
+                height={20}
+                alt={'delete button'}
+                className='absolute -right-2 -top-2 z-10'
+              />
+            </button>
+          )}
+          <div
+            ref={setActivatorNodeRef}
+            {...attributes}
+            {...listeners}
+            onClick={(e) => setIsClick(!isClick)}
+            onBlur={(e) => {
+              setTimeout(function () {
+                setIsClick(false);
+              }, 50);
+            }}
+          >
+            {children}
+          </div>
         </div>
       )}
     </div>
-    // </div>
-    // <div ref={setDroppableNodeRef} style={style} className={`${isDragging && 'opacity-50'} w-full h-full`}>
-    //   <div ref={setDraggableNodeRef} className={`${props.className}`}>
-    //     <div ref={setActivatorNodeRef} {...listeners} {...attributes} className={`bg-gray-400 rounded-md flex`}>
-    //       {/* drag me */}
-    //       {props.isRow ? `drag m111e` : children}
-    //     </div>
-    //     {/* {
-    //       props.onRemove &&
-    //       <button onClick={()=>{
-    //         props.onRemove(props.id, props.parentID)
-    //       }} className='bg-red-700 rounded-md'>
-    //         delete me
-    //       </button>
-    //     } */}
-    //     {
-    //       props.isRow && children
-    //     }
-
-    //   </div>
-    // </div>
   );
 }
