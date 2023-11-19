@@ -16,6 +16,7 @@ import Container from '../../../components/container';
 import SortableItem from '../../../components/sortableItem';
 import { SortableContext } from '@dnd-kit/sortable';
 import { data } from './data';
+import Image from 'next/image';
 
 const measuringConfig = {
   droppable: {
@@ -27,19 +28,15 @@ export default function TierList() {
   const [items, setItems] = useState(data);
   const [activeId, setActiveId] = useState(null);
 
-  const handleRemoveRow = (id) =>
-    setItems((rows) => rows.filter((row) => row.id !== id));
+  // const handleRemoveRow = (id) => setItems((rows) => rows.filter((row) => row.id !== id));
   const handleRemoveElement = (id, parentIndex) => {
-    // const parentIndex = items.findIndex(row => row.id == parentID)
     console.log(parentIndex);
     console.log('id', id);
-    // console.log('new', items[parentIndex].elements.filter(element => element.id !== id))
     setItems((prev) => {
       return [
         ...prev.slice(0, parentIndex),
         {
-          id: prev[parentIndex].id,
-          name: prev[parentIndex].name,
+          ...prev[parentIndex],
           elements: prev[parentIndex].elements.filter(
             (element) => element.id !== id
           ),
@@ -76,6 +73,7 @@ export default function TierList() {
     // console.log('overId', overId)
     // console.log("activeContainer", activeContainer);
     // console.log("overContainer", overContainer);
+    const isSpawner = event.over?.id == 'spawner';
 
     if (
       !activeContainer ||
@@ -85,65 +83,103 @@ export default function TierList() {
       return;
     }
 
+    // drag element to empty row
     if (
       typeof overContainer === 'string' &&
       typeof activeContainer === 'object'
     ) {
+      // console.log('---');
+      // console.log('event', event);
+
       const activeContainerIndex = items.findIndex(
         (row) => row.id == activeContainer.id
       );
       const activeElementIndex = event.active.data.current.sortable.index;
 
-      const overContainerIndex = event.over.data.current.sortable.index;
-
-      if (items[overContainerIndex].elements.length == 0) {
-        console.log('---');
-        console.log('event', event);
-        // console.log("activeContainer", activeContainer);
-        console.log('activeContainerIndex', activeContainerIndex);
-        console.log('activeElementIndex', activeElementIndex);
-
-        console.log('overContainerIndex', overContainerIndex);
+      // drag to spawner row
+      if (isSpawner && items[items.length - 1].elements.length == 0) {
         setItems((prev) => {
-          const add = {
-            id: prev[overContainerIndex].id,
-            name: prev[overContainerIndex].name,
-            elements: [prev[activeContainerIndex].elements[activeElementIndex]],
-          };
-
-          const remove = {
-            id: prev[activeContainerIndex].id,
-            name: prev[activeContainerIndex].name,
-            elements: prev[activeContainerIndex].elements.filter(
-              (element) => element.id !== id
-            ),
-          };
-
-          if (activeContainerIndex > overContainerIndex) {
-            return [
-              ...prev.slice(0, overContainerIndex),
-              add,
-              ...prev.slice(overContainerIndex + 1, activeContainerIndex),
-              remove,
-              ...prev.slice(activeContainerIndex + 1, prev.length),
-            ];
-          } else {
-            return [
-              ...prev.slice(0, activeContainerIndex),
-              remove,
-              ...prev.slice(activeContainerIndex + 1, overContainerIndex),
-              add,
-              ...prev.slice(overContainerIndex + 1, prev.length),
-            ];
-          }
+          return [
+            ...prev.slice(0, activeContainerIndex),
+            {
+              ...prev[activeContainerIndex],
+              elements: prev[activeContainerIndex].elements.filter(
+                (element) => element.id !== id
+              ),
+            },
+            ...prev.slice(activeContainerIndex + 1, -1),
+            {
+              ...prev[prev.length - 1],
+              elements: [
+                prev[activeContainerIndex].elements[activeElementIndex],
+              ],
+            },
+          ];
         });
+        return;
+      }
+      if (!isSpawner) {
+        const overContainerIndex = event.over.data.current.sortable.index;
+        if (items[overContainerIndex].elements.length == 0) {
+          // console.log('---');
+          // console.log('event', event);
+          // console.log("activeContainer", activeContainer);
+          // console.log('activeContainerIndex', activeContainerIndex);
+          // console.log('activeElementIndex', activeElementIndex);
+          // console.log('overContainerIndex', overContainerIndex);
+          setItems((prev) => {
+            const add = {
+              ...prev[overContainerIndex],
+              ['elements']: [
+                prev[activeContainerIndex].elements[activeElementIndex],
+              ],
+            };
+
+            const remove = {
+              ...prev[activeContainerIndex],
+              ['elements']: prev[activeContainerIndex].elements.filter(
+                (element) => element.id !== id
+              ),
+            };
+
+            if (activeContainerIndex > overContainerIndex) {
+              return [
+                ...prev.slice(0, overContainerIndex),
+                add,
+                ...prev.slice(overContainerIndex + 1, activeContainerIndex),
+                remove,
+                ...prev.slice(activeContainerIndex + 1, prev.length),
+              ];
+            } else {
+              return [
+                ...prev.slice(0, activeContainerIndex),
+                remove,
+                ...prev.slice(activeContainerIndex + 1, overContainerIndex),
+                add,
+                ...prev.slice(overContainerIndex + 1, prev.length),
+              ];
+            }
+          });
+        }
       }
 
       return;
     }
 
     // swap row
-    if (typeof activeContainer === 'string') {
+    // console.log("activeContainer", activeContainer);
+    // console.log("overContainer", overContainer);
+    if (
+      typeof activeContainer === 'string' &&
+      (overContainer == 'spawner' || overContainer?.id == 'spawner')
+    ) {
+      // console.log('spawner')
+      return;
+    }
+    if (
+      typeof activeContainer === 'string' &&
+      !(overContainer == 'spawner' || overContainer?.id == 'spawner')
+    ) {
       const activeRowIndex = event.active.data.current.sortable.index;
       const overRowIndex =
         typeof overContainer === 'string'
@@ -157,7 +193,7 @@ export default function TierList() {
       return;
     }
 
-    // swap elements between difference row
+    // move element to difference row
     const activeContainerIndex = items?.findIndex(
       (container) => container.id == activeContainer.id
     );
@@ -166,37 +202,25 @@ export default function TierList() {
         container.elements?.filter((element) => element.id == overId).length ==
         1
     );
-
     const activeIndex = event.active.data.current?.sortable?.index;
     const overIndex = event.over.data.current?.sortable?.index;
-
-    // console.log('---')
-    // console.log("event", event);
-    // console.log('over', event.over);
-    // console.log('overContainerIndex', overContainerIndex);
-
     if (
       !items[overContainerIndex] ||
       !items[overContainerIndex].elements ||
-      !items[overContainerIndex].name ||
+      !items[overContainerIndex].label ||
       (activeIndex != 0 && !activeIndex) ||
       (overIndex != 0 && !overIndex) ||
       !overId
     ) {
       return;
     }
-    // console.log('---')
-    // console.log("event", event);
-    // console.log('over', event.over);
-
     setItems((prev) => {
       const add = prev[activeContainerIndex].elements[activeIndex];
       if (overContainerIndex < activeContainerIndex) {
         return [
           ...prev.slice(0, overContainerIndex),
           {
-            id: prev[overContainerIndex].id,
-            name: prev[overContainerIndex].name,
+            ...prev[overContainerIndex],
             elements: [
               ...prev[overContainerIndex].elements.slice(0, overIndex),
               add,
@@ -204,18 +228,11 @@ export default function TierList() {
                 overIndex,
                 prev[overContainerIndex].elements.length
               ),
-              // {
-              //   id: `empty${overContainerIndex + 1}`,
-              //   isDisable: true,
-              //   title: "",
-              //   description: "This is the third item.",
-              // },
             ],
           },
           ...prev.slice(overContainerIndex + 1, activeContainerIndex),
           {
-            id: prev[activeContainerIndex].id,
-            name: prev[activeContainerIndex].name,
+            ...prev[activeContainerIndex],
             elements: [
               ...prev[activeContainerIndex].elements.filter(
                 (element) => element.id !== active.id
@@ -228,8 +245,7 @@ export default function TierList() {
         return [
           ...prev.slice(0, activeContainerIndex),
           {
-            id: prev[activeContainerIndex].id,
-            name: prev[activeContainerIndex].name,
+            ...prev[activeContainerIndex],
             elements: [
               ...prev[activeContainerIndex].elements.filter(
                 (element) => element.id !== active.id
@@ -238,8 +254,7 @@ export default function TierList() {
           },
           ...prev.slice(activeContainerIndex + 1, overContainerIndex),
           {
-            id: prev[overContainerIndex].id,
-            name: prev[overContainerIndex].name,
+            ...prev[overContainerIndex],
             elements: [
               ...prev[overContainerIndex].elements.slice(0, overIndex),
               add,
@@ -247,12 +262,6 @@ export default function TierList() {
                 overIndex,
                 prev[overContainerIndex].elements.length
               ),
-              // {
-              //   id: `empty${overContainerIndex + 1}`,
-              //   isDisable: true,
-              //   title: "",
-              //   description: "This is the third item.",
-              // },
             ],
           },
           ...prev.slice(overContainerIndex + 1, prev.length),
@@ -302,8 +311,9 @@ export default function TierList() {
     setItems((prev) => [
       ...prev.slice(0, containerIndex),
       {
-        id: prev[containerIndex].id,
-        name: prev[containerIndex].name,
+        // id: prev[containerIndex].id,
+        // label: prev[containerIndex].label,
+        ...prev[containerIndex],
         elements: arrayMove(
           prev[containerIndex].elements,
           activeIndex,
@@ -319,9 +329,23 @@ export default function TierList() {
     console.log('items=', items);
   }, [items]);
 
-  const mouseSensor = useSensor(MouseSensor); // Initialize mouse sensor
-  const touchSensor = useSensor(TouchSensor); // Initialize touch sensor
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      delay: 1, // millisec
+    },
+  }); // Initialize mouse sensor
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 1, // millisec
+    },
+  }); // Initialize touch sensor
   const sensors = useSensors(touchSensor, mouseSensor);
+
+  // const activeID = 'c5'
+  // const row = items.filter(row => row.elements.find(element => element.id == activeID) != undefined)
+  // console.log(row)
+  // console.log(row[0].elements[row[0]?.elements?.findIndex(element => element.id == activeID)].pictuerURL)
+  // console.log(items.filter(row => row.elements.find(element => element.id == activeID) != undefined)[0].elements[items.filter(row => row.elements.find(element => element.id == activeID) != undefined)[0]?.elements?.findIndex(element => element.id == activeID)].pictuerURL)
 
   return (
     <DndContext
@@ -333,24 +357,23 @@ export default function TierList() {
       modifiers={[restrictToWindowEdges]}
       autoScroll={true}
       sensors={sensors}
-      // activationConstraint={{
-      //   distance: 100,
-      // }}
     >
-      <div className='flex w-full flex-col gap-8 bg-green-400 '>
+      <div className='flex w-full flex-col gap-y-2 bg-green-400 px-[5px] '>
         <SortableContext strategy={verticalListSortingStrategy} items={items}>
           {items.map((row, index) => {
+            if (index == items.length - 1) {
+              return;
+            }
             return (
               <SortableItem
-                // onRemove={handleRemoveRow}
                 id={row.id}
-                index={index}
+                parentIndex={index}
                 key={row.id}
                 isDisable={row.isDisable}
                 items={row.elements}
+                row={row}
                 isRow={true}
-                className={`flex min-h-[100px] w-full gap-4 rounded-xl border-4 border-black bg-purple-400 `}
-                // itemClassName="flex bg-red-200 rounded-md min-w-[70px] min-h-[70px]"
+                className={`flex h-[90px] w-full gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-[5px] shadow-lg`}
               >
                 <Container
                   parentIndex={index}
@@ -358,22 +381,79 @@ export default function TierList() {
                   onRemove={handleRemoveElement}
                   id={row.id}
                   items={row.elements}
-                  className={`flex h-full w-full shrink-0 items-center gap-x-1.5 border-4`}
-                  itemClassName={`border-4 border-red-800 relative min-w-[70px] min-h-[70px] max-w-[70px] max-h-[70px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.25)]`}
+                  className={`flex h-full w-full shrink-0 items-center gap-x-[5px] `}
+                  itemClassName={`relative min-w-[70px] min-h-[70px] max-w-[70px] max-h-[70px] rounded-xl shadow-lg`}
                 />
               </SortableItem>
             );
           })}
-          <DragOverlay dropAnimation={null}>
-            {activeId ? (
-              <SortableItem
-                id={activeId}
-                item={{ title: 'overlay' }}
-                className='min-w-[70px] rounded-md bg-red-200'
-              >
-                <div>overlay {activeId}</div>
-              </SortableItem>
-            ) : null}
+          <div className='fixed inset-x-0 bottom-0 h-[152px] w-full rounded-[10px] bg-cherry'>
+            <Container
+              parentIndex={items.length - 1}
+              onRemove={handleRemoveElement}
+              id={items[items.length - 1].id}
+              items={items[items.length - 1].elements}
+              className={`flex h-full w-full shrink-0 gap-x-[15px] px-5 py-4 `}
+              itemClassName={`relative min-w-[70px] min-h-[70px] max-w-[70px] max-h-[70px] rounded-xl shadow-lg`}
+            />
+          </div>
+
+          <DragOverlay
+            dropAnimation={{
+              duration: 200,
+              easing: 'cubic-bezier(0.18, 0.67, 0.6, 1.22)',
+            }}
+          >
+            {items.findIndex((row) => row.id == activeId) == -1 ? (
+              <div>
+                <Image
+                  priority={true}
+                  src={
+                    items.filter(
+                      (row) =>
+                        row?.elements.find(
+                          (element) => element.id == activeId
+                        ) != undefined
+                    )[0]?.elements[
+                      items
+                        .filter(
+                          (row) =>
+                            row.elements.find(
+                              (element) => element.id == activeId
+                            ) != undefined
+                        )[0]
+                        ?.elements?.findIndex(
+                          (element) => element.id == activeId
+                        )
+                    ].pictuerUrl
+                  }
+                  fill={true}
+                  quality={100}
+                  className='rounded-lg object-cover shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]'
+                  alt={'sdfsdf'}
+                />
+              </div>
+            ) : (
+              <div>
+                <SortableItem
+                  id={activeId}
+                  parentIndex={items.findIndex((row) => row.id == activeId)}
+                  items={items.find((row) => row.id == activeId).elements}
+                  row={items.find((row) => row.id == activeId)}
+                  isRow={true}
+                  className={`flex h-[90px] w-full gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-[5px] shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]`}
+                >
+                  <Container
+                    parentIndex={items.findIndex((row) => row.id == activeId)}
+                    onRemove={handleRemoveElement}
+                    id={activeId}
+                    items={items.find((row) => row.id == activeId).elements}
+                    className={`flex h-full w-full shrink-0 items-center gap-x-[5px] `}
+                    itemClassName={`relative min-w-[70px] min-h-[70px] max-w-[70px] max-h-[70px] rounded-xl shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]`}
+                  />
+                </SortableItem>
+              </div>
+            )}
           </DragOverlay>
         </SortableContext>
       </div>

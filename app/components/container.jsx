@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -7,19 +7,20 @@ import Image from 'next/image';
 
 export default function Container(props) {
   const { id, items } = props;
-  const {
-    attributes,
-    listeners,
-    transform,
-    transition,
-    setDraggableNodeRef,
-    setDroppableNodeRef,
-  } = useSortable({ id: id });
+  // const {
+  //   attributes,
+  //   listeners,
+  //   transform,
+  //   transition,
+  //   setDraggableNodeRef,
+  //   setDroppableNodeRef,
+  //   setNodeRef: setNodeRefSortable,
+  // } = useSortable({ id: id });
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
+  // const style = {
+  //   transform: CSS.Transform.toString(transform),
+  //   transition,
+  // };
 
   const { isOver, setNodeRef } = useDroppable({
     id: id,
@@ -31,10 +32,11 @@ export default function Container(props) {
   return (
     // <div ref={setNodeRef} id={`${id}+asd`} className={`${props.className}`}>
     <div
-      ref={[setDroppableNodeRef, setNodeRef, setDraggableNodeRef]}
+      // ref={setNodeRefSortable}
+      ref={setNodeRef}
       className={`${props.className}`}
-      style={style}
-      {...attributes}
+      // style={style}
+      // {...attributes}
     >
       <SortableContext id={id} items={items}>
         {/* <div className={`overflow-auto`}> */}
@@ -43,6 +45,7 @@ export default function Container(props) {
             <SortableItem
               isRow={false}
               parentID={id}
+              parentIndex={props.parentIndex}
               onRemove={props.onRemove}
               isDisable={item.isDisable}
               key={item.id}
@@ -52,14 +55,15 @@ export default function Container(props) {
             >
               <Image
                 priority={true}
-                src={'/vercel.svg'}
-                // width={70}
-                // height={70}
+                src={item.pictuerUrl}
                 fill={true}
                 quality={100}
-                className='object-cover'
+                className='rounded-lg object-cover'
                 alt={item.title}
               />
+              {/* <div className='w-full h-full flex text-center'>
+                {item.title} + {item.id}
+              </div> */}
             </SortableItem>
           );
         })}
