@@ -16,14 +16,12 @@ export default function SortableItem(props) {
     transform,
     transition,
     isDragging,
-    setDraggableNodeRef,
-    setDroppableNodeRef,
     setActivatorNodeRef,
     setNodeRef,
   } = useSortable({
     animateLayoutChanges,
     id: props.id,
-    disabled: props.isDisable,
+    disabled: !props.isEditable,
   });
   const [isClick, setIsClick] = useState(false);
 
@@ -56,10 +54,10 @@ export default function SortableItem(props) {
         <div
         // className={`flex h-full w-full rounded-md`}
         >
-          {props.onRemove && isClick && (
+          {props.onRemove && isClick && props.isEditable && (
             <button
               onClick={() => {
-                props.onRemove(props.id, props.parentIndex);
+                props.onRemove(props.id, props.rowIndex);
               }}
             >
               <Image
@@ -75,7 +73,7 @@ export default function SortableItem(props) {
             ref={setActivatorNodeRef}
             {...attributes}
             {...listeners}
-            onClick={(e) => setIsClick(!isClick)}
+            onFocus={(e) => setIsClick(!isClick)}
             onBlur={(e) => {
               setTimeout(function () {
                 setIsClick(false);
