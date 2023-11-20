@@ -2,7 +2,7 @@
 import Image from "next/image";
 import {useState} from 'react'
 
-export default function ImageIcon ({img, imgName, tierRow}){
+export default function ImageIcon ({img, imgName, tierRow, deleting}){
     const [isOpen, setIsOpen] = useState(false)
     const [value, setValue] = useState('')
 
@@ -35,7 +35,7 @@ export default function ImageIcon ({img, imgName, tierRow}){
                                         <p className='text-darkgrey cursor-pointer' onClick={() => {getValue(row.id); handleOnClick()}}>{row.name}</p>)
                                     }
                                 </div>
-                            <p className="bg-winered rounded-xl my-1 p-[3px] border-1 border-red-200 text-white text-bold cursor-pointer" onClick={''}>Delete item</p>
+                            <p className="bg-winered rounded-xl my-1 p-[3px] border-1 border-red-200 text-white text-bold cursor-pointer" onClick={deleting}>Delete item</p>
                             </div>
                             <Image
                                 src='/arrowDown.svg'
