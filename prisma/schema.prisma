@@ -2,30 +2,29 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("NEXT_PUBLIC_SUPABASE_URL")
+  url      = env("NEXT_PUBLIC_DATABASE_URL")
 }
 
 model User {
-  userId    String     @id @default(uuid()) @db.Uuid
+  userId    String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email     String     @unique @db.VarChar(254)
   name      String     @db.VarChar(50)
-  token     String     @db.Text
   image     String?    @db.Text
   aboutMe   String?    @db.Text
   tierlists Tierlist[]
 }
 
 model Tierlist {
-  tierlistId    String   @id @default(uuid()) @db.Uuid
+  tierlistId    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   category      Category @relation(fields: [categoryId], references: [categoryId])
-  categoryId    String
+  categoryId    String   @db.Uuid
   user          User     @relation(fields: [userId], references: [userId])
-  userId        String
+  userId        String   @db.Uuid
   name          String   @db.VarChar(50)
   description   String?  @db.Text
   coverPhotoUrl String?  @db.Text
@@ -33,15 +32,15 @@ model Tierlist {
 }
 
 model Category {
-  categoryId   String     @id @default(uuid()) @db.Uuid
+  categoryId   String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   categoryName String     @db.VarChar(50)
   tierlists    Tierlist[]
 }
 
 model Row {
-  rowId      String    @id @default(uuid()) @db.Uuid
+  rowId      String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   tierlist   Tierlist  @relation(fields: [tierlistId], references: [tierlistId])
-  tierlistId String
+  tierlistId String    @db.Uuid
   label      String?   @db.VarChar(50)
   color      String?   @db.VarChar(6)
   order      Int       @db.SmallInt
@@ -49,9 +48,9 @@ model Row {
 }
 
 model Element {
-  elementId  String @id @default(uuid()) @db.Uuid
+  elementId  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   row        Row    @relation(fields: [rowId], references: [rowId])
-  rowId      String
+  rowId      String @db.Uuid
   pictureUrl String @db.Text
   order      Int    @db.SmallInt
 }
