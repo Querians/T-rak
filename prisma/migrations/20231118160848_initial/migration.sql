@@ -3,7 +3,6 @@ CREATE TABLE "User" (
     "userId" UUID NOT NULL DEFAULT gen_random_uuid(),
     "email" VARCHAR(254) NOT NULL,
     "name" VARCHAR(50) NOT NULL,
-    "token" TEXT NOT NULL,
     "image" TEXT,
     "aboutMe" TEXT,
 

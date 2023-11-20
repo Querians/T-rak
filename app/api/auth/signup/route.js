@@ -2,6 +2,7 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
+import { uploadfile } from '@/utils/uploadfile';
 
 export async function POST(request) {
   const requestUrl = new URL(request.url);
@@ -21,12 +22,19 @@ export async function POST(request) {
 
   console.log(data, error);
 
-  prisma.user.create({
+  console.log(formData.get('picture'));
+  const fileResponse = await uploadfile(formData.get('picture'));
+
+  const dbResponse = await prisma.user.create({
     data: {
       email: data.user.email,
       name: formData.get('name'),
+      image: fileResponse.path,
+      userId: data.user.id,
     },
   });
+
+  console.log(dbResponse);
 
   return NextResponse.redirect(requestUrl.origin, {
     status: 301,

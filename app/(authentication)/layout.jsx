@@ -11,7 +11,7 @@ export default async function AuthLayout({ children }) {
   }
 
   return (
-    <div>
+    <div className='h-screen'>
       <p>Hi {JSON.stringify(data?.session?.user?.email)}</p>
       {children}
 

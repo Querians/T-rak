@@ -14,7 +14,6 @@ model User {
   userId    String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email     String     @unique @db.VarChar(254)
   name      String     @db.VarChar(50)
-  token     String     @db.Text
   image     String?    @db.Text
   aboutMe   String?    @db.Text
   tierlists Tierlist[]
