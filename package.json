@@ -19,19 +19,25 @@
     "production:build": "pnpm prisma generate && pnpm prisma migrate deploy && pnpm next build"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/modifiers": "^7.0.0",
+    "@dnd-kit/sortable": "^8.0.0",
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "5.6.0",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/supabase-js": "^2.38.4",
     "@tanstack/react-query": "^5.8.4",
     "@tanstack/react-query-devtools": "^5.8.4",
+    "@tracksuitdev/use-select": "^1.1.1",
     "dotenv": "^16.3.1",
     "framer-motion": "^10.16.5",
     "next": "14.0.1",
     "postgres": "^3.4.3",
     "prettier": "^3.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-widgets": "^5.8.4",
+    "react-widgets-tailwind": "^1.1.5"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.3",
