@@ -1,42 +1,17 @@
-'use client'
-import Combobox from './components/combobox.jsx';
-
-const data = [
-  {
-      id: 1,
-      name: 'Anime'
-  },
-  {
-      id: 2,
-      name: 'Food'
-  },
-  {
-      id: 3,
-      name: 'Routh'
-  },
-  {
-      id: 4,
-      name: 'Country'
-  },
-  {
-      id: 5,
-      name: 'Happy'
-  },
-  {
-      id: 6,
-      name: 'Time'
-  },
-  {
-      id: 7,
-      name: 'Yes'
-  },
-]
-
+import Image from 'next/image'
 
 export default function Home() {
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <Combobox data={data} text='Category'/>
+    <main className='flex min-h-screen flex-col items-center justify-center p-24'>
+      <Image
+        src="/logoTRak.svg"
+        alt="T-Rak Logo"
+        width={124}
+        height={124}
+        priority
+      />
+      <p className='text-3xl text-white font-bold'>T-rak</p>
+      <p className='text-xl text-white'>sort your favourite</p>
     </main>
   );
 }
