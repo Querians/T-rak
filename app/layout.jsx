@@ -3,8 +3,17 @@ import Providers from './providers.jsx';
 import localFont from 'next/font/local';
 
 const subjectRounded = localFont({
-  src: '../style/fonts/fc_subject_rounded_bold_non-commercial_use-webfont.woff',
-  display: 'swap',
+  src: [
+    {
+      path: '../style/fonts/FC Subject Rounded Regular [Non-commercial use].ttf',
+      weight: '400',
+    },
+    {
+      path: '../style/fonts/FC Subject Rounded Bold [Non-commercial use].ttf',
+      weight: '700',
+    },
+  ],
+  variable: '--font-subjectRounded'
 });
 
 export const metadata = {
