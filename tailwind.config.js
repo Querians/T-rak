@@ -7,6 +7,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    require.resolve('react-widgets/styles.css'),
   ],
   theme: {
     extend: {
@@ -17,7 +18,16 @@ module.exports = {
         lightpink: '#f6d8df',
         cream: '#fbf3e2',
         winered: '#a73440',
-        darkgrey: '#464646',
+        darkblack: '#464646',
+      },
+      fontSize: {
+        sm: '0.8rem',
+        base: '1rem',
+        xl: '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.625rem',
+        '4xl': '2.441rem',
+        '5xl': '3rem',
       },
       fontSize: {
         sm: '0.8rem',
@@ -39,5 +49,5 @@ module.exports = {
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [ nextui(), require('react-widgets-tailwind') ]
 };
