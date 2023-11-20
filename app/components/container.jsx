@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+// import { CSS } from '@dnd-kit/utilities';
 import SortableItem from './sortableItem';
 import Image from 'next/image';
 
@@ -45,9 +45,9 @@ export default function Container(props) {
             <SortableItem
               isRow={false}
               parentID={id}
-              parentIndex={props.parentIndex}
+              rowIndex={props.rowIndex}
               onRemove={props.onRemove}
-              isDisable={item.isDisable}
+              isEditable={props.isEditable}
               key={item.id}
               id={item.id}
               item={item}

@@ -3,7 +3,6 @@ export const data = [
     id: 'container1',
     label: 'All of my heart',
     color: 'bg-[#FABEBE]',
-    isDisable: false,
     elements: [
       {
         id: 'asd',
@@ -29,7 +28,6 @@ export const data = [
     id: 'container2',
     label: 'Part of my heart',
     color: 'bg-[#FAD4BE]',
-    isDisable: false,
     elements: [
       {
         id: 'asd2',
@@ -91,14 +89,12 @@ export const data = [
     id: 'container3',
     label: 'container3',
     color: 'bg-[#FAE6BE]',
-    isDisable: false,
     elements: [],
   },
   {
     id: 'spawner',
     label: 'spawner',
     color: 'bg-[#F2FABE]',
-    isDisable: false,
     elements: [
       {
         id: 'c9',
