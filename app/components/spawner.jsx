@@ -3,7 +3,11 @@ import Container from '@/app/components/container';
 export default function Spawner(props) {
   const { items, handleRemoveElement } = props;
   return (
-    <div className='fixed inset-x-0 bottom-0 h-[152px] w-full rounded-[10px] bg-cherry'>
+    <div
+      className={`transition ${
+        !props.isEditable && 'translate-y-full opacity-0'
+      } fixed inset-x-0 bottom-0 h-[152px] w-full rounded-[10px] bg-cherry`}
+    >
       <Container
         isEditable={true}
         rowIndex={items.length - 1}

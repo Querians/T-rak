@@ -21,7 +21,12 @@ const measuringConfig = {
   },
 };
 
-export default function TierList({ items, setItems, isEditable }) {
+export default function TierList({
+  items,
+  setItems,
+  isEditable = false,
+  className = '',
+}) {
   const [activeId, setActiveId] = useState(null); // for over lay
 
   const handleRemoveElement = (id, parentIndex) => {
@@ -313,20 +318,21 @@ export default function TierList({ items, setItems, isEditable }) {
       autoScroll={true}
       sensors={sensors}
     >
-      <div className='mt-3.5 flex h-full w-full flex-col gap-y-2 rounded-tl-[20px] rounded-tr-[20px] bg-cream px-4 pt-[27px]'>
+      <div className={className}>
         <SortableContext strategy={verticalListSortingStrategy} items={items}>
           {/* each row of tier list part */}
           {items.map((row, index) => {
             // spawner part
             if (index == items.length - 1) {
               return (
-                isEditable && (
-                  <Spawner
-                    key={row.id}
-                    items={items}
-                    handleRemoveElement={handleRemoveElement}
-                  />
-                )
+                // isEditable && (
+                <Spawner
+                  isEditable={isEditable}
+                  key={row.id}
+                  items={items}
+                  handleRemoveElement={handleRemoveElement}
+                />
+                // )
               );
             }
 
