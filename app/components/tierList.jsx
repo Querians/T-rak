@@ -14,6 +14,7 @@ import { SortableContext } from '@dnd-kit/sortable';
 import TierListRow from '@/app/components/tierListRow';
 import DragOverLayTierList from '@/app/components/dragOverLayTierList';
 import Spawner from '@/app/components/spawner';
+import { Button } from './button';
 
 const measuringConfig = {
   droppable: {
@@ -28,6 +29,40 @@ export default function TierList({
   className = '',
 }) {
   const [activeId, setActiveId] = useState(null); // for over lay
+  const defaultRow = [
+    {
+      label: 'All of my heart',
+      bgColor: '#FAFEFF',
+    },
+    {
+      label: 'Part of my heart',
+      bgColor: '#F1EEE7',
+    },
+    {
+      label: 'In my heart',
+      bgColor: '#FAE6BE',
+    },
+    {
+      label: 'Love that',
+      bgColor: '#F2FABE',
+    },
+    {
+      label: 'Ahh Ha',
+      bgColor: '#D8FABE',
+    },
+    {
+      label: 'Ummm',
+      bgColor: '#BEFAE4',
+    },
+    {
+      label: "What that's",
+      bgColor: '#BEECFA',
+    },
+    {
+      label: 'Nope',
+      bgColor: '#BED2FA',
+    },
+  ];
 
   const handleRemoveElement = (id, parentIndex) => {
     setItems((prev) => {
@@ -294,6 +329,19 @@ export default function TierList({
     setActiveId(null);
   }
 
+  const handleAddRow = () => {
+    setItems([
+      ...items.slice(0, -1),
+      {
+        id: `container${items.length}`,
+        label: defaultRow[items.length - 1].label,
+        color: defaultRow[items.length - 1].bgColor,
+        elements: [],
+      },
+      items[items.length - 1],
+    ]);
+  };
+
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       delay: 100, // millisec
@@ -347,6 +395,19 @@ export default function TierList({
               />
             );
           })}
+          <div
+            className={`flex w-full items-center justify-center ${
+              (!isEditable || items.length >= 9) && 'invisible'
+            }`}
+          >
+            <div className='w-[200px]'>
+              <Button
+                onClick={handleAddRow}
+                type={'addtextbtn'}
+                text={'Add new Level'}
+              />
+            </div>
+          </div>
 
           {/* drag overlay part */}
           <DragOverLayTierList items={items} activeId={activeId} />

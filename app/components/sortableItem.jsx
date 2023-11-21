@@ -44,7 +44,7 @@ export default function SortableItem(props) {
             ref={setActivatorNodeRef}
             {...listeners}
             {...attributes}
-            className={`flex h-full w-[90px] shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg text-center text-lg font-bold text-darkgrey ${props.row.color} shadow-lg`}
+            className={`flex h-full w-[90px] shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg text-center text-lg font-bold text-darkgrey bg-[${props.row.color}] shadow-lg`}
           >
             {props?.row?.label}
           </div>

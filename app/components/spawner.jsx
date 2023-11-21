@@ -6,7 +6,7 @@ export default function Spawner(props) {
     <div
       className={`transition ${
         !props.isEditable && 'translate-y-full opacity-0'
-      } fixed inset-x-0 bottom-0 h-[152px] w-full rounded-[10px] bg-cherry`}
+      } fixed inset-x-0 bottom-0 z-10 h-[152px] w-full rounded-[10px] bg-cherry`}
     >
       <Container
         isEditable={true}
