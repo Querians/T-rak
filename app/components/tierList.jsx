@@ -329,6 +329,7 @@ export default function TierList({
     setActiveId(null);
   }
 
+  const lastIndexOriginal = 1; // count when query
   const handleAddRow = () => {
     setItems([
       ...items.slice(0, -1),
@@ -354,6 +355,7 @@ export default function TierList({
     },
   }); // Initialize touch sensor
   const sensors = useSensors(touchSensor, mouseSensor);
+  const itemsLength = items.length;
 
   return (
     <DndContext
@@ -387,6 +389,8 @@ export default function TierList({
             // each row in tier list
             return (
               <TierListRow
+                lastIndexOriginal={lastIndexOriginal}
+                itemsLength={itemsLength}
                 isEditable={isEditable}
                 key={row.id}
                 row={row}

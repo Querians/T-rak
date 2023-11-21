@@ -32,7 +32,7 @@ export default function CurrentTierList({ params }) {
           isEditable={isEditable}
           className={`flex flex-col gap-y-2.5 px-1 transition-[height] ${
             !isEditable ? 'h-5/6 ' : 'h-3/4 '
-          }  w-full shrink-0 overflow-y-auto`}
+          }  w-full shrink-0 overflow-y-auto py-2.5`}
         />
         <div className={`h-1/6 shrink-0 ${isEditable && 'hidden'}`}>
           <MenuBar type={'home'} />

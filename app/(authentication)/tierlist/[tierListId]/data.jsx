@@ -2,7 +2,7 @@ export const data = [
   {
     id: 'container1',
     label: 'All of my heart',
-    color: 'bg-[#FABEBE]',
+    color: '#FABEBE',
     elements: [
       {
         id: 'asd',
@@ -27,7 +27,7 @@ export const data = [
   {
     id: 'container2',
     label: 'Part of my heart',
-    color: 'bg-[#FAD4BE]',
+    color: '#FAD4BE',
     elements: [
       {
         id: 'asd2',
@@ -85,46 +85,46 @@ export const data = [
       },
     ],
   },
-  {
-    id: 'container3',
-    label: 'container3',
-    color: 'bg-[#FAE6BE]',
-    elements: [],
-  },
-  {
-    id: 'container4',
-    label: 'container4',
-    color: 'bg-[#FAE6BE]',
-    elements: [],
-  },
-  {
-    id: 'container5',
-    label: 'container5',
-    color: 'bg-[#FAE6BE]',
-    elements: [],
-  },
-  {
-    id: 'container6',
-    label: 'container6',
-    color: 'bg-[#FAE6BE]',
-    elements: [],
-  },
+  // {
+  //   id: 'container3',
+  //   label: 'container3',
+  //   color: '#FAE6BE',
+  //   elements: [],
+  // },
+  // {
+  //   id: 'container4',
+  //   label: 'container4',
+  //   color: '#FAE6BE',
+  //   elements: [],
+  // },
+  // {
+  //   id: 'container5',
+  //   label: 'container5',
+  //   color: '#FAE6BE',
+  //   elements: [],
+  // },
+  // {
+  //   id: 'container6',
+  //   label: 'container6',
+  //   color: '#FAE6BE',
+  //   elements: [],
+  // },
   // {
   //   id: 'container7',
   //   label: 'container7',
-  //   color: 'bg-[#FAE6BE]',
+  //   color: '#FAE6BE',
   //   elements: [],
   // },
   // {
   //   id: 'container8',
   //   label: 'container8',
-  //   color: 'bg-[#FAE6BE]',
+  //   color: '#FAE6BE',
   //   elements: [],
   // },
   {
     id: 'spawner',
     label: 'spawner',
-    color: 'bg-[#F2FABE]',
+    color: '#F2FABE',
     elements: [
       {
         id: 'c9',

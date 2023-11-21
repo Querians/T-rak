@@ -12,7 +12,11 @@ export default function TierListRow(props) {
       items={row.elements}
       row={row}
       isRow={true}
-      className={`flex h-[90px] w-full shrink-0 gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-1 shadow-lg`}
+      className={`transition ${
+        rowIndex == props?.itemsLength - 2 &&
+        props?.lastIndexOriginal != rowIndex &&
+        'animate-fadeIn'
+      } flex h-[90px] w-full shrink-0 gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-1 shadow-lg `}
     >
       <Container
         isEditable={props.isEditable}
