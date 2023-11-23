@@ -1,14 +1,13 @@
 import React from "react";
 import Image from "next/image";
-// ***import style*** //
 
-export const Button = ({onClick, text, type }) => {
+export const CustomizeButton = ({onClick, text, styles }) => {
     return (
       <>
-        {type == 'btnpeach' ? (
+        {styles == 'btnpeach' ? (
             <button
-            className="h-fit w-full rounded-[0.625rem] border border-1 border-littlepink bg-peach px-20 py-2 text-base font-bold text-white drop-shadow-md"
-            onClick={onClick}
+            className="h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-peach px-2 text-base text-white drop-shadow-md"
+            onClick={onClick} type="submit"
             >
                 {text}
             </button>
@@ -16,10 +15,10 @@ export const Button = ({onClick, text, type }) => {
           <></>
         )}
 
-        {type == 'btncherry' ? (
+        {styles == 'btncherry' ? (
             <button
-            className="h-fit w-full rounded-[0.625rem] border border-1 border-littlepink bg-cherry px-20 py-2 text-base font-bold text-white drop-shadow-md"
-            onClick={onClick}
+            className="h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-cherry px-2 text-base text-white drop-shadow-md"
+            onClick={onClick} type="submit"
             >
                 {text}
             </button>
@@ -28,10 +27,10 @@ export const Button = ({onClick, text, type }) => {
         )}
 
        
-        {type == 'addtextbtn' ? (
+        {styles == 'addtextbtn' ? (
             <button
-            className="flex gap-2 items-center justify-center h-fit w-full rounded-[0.625rem] border border-1 border-littlepink bg-peach px-20 py-2 text-base font-bold text-white drop-shadow-md"
-            onClick={onClick}
+            className="flex gap-2 items-center justify-center h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-peach px-20 py-2 text-base font-bold text-white drop-shadow-md"
+            onClick={onClick} type="submit"
             >
                 <Image
                 src= "/iconPlus.svg"
@@ -48,10 +47,10 @@ export const Button = ({onClick, text, type }) => {
         )}
         
 
-        {type == 'deletebtn' ? (
+        {styles == 'deletebtn' ? (
             <button
             className="flex gap-2 items-center justify-center h-fit w-full rounded-[0.625rem] border border-1 border-littlepink bg-winered px-20 py-2 text-base font-bold text-white drop-shadow-md"
-            onClick={onClick}
+            onClick={onClick} type="submit"
             >
                 <Image
                 src= "/iconTrash.svg"
@@ -67,10 +66,10 @@ export const Button = ({onClick, text, type }) => {
           <></>
         )}
 
-        {type == 'logoutbtn' ? (
+        {styles == 'logoutbtn' ? (
             <button
             className="flex gap-2 items-center justify-center h-fit w-full rounded-[0.625rem] border border-1 border-littlepink bg-winered px-20 py-2 text-base font-bold text-white drop-shadow-md"
-            onClick={onClick}
+            onClick={onClick} type="submit"
             >
                 <Image
                 src= "/iconLogout.svg"
