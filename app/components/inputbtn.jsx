@@ -1,7 +1,7 @@
 'use client'
 import {useState} from 'react'
 
-export default function Inputbutton({text, type}) {
+export default function Inputbutton({text, type='text', name=''}) {
 
     const [value, setValue] = useState("")
 
@@ -14,11 +14,13 @@ export default function Inputbutton({text, type}) {
         <div>
             <p className="text-xl text-cherry">{text}</p>
             <div className='w-full h-[36px] rounded-[15px] border-1 border-white bg-lightpink flex gap-5 items-center shadow-lg'>
-                <input className="w-full h-full bg-transparent text-darkgrey placeholder-peach placeholder:text-left px-3 rounded-xl focus:ring-0 focus:ring-offset-0 " 
-                    type={type=='password'?'password':'text'}
+                <input 
+                    className='bg-transparent w-full h-full rounded-xl px-3 text-darkgrey placeholder:text-peach focus:ring-sky-500 focus:ring-1'
+                    type={type}
                     placeholder={text}
                     value={value} 
                     onChange={handleInputChange}
+                    name={name}
                 />
             </div>
         </div>
