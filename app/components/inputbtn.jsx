@@ -14,8 +14,8 @@ export default function Inputbutton({text, type='text', name='', isArea=0}) {
         <div>
             <p className="text-xl text-cherry">{text}</p>
                 {isArea ? (
-                <div className='w-full h-24'> 
-                    <textarea className="resize-none w-full max-h-24 rounded-[15px] border-1 border-white bg-lightpink items-center shadow-lg text-darkgrey placeholder-peach px-3 py-1"
+                <div className='w-full'> 
+                    <textarea className="resize-none w-full h-20 rounded-[15px] border-1 border-white bg-lightpink items-center shadow-lg text-darkgrey placeholder-peach px-3 py-1"
                         name="description" 
                         placeholder={text}
                         value={value} 

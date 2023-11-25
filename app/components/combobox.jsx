@@ -55,7 +55,7 @@ export default function Combobox({data, text}) {
     }
 
     return(
-        <div className="w-72 h-[70px] flex flex-col">
+        <div className="w-full h-[70px] flex flex-col">
             <p className="text-xl text-cherry">{text}</p>
             <div className='relative h-9 rounded-2xl border-1 border-white bg-lightpink flex gap-2 items-center px-2 shadow-lg'>
                 <input className="w-full bg-transparent text-darkblack placeholder-peach pl-3 rounded-xl focus:ring-0 focus:ring-offset-0" 
@@ -69,7 +69,7 @@ export default function Combobox({data, text}) {
                 <DropButton onClick={handleOnClick} open={isOpen}/>
                 <div className='absolute -bottom-[7.5rem] right-0 h-28 justify-start'>
                     {isOpen && (
-                        <div className='bg-cream  w-[213px] max-h-28 rounded-xl px-[11px] py-1 border-1 border-white overflow-auto shadow-lg'>
+                        <div className='bg-cream w-60 max-h-28 rounded-xl px-[11px] py-1 border-1 border-white overflow-auto shadow-lg'>
                             {filteredCategory.length === 0
                                 ? <p className='text-darkblack'>Not found</p>
                                 : <div className='divide-y-1 divide-darkblack'>
