@@ -18,7 +18,7 @@ export default function CreateTierlist({profile="/profilelight.svg"}) {
         </div> 
         <p className='text-2xl text-white '>Create New Tierlist</p>
       </div>
-      <div className='h-[60%] p-8 bg-cream rounded-t-2xl'>
+      <div className='h-5/6 p-8 bg-cream rounded-t-2xl'>
         <TierListForm />
       </div>
     </main>
