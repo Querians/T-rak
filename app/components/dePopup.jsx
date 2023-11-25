@@ -3,8 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import { CustomizeButton } from "./button";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
-import {NextUIProvider} from "@nextui-org/react";
+import {Modal, ModalContent, ModalBody, Button, useDisclosure} from "@nextui-org/react";
+
 
 export const DelExPopup=({species,text}) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -13,8 +13,8 @@ export const DelExPopup=({species,text}) => {
   <>
   {species == 'export' ? (
             <div>
-                <Button onPress={onOpen} type="submit"
-                className="h-fit w-full rounded-2xl border border-1 border-littlepink bg-peach px-2 py-2 text-base text-white drop-shadow-md">
+                <Button onPress={onOpen}
+                className="h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-peach px-2 text-base text-white drop-shadow-md">
                 Export
                 </Button>
 
@@ -37,9 +37,9 @@ export const DelExPopup=({species,text}) => {
                                     quality={100}
                                     />
                                 <p className="text-2xl text-darkgrey"> Export Complete! </p>    
-                                <Button onPress={onClose} type="submit"
-                                        className="h-[33px] w-[150px] rounded-2xl border border-1 border-littlepink bg-cherry px-2 py-2 text-base text-white drop-shadow-md">
-                                        Done
+                                <Button onPress={onClose}
+                                        className="h-[33px] w-[150px] rounded-2xl border border-1 border-littlepink bg-cherry px-2 text-base text-white drop-shadow-md">
+                                    Done
                                 </Button>
                             </ModalBody>
                            
@@ -54,8 +54,8 @@ export const DelExPopup=({species,text}) => {
 
 {species == 'deltier' ? (
             <div>
-            <Button onPress={onOpen} type="submit"
-            className="flex gap-2 items-center justify-center h-fit w-full rounded-2xl border border-1 border-littlepink bg-winered px-2 py-2 text-base text-white drop-shadow-md">
+            <Button onPress={onOpen}
+            className="flex gap-2 items-center justify-center h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-winered px-2 text-base text-white drop-shadow-md">
                  <Image
                 src= "/iconTrash.svg"
                 className="inline"
@@ -85,16 +85,11 @@ export const DelExPopup=({species,text}) => {
                                 height={69.99}
                                 quality={100}
                                 />
-                            <p className=" text-2xl text-winered "> Are you sure?</p>
+                            <p className=" text-2xl text-winered text-center"> Are you sure?</p>
                             <p className=" w-[261px] text-base text-darkgrey text-center"> Do you really want to delete this Tier List?</p>
                        
-                        
-                            {/* <Button onPress={onClose}
-                                    className="rounded-2xl border border-1 border-littlepink bg-cherry px-2 py-2 text-base text-white drop-shadow-md">
-                                    Delete
-                            </Button> */}
-                            <Button onPress={onClose} type="submit"
-                            className= "h-[33px] w-[150px] flex gap-2 items-center justify-center rounded-2xl border border-1 border-littlepink bg-winered px-[20px] py-2 text-base text-white drop-shadow-md"
+                            <Button onPress={onClose}
+                            className= "h-[33px] w-[150px] flex gap-2 items-center justify-center rounded-2xl border border-1 border-littlepink bg-winered px-2 text-base text-white drop-shadow-md"
                             >
                                 <Image
                                 src= "/iconTrash.svg"
@@ -107,8 +102,8 @@ export const DelExPopup=({species,text}) => {
                                 Delete
                             </Button>
 
-                            <Button onPress={onClose} type="submit"
-                            className="h-[33px] w-[150px] flex gap-2 items-center justify-center rounded-2xl border border-1 border-littlepink bg-cherry px-[20px] py-2 text-base text-white drop-shadow-md"
+                            <Button onPress={onClose}
+                            className="h-[33px] w-[150px] flex gap-2 items-center justify-center rounded-2xl border border-1 border-littlepink bg-cherry px-2 text-base text-white drop-shadow-md"
                             >
                                 Cancle
                             </Button>
@@ -124,8 +119,8 @@ export const DelExPopup=({species,text}) => {
 
     {species == 'delrow' ? (
             <div>
-            <Button onPress={onOpen} type="submit"
-            className="flex gap-2 items-center justify-center h-fit w-full rounded-2xl border border-1 border-littlepink bg-winered px-2 py-2 text-base text-white drop-shadow-md">
+            <Button onPress={onOpen}
+            className="flex gap-2 items-center justify-center h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-winered px-2 text-base text-white drop-shadow-md">
                  <Image
                 src= "/iconTrash.svg"
                 className="inline"
@@ -155,16 +150,11 @@ export const DelExPopup=({species,text}) => {
                                 height={69.99}
                                 quality={100}
                                 />
-                            <p className=" text-2xl text-winered "> Are you sure?</p>
+                            <p className=" text-2xl text-winered text-center"> Are you sure?</p>
                             <p className=" w-[261px] text-base text-darkgrey text-center"> Do you really want to delete this Tier List row?</p>
                        
-                        
-                            {/* <Button onPress={onClose}
-                                    className="rounded-2xl border border-1 border-littlepink bg-cherry px-2 py-2 text-base text-white drop-shadow-md">
-                                    Delete
-                            </Button> */}
-                            <Button onPress={onClose} type="submit"
-                            className= "h-[33px] w-[150px] flex gap-2 items-center justify-center rounded-2xl border border-1 border-littlepink bg-winered px-[20px] py-2 text-base text-white drop-shadow-md"
+                            <Button onPress={onClose}
+                            className= "h-[33px] w-[150px] flex gap-2 items-center justify-center rounded-2xl border border-1 border-littlepink bg-winered px-2 text-base text-white drop-shadow-md"
                             >
                                 <Image
                                 src= "/iconTrash.svg"
@@ -177,8 +167,8 @@ export const DelExPopup=({species,text}) => {
                                 Delete
                             </Button>
 
-                            <Button onPress={onClose} type="submit"
-                            className="h-[33px] w-[150px] flex gap-2 items-center justify-center rounded-2xl border border-1 border-littlepink bg-cherry px-[20px] py-2 text-base text-white drop-shadow-md"
+                            <Button onPress={onClose}
+                            className="h-[33px] w-[150px] flex gap-2 items-center justify-center rounded-2xl border border-1 border-littlepink bg-cherry px-2 text-base text-white drop-shadow-md"
                             >
                                 Cancle
                             </Button>
