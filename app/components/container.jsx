@@ -5,6 +5,7 @@ import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import SortableItem from './sortableItem';
 import Image from 'next/image';
 import ImageIcon from '@/app/components/imageIcon';
+import { Button } from '@nextui-org/react';
 
 export default function Container(props) {
   const { id, items } = props;
@@ -14,6 +15,14 @@ export default function Container(props) {
 
   return (
     <div ref={setNodeRef} className={`${props.className}`} {...attributes}>
+      {props.isSpawner && (
+        <Button
+          isIconOnly={true}
+          className='relative z-10 h-[70px] w-[70px] rounded-xl bg-lightpink shadow-lg'
+        >
+          <Image src='/plus.svg' width={40} height={40} alt={'add new image'} />
+        </Button>
+      )}
       <SortableContext id={id} items={items}>
         {items.map((item) => {
           return (
