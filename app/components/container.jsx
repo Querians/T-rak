@@ -34,7 +34,7 @@ export default function Container(props) {
               onRemove={props.onRemove}
               isEditable={props.isEditable}
               id={item.id}
-              key={item.id} // don't change key because somehow animetion will change
+              key={item.id} // don't change key because somehow animation will change
               item={item}
               className={`${props.itemClassName}`}
             >
