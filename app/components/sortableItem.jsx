@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSortable, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import Image from 'next/image';
+import imageIcon from '@/app/components/imageIcon';
 
 const animateLayoutChanges = (args) => {
   return args.isSorting || args.wasDragging
@@ -54,34 +55,42 @@ export default function SortableItem(props) {
         <div
         // className={`flex h-full w-full rounded-md`}
         >
-          {props.onRemove && isClick && props.isEditable && (
-            <button
-              onClick={() => {
-                props.onRemove(props.id, props.rowIndex);
-              }}
-            >
-              <Image
-                src='/delete.svg'
-                width={20}
-                height={20}
-                alt={'delete button'}
-                className='absolute -right-2 -top-2 z-10'
-              />
-            </button>
+          {!props.isSpawner ? (
+            <>
+              {props.onRemove && isClick && props.isEditable && (
+                <button
+                  onClick={() => {
+                    props.onRemove(props.id, props.rowIndex);
+                  }}
+                >
+                  <Image
+                    src='/delete.svg'
+                    width={20}
+                    height={20}
+                    alt={'delete button'}
+                    className='absolute -right-2 -top-2 z-10'
+                  />
+                </button>
+              )}
+              <div
+                ref={setActivatorNodeRef}
+                {...attributes}
+                {...listeners}
+                onFocus={(e) => setIsClick(!isClick)}
+                onBlur={(e) => {
+                  setTimeout(function () {
+                    setIsClick(false);
+                  }, 50);
+                }}
+              >
+                {children}
+              </div>
+            </>
+          ) : (
+            <div {...listeners} {...attributes}>
+              {children}
+            </div>
           )}
-          <div
-            ref={setActivatorNodeRef}
-            {...attributes}
-            {...listeners}
-            onFocus={(e) => setIsClick(!isClick)}
-            onBlur={(e) => {
-              setTimeout(function () {
-                setIsClick(false);
-              }, 50);
-            }}
-          >
-            {children}
-          </div>
         </div>
       )}
     </div>

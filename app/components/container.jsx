@@ -4,72 +4,61 @@ import { SortableContext, useSortable } from '@dnd-kit/sortable';
 // import { CSS } from '@dnd-kit/utilities';
 import SortableItem from './sortableItem';
 import Image from 'next/image';
+import ImageIcon from '@/app/components/imageIcon';
 
 export default function Container(props) {
   const { id, items } = props;
-  // const {
-  //   attributes,
-  //   listeners,
-  //   transform,
-  //   transition,
-  //   setDraggableNodeRef,
-  //   setDroppableNodeRef,
-  //   setNodeRef: setNodeRefSortable,
-  // } = useSortable({ id: id });
-
-  // const style = {
-  //   transform: CSS.Transform.toString(transform),
-  //   transition,
-  // };
-
-  const { isOver, setNodeRef } = useDroppable({
+  const { isOver, setNodeRef, attributes } = useDroppable({
     id: id,
   });
-  // useEffect(()=>{
-  //   console.log(isOver)
-  // },[isOver])
 
   return (
-    // <div ref={setNodeRef} id={`${id}+asd`} className={`${props.className}`}>
-    <div
-      // ref={setNodeRefSortable}
-      ref={setNodeRef}
-      className={`${props.className}`}
-      // style={style}
-      // {...attributes}
-    >
+    <div ref={setNodeRef} className={`${props.className}`} {...attributes}>
       <SortableContext id={id} items={items}>
-        {/* <div className={`overflow-auto`}> */}
         {items.map((item) => {
           return (
             <SortableItem
+              isSpawner={props.isSpawner}
               isRow={false}
               parentID={id}
               rowIndex={props.rowIndex}
               onRemove={props.onRemove}
               isEditable={props.isEditable}
-              key={item.id}
               id={item.id}
+              key={item.id} // don't change key because somehow animetion will change
               item={item}
               className={`${props.itemClassName}`}
             >
-              <Image
-                priority={true}
-                src={item.pictuerUrl}
-                fill={true}
-                quality={100}
-                className='rounded-lg object-cover'
-                alt={item.title}
-              />
-              {/* <div className='w-full h-full flex text-center'>
-                {item.title} + {item.id}
-              </div> */}
+              {
+                props.isSpawner ? (
+                  <ImageIcon
+                    elementId={item.id}
+                    handleSelectRow={props?.handleSelectRow}
+                    id={item.id}
+                    rowIndex={props.rowIndex}
+                    onRemove={props.onRemove}
+                    img={item.pictuerUrl}
+                    imgName={item.title}
+                    tierRow={props?.rows.slice(0, -1)}
+                  />
+                ) : (
+                  <Image
+                    priority={true}
+                    src={item.pictuerUrl}
+                    fill={true}
+                    quality={100}
+                    className='rounded-lg object-cover'
+                    alt={item.title}
+                  />
+                )
+                // <div className='w-full h-full flex text-center'>
+                //   {item.title} + {item.id}
+                // </div>
+              }
             </SortableItem>
           );
         })}
-        {/* </div> */}
       </SortableContext>
     </div>
-    // </div>
   );
 }
