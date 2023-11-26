@@ -19,7 +19,7 @@ export default function Header(props) {
       router.push(`/tierlist/editDetail/${props.tierListId}`);
     }
   };
-  console.log(props.isEditable);
+
   return (
     <div className='mx-5 mt-[15px] box-border flex h-[22%] shrink-0 flex-col justify-around gap-[15px] px-3 py-3.5'>
       <div className='flex items-center gap-3.5'>
@@ -57,7 +57,7 @@ export default function Header(props) {
             type={props?.isEditable ? 'btnpeach' : 'deletebtn'}
             text={props?.isEditable ? 'Save' : 'Delete'}
             onClick={
-              !props?.isEditable ? handleOnClickSave : handleOnClickDelete
+              props?.isEditable ? handleOnClickSave : handleOnClickDelete
             }
           />
         </div>
