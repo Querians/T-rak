@@ -27,7 +27,6 @@ export default function TierList({
   setItems,
   isEditable = false,
   className = '',
-  ref,
   id,
 }) {
   const [activeId, setActiveId] = useState(null); // for over lay
@@ -347,13 +346,15 @@ export default function TierList({
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
-      delay: 100, // millisec
+      delay: 200, // millisec
+      tolerance: 2,
     },
   }); // Initialize mouse sensor
 
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
-      delay: 100, // millisec
+      delay: 200, // millisec
+      tolerance: 2,
     },
   }); // Initialize touch sensor
   const sensors = useSensors(touchSensor, mouseSensor);
@@ -380,6 +381,8 @@ export default function TierList({
               return (
                 // isEditable && (
                 <Spawner
+                  setItems={setItems}
+                  rows={items}
                   isEditable={isEditable}
                   key={row.id}
                   items={items}
