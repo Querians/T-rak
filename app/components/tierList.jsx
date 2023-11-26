@@ -27,6 +27,8 @@ export default function TierList({
   setItems,
   isEditable = false,
   className = '',
+  ref,
+  id,
 }) {
   const [activeId, setActiveId] = useState(null); // for over lay
   const defaultRow = [
@@ -359,6 +361,7 @@ export default function TierList({
 
   return (
     <DndContext
+      id={id}
       collisionDetection={pointerWithin}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
