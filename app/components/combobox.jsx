@@ -71,11 +71,11 @@ export default function Combobox({data, text}) {
                     {isOpen && (
                         <div className='bg-cream w-60 max-h-28 rounded-xl px-[11px] py-1 border-1 border-white overflow-auto shadow-lg'>
                             {filteredCategory.length === 0
-                                ? <p className='text-darkblack'>Not found</p>
-                                : <div className='divide-y-1 divide-darkblack'>
+                                ? <p className='text-darkgrey'>Not found</p>
+                                : <div className='divide-y-1 divide-darkgrey'>
                                 {
                                     filteredCategory.map((choice) =>  
-                                    <p className='text-darkblack cursor-pointer' onClick={() => {getValue(choice.name); handleOnClick()}}>{choice.name}</p>)
+                                    <p className='text-darkgrey cursor-pointer' onClick={() => {getValue(choice.name); handleOnClick()}}>{choice.name}</p>)
                                 }
                                </div>
                             }   

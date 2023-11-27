@@ -18,7 +18,7 @@ module.exports = {
         lightpink: '#f6d8df',
         cream: '#fbf3e2',
         winered: '#a73440',
-        darkblack: '#464646',
+        darkgrey: '#464646',
       },
       fontSize: {
         sm: '0.8rem',
