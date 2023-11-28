@@ -1,9 +1,6 @@
 'use client'
 import Inputbutton from "./inputbtn"
 import { CustomizeButton } from "./button";
-import Link from "next/link";
-import Combobox from "./combobox";
-import NumberInput from "./numberInput";
 
 export default function SignUpForm({}) {
     return (
