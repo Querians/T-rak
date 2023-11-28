@@ -11,6 +11,8 @@ export default function Header(props) {
     console.log('handleOnClickDelete');
   };
   const handleOnClickSave = (e) => {
+    props?.setIsEditable(false);
+    props?.saveItems();
     console.log('handleOnClickSave');
   };
   const handleOnClickRedirect = (e) => {
@@ -39,7 +41,7 @@ export default function Header(props) {
             text={props?.isEditable ? 'Cancel' : 'Edit'}
             onClick={() => {
               props?.setIsEditable(!props?.isEditable);
-              props?.resetItem();
+              props?.resetItems();
             }}
           />
         </div>

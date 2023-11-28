@@ -30,10 +30,11 @@ export default function Spawner(props) {
   };
 
   return (
+    // if we use overflow-x-auto the menu will disappear dueto overflow. Even we do only overflow-"x-auto
     <div
       className={`transition ${
         !props.isEditable && 'translate-y-full opacity-0'
-      } fixed inset-x-0 bottom-0 z-10 h-[152px] w-full rounded-[10px] bg-cherry`}
+      }  fixed inset-x-0 bottom-0 z-10 min-h-[152px] rounded-t-[10px] bg-cherry`}
     >
       <Container
         rows={props?.rows}
@@ -44,8 +45,8 @@ export default function Spawner(props) {
         onRemove={handleRemoveElement}
         id={items[items.length - 1].id}
         items={items[items.length - 1].elements}
-        className={`flex h-full w-full shrink-0 gap-x-[15px] px-5 py-4 `}
-        itemClassName={`relative min-w-[70px] min-h-[70px] max-w-[70px] max-h-[70px] rounded-xl shadow-lg`}
+        className={`flex shrink-0 gap-x-[15px] px-5 py-4 `}
+        itemClassName={`relative w-[70px] h-[70px] grow-0 shrink-0 rounded-xl shadow-lg`}
       />
     </div>
   );

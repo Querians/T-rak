@@ -10,12 +10,9 @@ export default function ImageIcon(props) {
   const handleOnClick = () => {
     setIsOpen(!isOpen);
   };
-  const getValue = (rowID) => {
-    setValue(rowID);
-  };
 
   return (
-    <div className='rouned-2xl relative h-[70px] w-[70px]'>
+    <>
       <Image
         src={img}
         alt={imgName}
@@ -24,16 +21,16 @@ export default function ImageIcon(props) {
         quality={100}
         sizes='(max-width: 70px) 100vw, 33vw'
         priority
+        tabIndex='0'
         onClick={handleOnClick}
-        onBlur={(e) => {
-          if (isOpen) {
+        onBlur={() => {
+          setTimeout(() => {
             setIsOpen(false);
-          }
+          }, 50);
         }}
       />
-      <div
-        className={`absolute -right-[22px] -top-80 z-30 flex h-[315px] text-sm`}
-      >
+
+      <div className={`absolute -right-[22px] -top-80 flex h-[315px] text-sm`}>
         {isOpen && (
           <div className='flex flex-col justify-end -space-y-[1px]'>
             <div
@@ -41,17 +38,16 @@ export default function ImageIcon(props) {
             >
               <div className='divide-y-1 divide-darkgrey'>
                 {tierRow.map((row, index) => (
-                  <p
+                  <button
                     key={index}
-                    className='cursor-pointer text-darkgrey'
+                    className='w-full cursor-pointer text-darkgrey'
                     onClick={() => {
-                      getValue(row.id);
                       props?.handleSelectRow(row.id, props.elementId);
                       handleOnClick();
                     }}
                   >
                     {row.label}
-                  </p>
+                  </button>
                 ))}
               </div>
               <p
@@ -74,6 +70,6 @@ export default function ImageIcon(props) {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSortable, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import Image from 'next/image';
-import imageIcon from '@/app/components/imageIcon';
 
 const animateLayoutChanges = (args) => {
   return args.isSorting || args.wasDragging
@@ -37,7 +36,7 @@ export default function SortableItem(props) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`${isDragging && 'opacity-50'} w-full ${props.className} `}
+      className={`${isDragging && 'opacity-50'} ${props.className} `}
     >
       {props.isRow ? (
         <>
