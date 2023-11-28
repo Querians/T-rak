@@ -24,8 +24,11 @@ export default function CurrentTierList({ params }) {
       <Header
         isEditable={isEditable}
         setIsEditable={setIsEditable}
-        resetItem={() => {
+        resetItems={() => {
           setTempItems(items);
+        }}
+        saveItems={() => {
+          setItems(tempItems);
         }}
         tierListId={params.tierListId}
       />
