@@ -30,7 +30,7 @@ export default async function Signup() {
         </div>
       </div>
       <div className='h-[78%] p-8 bg-cream rounded-t-2xl'>
-      <SignUpForm />
+        <SignUpForm />
       </div>
    </main>
   );
