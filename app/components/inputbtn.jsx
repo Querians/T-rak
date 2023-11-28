@@ -1,7 +1,7 @@
 'use client'
 import {useState} from 'react'
 
-export default function Inputbutton({text, type='text', name=''}) {
+export default function Inputbutton({text, type='text', name='',read=0}) {
 
     const [value, setValue] = useState("")
 
@@ -21,6 +21,7 @@ export default function Inputbutton({text, type='text', name=''}) {
                     value={value} 
                     onChange={handleInputChange}
                     name={name}
+                    readOnly={(read)?0:1}
                 />
             </div>
         </div>
