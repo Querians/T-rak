@@ -15,6 +15,7 @@ import TierListRow from '@/app/components/tierListRow';
 import DragOverLayTierList from '@/app/components/dragOverLayTierList';
 import Spawner from '@/app/components/spawner';
 import { Button } from './button';
+import Swal from 'sweetalert2';
 
 const measuringConfig = {
   droppable: {
@@ -66,17 +67,44 @@ export default function TierList({
   ];
 
   const handleRemoveElement = (id, parentIndex) => {
-    setItems((prev) => {
-      return [
-        ...prev.slice(0, parentIndex),
-        {
-          ...prev[parentIndex],
-          elements: prev[parentIndex].elements.filter(
-            (element) => element.id !== id
-          ),
-        },
-        ...prev.slice(parentIndex + 1, prev.length),
-      ];
+    Swal.fire({
+      title: 'Are you sure?',
+      color: '#A73440',
+      text: 'Do you really want to delete this Image?',
+      iconHtml:
+        '<Image src="/iconTrash.svg" width=65px height=65px alt="delete icon" />',
+      showCancelButton: true,
+      confirmButtonColor: '#a73440',
+      cancelButtonColor: '#DE717C',
+      confirmButtonText: 'Delete',
+      buttonsStyling: false,
+      customClass: {
+        popup:
+          'flex flex-col gap-[15px] bg-peach border border-cream rounded-lg',
+        title: 'p-0',
+        htmlContainer: 'm-0',
+        icon: 'border-0',
+        actions: 'flex flex-col gap-[15px] w-1/2',
+        confirmButton:
+          'bg-winered py-2 text-white font-bold w-full rounded-lg shadow-lg border border-[#FAFEFF]',
+        cancelButton:
+          'bg-cherry py-2 text-white font-bold w-full rounded-lg shadow-lg border border-[#FAFEFF]',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setItems((prev) => {
+          return [
+            ...prev.slice(0, parentIndex),
+            {
+              ...prev[parentIndex],
+              elements: prev[parentIndex].elements.filter(
+                (element) => element.id !== id
+              ),
+            },
+            ...prev.slice(parentIndex + 1, prev.length),
+          ];
+        });
+      }
     });
   };
 
