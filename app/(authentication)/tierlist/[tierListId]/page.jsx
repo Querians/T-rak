@@ -57,7 +57,7 @@ export default function CurrentTierList({ params }) {
           ref={componentRef}
           className={`${
             isExporting ? 'w-fit' : 'h-full w-full overflow-y-auto'
-          } py-2.5`}
+          }`}
         >
           <TierList
             isExporting={isExporting}
