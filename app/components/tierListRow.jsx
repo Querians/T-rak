@@ -8,11 +8,18 @@ export default function TierListRow(props) {
       id={row.id}
       rowIndex={rowIndex}
       key={row.id}
+      tierListId={props.tierListId}
       isEditable={isEditable}
       items={row.elements}
       row={row}
       isRow={true}
-      className={`flex h-[90px] w-full gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-1 shadow-lg`}
+      className={`transition ${
+        rowIndex > props.lastIndexOriginal &&
+        row.id != -2 &&
+        !props?.isOverLay &&
+        isEditable &&
+        'animate-fadeIn'
+      } flex h-[90px] w-full shrink-0 gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-1 shadow-lg `}
     >
       <Container
         isEditable={props.isEditable}
