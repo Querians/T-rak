@@ -5,7 +5,6 @@ import { useState } from 'react';
 export default function ImageIcon(props) {
   const { img, imgName, tierRow, onRemove } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState('');
 
   const handleOnClick = () => {
     setIsOpen(!isOpen);
@@ -30,11 +29,13 @@ export default function ImageIcon(props) {
         }}
       />
 
-      <div className={`absolute -right-[22px] -top-80 flex h-[315px] text-sm`}>
+      <div
+        className={`absolute -right-[22px] -top-80 z-30 flex h-[315px] text-sm`}
+      >
         {isOpen && (
           <div className='flex flex-col justify-end -space-y-[1px]'>
             <div
-              className={`w-28 overflow-auto rounded-xl border-1 border-cream bg-mint px-2 py-1 text-center shadow-lg`}
+              className={`z-30 w-28 overflow-auto rounded-xl border-1 border-cream bg-mint px-2 py-1 text-center shadow-lg`}
             >
               <div className='divide-y-1 divide-darkgrey'>
                 {tierRow.map((row, index) => (

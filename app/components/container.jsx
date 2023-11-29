@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
-import { SortableContext, useSortable } from '@dnd-kit/sortable';
-// import { CSS } from '@dnd-kit/utilities';
+import { SortableContext } from '@dnd-kit/sortable';
 import SortableItem from './sortableItem';
 import Image from 'next/image';
 import ImageIcon from '@/app/components/imageIcon';
@@ -17,8 +16,9 @@ export default function Container(props) {
     <div ref={setNodeRef} className={`${props.className}`} {...attributes}>
       {props.isSpawner && (
         <Button
+          onClick={props.handleAddElement}
           isIconOnly={true}
-          className='relative z-10 h-[70px] w-[70px] rounded-xl bg-lightpink shadow-lg'
+          className='relative z-10 h-[70px] w-[70px] shrink-0 rounded-xl bg-lightpink shadow-lg'
         >
           <Image src='/plus.svg' width={40} height={40} alt={'add new image'} />
         </Button>
@@ -46,14 +46,14 @@ export default function Container(props) {
                     id={item.id}
                     rowIndex={props.rowIndex}
                     onRemove={props.onRemove}
-                    img={item.pictuerUrl}
+                    img={item.toShowSrc}
                     imgName={item.title}
                     tierRow={props?.rows.slice(0, -1)}
                   />
                 ) : (
                   <Image
                     priority={true}
-                    src={item.pictuerUrl}
+                    src={item.toShowSrc}
                     fill={true}
                     quality={100}
                     className='rounded-lg object-cover'

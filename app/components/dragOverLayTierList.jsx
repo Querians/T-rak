@@ -10,7 +10,7 @@ export default function DragOverLayTierList({ items, activeId }) {
   const activeElementIndex = row?.elements?.findIndex(
     (element) => element.id == activeId
   );
-  const activeElementUrl = row?.elements[activeElementIndex].pictuerUrl;
+  const activeElementUrl = row?.elements[activeElementIndex].toShowSrc;
   return (
     <DragOverlay
       dropAnimation={{
