@@ -87,7 +87,7 @@ export default function Spawner(props) {
     // if we use overflow-x-auto the menu will disappear dueto overflow. Even we do only overflow-"x-auto
     <div
       className={`transition ${
-        !props.isEditable && 'translate-y-full opacity-0'
+        !props.isEditable && 'translate-y-[250%] opacity-0'
       }  fixed inset-x-0 bottom-0 z-10 h-[152px] rounded-t-[10px] bg-cherry`}
     >
       {/* <div className='absolute z-10 bottom-[40px] left-1/2 transform -translate-x-1/2 flex items-end w-[325px] mt-96 overflow-y-visible overflow-x-scroll'> */}

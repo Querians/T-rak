@@ -5,7 +5,7 @@ export default function Header(props) {
   const router = useRouter();
 
   const handleOnClickExport = (e) => {
-    console.log('handleOnClickExport');
+    props.export();
   };
   const handleOnClickDelete = (e) => {
     console.log('handleOnClickDelete');
