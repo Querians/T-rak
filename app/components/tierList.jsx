@@ -66,6 +66,21 @@ export default function TierList({
     },
   ];
 
+  const removeElement = (id, parentIndex) => {
+    setItems((prev) => {
+      return [
+        ...prev.slice(0, parentIndex),
+        {
+          ...prev[parentIndex],
+          elements: prev[parentIndex].elements.filter(
+            (element) => element.id !== id
+          ),
+        },
+        ...prev.slice(parentIndex + 1, prev.length),
+      ];
+    });
+  };
+
   const handleRemoveElement = (id, parentIndex) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -92,18 +107,7 @@ export default function TierList({
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        setItems((prev) => {
-          return [
-            ...prev.slice(0, parentIndex),
-            {
-              ...prev[parentIndex],
-              elements: prev[parentIndex].elements.filter(
-                (element) => element.id !== id
-              ),
-            },
-            ...prev.slice(parentIndex + 1, prev.length),
-          ];
-        });
+        removeElement(id, parentIndex);
       }
     });
   };
