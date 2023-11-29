@@ -21,7 +21,7 @@ export function handleDragOver(event, setItems, items) {
   // Find the containers
   const activeContainer = findContainer(id, items);
   const overContainer = findContainer(overId, items);
-  const isSpawner = event.over?.id == 'spawner';
+  const isSpawner = event.over?.id == -1;
 
   if (!activeContainer || !overContainer || activeContainer === overContainer) {
     return;
@@ -29,7 +29,7 @@ export function handleDragOver(event, setItems, items) {
 
   // drag element to empty row
   if (
-    typeof overContainer === 'string' &&
+    (typeof overContainer === 'string' || overContainer == -1) &&
     typeof activeContainer === 'object'
   ) {
     const activeContainerIndex = items.findIndex(
@@ -102,13 +102,13 @@ export function handleDragOver(event, setItems, items) {
   // swap row
   if (
     typeof activeContainer === 'string' &&
-    (overContainer == 'spawner' || overContainer?.id == 'spawner')
+    (overContainer == -1 || overContainer?.id == -1)
   ) {
     return;
   }
   if (
     typeof activeContainer === 'string' &&
-    !(overContainer == 'spawner' || overContainer?.id == 'spawner')
+    !(overContainer == -1 || overContainer?.id == -1)
   ) {
     const activeRowIndex = event.active.data.current.sortable.index;
     const overRowIndex =

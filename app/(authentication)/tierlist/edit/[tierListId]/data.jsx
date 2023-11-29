@@ -137,8 +137,8 @@ export const data = [
   //   elements: [],
   // },
   {
-    id: 'spawner',
-    label: 'spawner',
+    id: -1,
+    label: -1,
     color: '#F2FABE',
     elements: [
       {

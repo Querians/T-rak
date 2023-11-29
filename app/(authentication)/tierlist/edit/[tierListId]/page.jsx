@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { data } from './data';
-// import TierList from '@/app/components/tierList';
 import MenuBar from '@/app/components/menuBar';
 import Header from '@/app/components/header';
 import dynamic from 'next/dynamic';
@@ -14,7 +13,7 @@ export default function CurrentTierList({ params }) {
   const [items, setItems] = useState(data);
   // for editing
   const [tempItems, setTempItems] = useState(data);
-  const [isEditable, setIsEditable] = useState(true);
+  const [isEditable, setIsEditable] = useState(false);
   // for exporting
   const [isExporting, setIsExporting] = useState(false);
   const componentRef = useRef();
@@ -60,6 +59,7 @@ export default function CurrentTierList({ params }) {
           }`}
         >
           <TierList
+            originalLength={items.length}
             isExporting={isExporting}
             tierListId={params.tierListId}
             items={isEditable ? tempItems : items}

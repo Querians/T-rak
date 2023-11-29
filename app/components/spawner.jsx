@@ -59,7 +59,7 @@ export default function Spawner(props) {
         if (data.value[0].length == 0 || !data.value[1]) {
           return;
         }
-        console.log(data.value[1]);
+        // console.log(data.value[1]);
         props.setItems((prev) => {
           return [
             ...prev.slice(0, -1),
