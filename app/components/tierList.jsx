@@ -35,10 +35,10 @@ export default function TierList({
   isEditable = false,
   className = '',
   tierListId,
+  originalLength = 0,
 }) {
   const [activeId, setActiveId] = useState(null); // for over lay
   const itemsLength = items.length;
-  const lastIndexOriginal = itemsLength - 2; // index of last row
 
   // sensor
   const mouseSensor = useSensor(MouseSensor, {
@@ -95,7 +95,7 @@ export default function TierList({
             return (
               <TierListRow
                 tierListId={tierListId}
-                lastIndexOriginal={lastIndexOriginal}
+                lastIndexOriginal={originalLength - 2}
                 itemsLength={itemsLength}
                 isEditable={isEditable}
                 key={row.id}

@@ -14,9 +14,10 @@ export default function TierListRow(props) {
       row={row}
       isRow={true}
       className={`transition ${
-        rowIndex == props.lastIndexOriginal &&
-        props.lastIndexOriginal + 1 != rowIndex &&
+        rowIndex > props.lastIndexOriginal &&
+        row.id != -2 &&
         !props?.isOverLay &&
+        isEditable &&
         'animate-fadeIn'
       } flex h-[90px] w-full shrink-0 gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-1 shadow-lg `}
     >
