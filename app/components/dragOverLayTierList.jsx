@@ -31,7 +31,7 @@ export default function DragOverLayTierList({ items, activeId }) {
         />
       ) : (
         <div>
-          <TierListRow row={items[activeRowIndex]} />
+          <TierListRow row={items[activeRowIndex]} isOverLay={true} />
         </div>
       )}
     </DragOverlay>

@@ -49,7 +49,7 @@ export default function SortableItem(props) {
           >
             {!props.isEditable ? (
               <Link
-                className='flex h-full w-full shrink-0 items-center items-center justify-center text-center'
+                className='flex h-full w-full shrink-0 items-center justify-center text-center'
                 href={`/tierlist/${props?.tierListId}/${props.id}`}
               >
                 {props?.row?.label}
@@ -61,9 +61,7 @@ export default function SortableItem(props) {
           <div className='w-full overflow-auto '>{children}</div>
         </>
       ) : (
-        <div
-        // className={`flex h-full w-full rounded-md`}
-        >
+        <div>
           {!props.isSpawner ? (
             <>
               {props.onRemove && isClick && props.isEditable && (

@@ -5,8 +5,8 @@ export default function Spawner(props) {
   const { items, handleRemoveElement } = props;
   const handleSelectRow = (selectRowId, selectElementId) => {
     props?.setItems((prev) => {
-      const rowIndex = props?.rows?.findIndex((row) => row.id === selectRowId);
-      const elementIndex = props?.rows[prev.length - 1]?.elements?.findIndex(
+      const rowIndex = props?.items?.findIndex((row) => row.id === selectRowId);
+      const elementIndex = props?.items[prev.length - 1]?.elements?.findIndex(
         (element) => element.id === selectElementId
       );
 
@@ -92,7 +92,7 @@ export default function Spawner(props) {
     >
       {/* <div className='absolute z-10 bottom-[40px] left-1/2 transform -translate-x-1/2 flex items-end w-[325px] mt-96 overflow-y-visible overflow-x-scroll'> */}
       <Container
-        rows={props?.rows}
+        rows={props?.items}
         isSpawner={true}
         isEditable={true}
         rowIndex={items.length - 1}
