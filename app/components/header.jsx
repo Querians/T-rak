@@ -24,6 +24,52 @@ export default function Header(props) {
   };
   const handleOnClickDelete = (e) => {
     console.log('handleOnClickDelete');
+    Swal.fire({
+      title: 'Are you sure?',
+      color: '#A73440',
+      text: 'Do you really want to delete this Tier List?',
+      iconHtml:
+        '<Image src="/iconTrash.svg" width=65px height=65px alt="delete icon" />',
+      showCancelButton: true,
+      confirmButtonColor: '#a73440',
+      cancelButtonColor: '#DE717C',
+      confirmButtonText: 'Delete',
+      buttonsStyling: false,
+      customClass: {
+        popup:
+          'flex flex-col gap-[15px] bg-peach border border-cream rounded-lg',
+        title: 'p-0',
+        htmlContainer: 'm-0',
+        icon: 'border-0',
+        actions: 'flex flex-col gap-[15px] w-1/2',
+        confirmButton:
+          'bg-winered py-2 text-white font-bold w-full rounded-lg shadow-lg border border-[#FAFEFF]',
+        cancelButton:
+          'bg-cherry py-2 text-white font-bold w-full rounded-lg shadow-lg border border-[#FAFEFF]',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // space for remove tierList function
+        // tierlistId can find from "props.tierListId"
+        //
+        //
+        // delete complete
+        Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        }).fire({
+          icon: 'success',
+          title: 'Delete successfully',
+        });
+      }
+    });
   };
   const handleOnClickSave = (e) => {
     props?.setIsEditable(false);
