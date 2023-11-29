@@ -1,11 +1,26 @@
 import { Button } from '@/app/components/button';
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 export default function Header(props) {
   const router = useRouter();
 
   const handleOnClickExport = (e) => {
     props.export();
+    Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    }).fire({
+      icon: 'success',
+      title: 'Export Complete!',
+    });
   };
   const handleOnClickDelete = (e) => {
     console.log('handleOnClickDelete');
