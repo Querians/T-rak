@@ -108,6 +108,20 @@ export default function TierList({
     }).then((result) => {
       if (result.isConfirmed) {
         removeElement(id, parentIndex);
+        Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        }).fire({
+          icon: 'success',
+          title: 'Delete successfully',
+        });
       }
     });
   };
