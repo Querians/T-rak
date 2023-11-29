@@ -53,7 +53,7 @@ export default function Header(props) {
         // tierlistId can find from "props.tierListId"
         //
         //
-        // delete complete
+        // after delete complete
         Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -74,6 +74,24 @@ export default function Header(props) {
   const handleOnClickSave = (e) => {
     props?.setIsEditable(false);
     props?.saveItems();
+    // space for save tierList function
+    //
+
+    // after saving complete
+    Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    }).fire({
+      icon: 'success',
+      title: 'Save successfully',
+    });
     console.log('handleOnClickSave');
   };
   const handleOnClickRedirect = (e) => {
