@@ -27,6 +27,7 @@ export default function Container(props) {
         {items.map((item) => {
           return (
             <SortableItem
+              tierListId={props?.tierListId}
               isSpawner={props.isSpawner}
               isRow={false}
               parentID={id}

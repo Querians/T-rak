@@ -61,7 +61,7 @@ export default function CurrentTierList({ params }) {
         >
           <TierList
             isExporting={isExporting}
-            id={'tierList ID'}
+            tierListId={params.tierListId}
             items={isEditable ? tempItems : items}
             setItems={isEditable ? setTempItems : setItems}
             isEditable={isEditable}

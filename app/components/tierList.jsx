@@ -28,7 +28,7 @@ export default function TierList({
   setItems,
   isEditable = false,
   className = '',
-  id,
+  tierListId,
 }) {
   const [activeId, setActiveId] = useState(null); // for over lay
   const defaultRow = [
@@ -408,7 +408,7 @@ export default function TierList({
 
   return (
     <DndContext
-      id={id}
+      id={tierListId}
       collisionDetection={pointerWithin}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
@@ -441,6 +441,7 @@ export default function TierList({
             // each row in tier list
             return (
               <TierListRow
+                tierListId={tierListId}
                 lastIndexOriginal={lastIndexOriginal}
                 itemsLength={itemsLength}
                 isEditable={isEditable}

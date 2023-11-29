@@ -8,6 +8,7 @@ export default function TierListRow(props) {
       id={row.id}
       rowIndex={rowIndex}
       key={row.id}
+      tierListId={props.tierListId}
       isEditable={isEditable}
       items={row.elements}
       row={row}

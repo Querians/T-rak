@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSortable, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const animateLayoutChanges = (args) => {
   return args.isSorting || args.wasDragging
@@ -44,9 +45,18 @@ export default function SortableItem(props) {
             ref={setActivatorNodeRef}
             {...listeners}
             {...attributes}
-            className={`flex h-full w-[90px] shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg text-center text-lg font-bold text-darkgrey bg-[${props.row.color}] shadow-lg`}
+            className={`flex h-full w-[90px]  shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg text-center text-lg font-bold text-darkgrey bg-[${props.row.color}] shadow-lg`}
           >
-            {props?.row?.label}
+            {!props.isEditable ? (
+              <Link
+                className='flex h-full w-full shrink-0 items-center items-center justify-center text-center'
+                href={`/tierlist/${props?.tierListId}/${props.id}`}
+              >
+                {props?.row?.label}
+              </Link>
+            ) : (
+              props?.row?.label
+            )}
           </div>
           <div className='w-full overflow-auto '>{children}</div>
         </>
