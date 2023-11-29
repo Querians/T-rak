@@ -32,6 +32,22 @@ export default function SortableItem(props) {
     transform: CSS.Transform.toString(transform),
     transition,
   };
+  let bgColor = '';
+  if (props.isRow) {
+    bgColor = props.row.color;
+  }
+
+  const defaultColor = {
+    '#FABEBE': 'bg-[#FABEBE]',
+    '#FAD4BE': 'bg-[#FAD4BE]',
+    '#FAE6BE': 'bg-[#FAE6BE]',
+    '#F2FABE': 'bg-[#F2FABE]',
+    '#D8FABE': 'bg-[#D8FABE]',
+    '#BEFAE4': 'bg-[#BEFAE4]',
+    '#BEECFA': 'bg-[#BEECFA]',
+    '#BED2FA': 'bg-[#BED2FA]',
+    '': '',
+  };
 
   return (
     <div
@@ -45,12 +61,12 @@ export default function SortableItem(props) {
             ref={setActivatorNodeRef}
             {...listeners}
             {...attributes}
-            className={`flex h-full w-[90px]  shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg text-center text-lg font-bold text-darkgrey bg-[${props.row.color}] shadow-lg`}
+            className={`flex h-full w-[90px]  shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg text-center text-lg font-bold text-darkgrey shadow-lg  ${defaultColor[bgColor]}`}
           >
             {!props.isEditable ? (
               <Link
                 className='flex h-full w-full shrink-0 items-center justify-center text-center'
-                href={`/tierlist/${props?.tierListId}/${props.id}`}
+                href={`/tierlist/edit/${props?.tierListId}/${props.id}`}
               >
                 {props?.row?.label}
               </Link>
