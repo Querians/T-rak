@@ -27,7 +27,9 @@ export default function Header(props) {
     Swal.fire({
       title: 'Are you sure?',
       color: '#A73440',
-      text: 'Do you really want to delete this Tier List?',
+      text: `Do you really want to delete this Tier List${
+        props?.isEditExpand ? ' row' : ''
+      }?`,
       iconHtml:
         '<Image src="/iconTrash.svg" width=65px height=65px alt="delete icon" />',
       showCancelButton: true,
@@ -114,7 +116,7 @@ export default function Header(props) {
         </div>
       </div>
       <div className='flex items-center justify-between gap-2'>
-        <div className='w-full'>
+        <div className={`${props?.isEditExpand ? 'basis-1/3' : 'w-full'}`}>
           <Button
             type={props?.isEditable ? 'redbtn' : 'btnpeach'}
             text={props?.isEditable ? 'Cancel' : 'Edit'}
@@ -124,7 +126,7 @@ export default function Header(props) {
             }}
           />
         </div>
-        <div className='w-full'>
+        <div className={`${props.isEditExpand && 'hidden'} w-full`}>
           <Button
             type='btnpeach'
             text={props?.isEditable ? 'Edit Detail' : 'Export'}
@@ -133,7 +135,7 @@ export default function Header(props) {
             }
           />
         </div>
-        <div className='w-full'>
+        <div className={`${props?.isEditExpand ? 'basis-2/3' : 'w-full'}`}>
           <Button
             type={props?.isEditable ? 'btnpeach' : 'deletebtn'}
             text={props?.isEditable ? 'Save' : 'Delete'}
