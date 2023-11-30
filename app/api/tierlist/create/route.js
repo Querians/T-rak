@@ -72,7 +72,7 @@ export async function POST(request) {
   const category = await prisma.category
     .findFirst({
       where: {
-        categoryName: formData.get('categoryName') || undefined,
+        categoryName: formData.get('categoryName'),
       },
       select: {
         categoryId: true,
@@ -85,6 +85,7 @@ export async function POST(request) {
           categoryId: randomUUID({ disableEntropyCache: true }),
         };
       }
+      return res;
     });
 
   try {
