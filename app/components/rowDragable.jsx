@@ -45,12 +45,7 @@ export default function RowDragable(props) {
   }); // Initialize touch sensor
   const sensors = useSensors(touchSensor, mouseSensor);
 
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
-
   const handleDragOver = (e, setItems, items) => {
-    console.log('enver', e);
     if (
       e.over?.data?.current?.sortable?.containerId ==
         e.active?.data?.current?.sortable?.containerId ||
