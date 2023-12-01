@@ -1,5 +1,4 @@
 'use client';
-import Header from '@/app/components/header';
 import ElementCard from '@/app/components/elementCard';
 import Spawner from '@/app/components/spawner';
 import { useState, useEffect } from 'react';

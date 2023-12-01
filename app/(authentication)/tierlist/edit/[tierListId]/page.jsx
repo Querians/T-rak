@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { data } from './data';
 import MenuBar from '@/app/components/menuBar';
-import Header from '@/app/components/header';
+import Header from './header';
 import dynamic from 'next/dynamic';
 
 const TierList = dynamic(() => import('@/app/components/tierList'), {
@@ -30,7 +30,7 @@ export default function CurrentTierList({ params }) {
   }, [isExporting]);
 
   return (
-    <div className='flex h-screen w-full flex-col overflow-hidden'>
+    <div className='relative flex h-screen w-full flex-col overflow-hidden'>
       <Header
         isEditable={isEditable}
         setIsEditable={setIsEditable}
@@ -55,7 +55,7 @@ export default function CurrentTierList({ params }) {
         <div
           ref={componentRef}
           className={`${
-            isExporting ? 'w-fit' : 'h-full w-full overflow-y-auto'
+            isExporting ? 'w-fit' : 'h-[95%] w-full overflow-y-auto'
           }`}
         >
           <TierList

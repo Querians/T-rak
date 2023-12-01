@@ -3,33 +3,27 @@ import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 
 export default function Header(props) {
+  const { tierListId, rowId, data } = props;
+
+  // query from tierListId
+  const tierListData = {
+    name: 'this is tier list name',
+    description: 'this is description',
+    category: 'this is category',
+    coverPhotoUrl: 'vercel.svg',
+  };
+  // query from rowId
+  const rowData = {
+    label: 'this is row label',
+  };
+
   const router = useRouter();
 
-  const handleOnClickExport = (e) => {
-    props.export();
-    Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      },
-    }).fire({
-      icon: 'success',
-      title: 'Export Complete!',
-    });
-  };
   const handleOnClickDelete = (e) => {
-    console.log('handleOnClickDelete');
     Swal.fire({
       title: 'Are you sure?',
       color: '#A73440',
-      text: `Do you really want to delete this Tier List${
-        props?.isEditExpand ? ' row' : ''
-      }?`,
+      text: `Do you really want to delete this Tier List row?`,
       iconHtml:
         '<Image src="/iconTrash.svg" width=65px height=65px alt="delete icon" />',
       showCancelButton: true,
@@ -52,10 +46,11 @@ export default function Header(props) {
     }).then((result) => {
       if (result.isConfirmed) {
         // space for remove tierList function
-        // tierlistId can find from "props.tierListId"
+        // tierlistId, rowId can find from "tierListId", "rowId"
         //
         //
         // after delete complete
+        // idk it need a popup or not
         Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -66,19 +61,25 @@ export default function Header(props) {
             toast.onmouseenter = Swal.stopTimer;
             toast.onmouseleave = Swal.resumeTimer;
           },
-        }).fire({
-          icon: 'success',
-          title: 'Delete successfully',
-        });
+        })
+          .fire({
+            icon: 'success',
+            title: `Delete ${data[0].label} row successfully`,
+          })
+          .then(() => {});
+        // if success (just didn't want to wait until popup is end then redirect page)
+        router.push(`/tierlist/edit/${tierListId}`);
       }
     });
   };
+
   const handleOnClickSave = (e) => {
     props?.setIsEditable(false);
     props?.saveItems();
     // space for save tierList function
+    // tierlistId, rowId, data can find from "tierListId", "rowId", "data"
     //
-
+    //
     // after saving complete
     Swal.mixin({
       toast: true,
@@ -94,29 +95,22 @@ export default function Header(props) {
       icon: 'success',
       title: 'Save successfully',
     });
-    console.log('handleOnClickSave');
-  };
-  const handleOnClickRedirect = (e) => {
-    console.log('handleOnClickRedirect');
-    if (props.tierListId) {
-      router.push(`/tierlist/editDetail/${props.tierListId}`);
-    }
   };
 
   return (
     <div className='mx-5 mt-[15px] box-border flex h-[22%] shrink-0 flex-col justify-around gap-[15px] px-3 py-3.5'>
       <div className='flex items-center gap-3.5'>
-        <div className='h-16 w-16 rounded-full bg-green-400 text-center'>
-          some image
+        <div className='flex h-16 w-16 items-center justify-center rounded-full bg-green-400 text-center'>
+          {tierListData.coverPhotoUrl}
         </div>
         <div className='font-bold'>
-          <p className='text-lg text-white'>Anime you</p>
-          <p className='text-md text-peach'>Anime</p>
-          <p className='text-sm text-white'>Hello How are you</p>
+          <p className='text-lg text-white'>{rowData.label}</p>
+          <p className='text-md text-peach'>{tierListData.category}</p>
+          <p className='text-sm text-white'>{tierListData.description}</p>
         </div>
       </div>
       <div className='flex items-center justify-between gap-2'>
-        <div className={`${props?.isEditExpand ? 'basis-1/3' : 'w-full'}`}>
+        <div className={`basis-1/3`}>
           <Button
             type={props?.isEditable ? 'redbtn' : 'btnpeach'}
             text={props?.isEditable ? 'Cancel' : 'Edit'}
@@ -126,19 +120,10 @@ export default function Header(props) {
             }}
           />
         </div>
-        <div className={`${props.isEditExpand && 'hidden'} w-full`}>
-          <Button
-            type='btnpeach'
-            text={props?.isEditable ? 'Edit Detail' : 'Export'}
-            onClick={
-              props?.isEditable ? handleOnClickRedirect : handleOnClickExport
-            }
-          />
-        </div>
-        <div className={`${props?.isEditExpand ? 'basis-2/3' : 'w-full'}`}>
+        <div className={`basis-2/3`}>
           <Button
             type={props?.isEditable ? 'btnpeach' : 'deletebtn'}
-            text={props?.isEditable ? 'Save' : 'Delete'}
+            text={props?.isEditable ? 'Save' : 'This Row'}
             onClick={
               props?.isEditable ? handleOnClickSave : handleOnClickDelete
             }

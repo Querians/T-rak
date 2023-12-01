@@ -1,39 +1,15 @@
 'use client';
-import Header from '@/app/components/header';
-import ElementCard from '@/app/components/elementCard';
-import Spawner from '@/app/components/spawner';
+import Header from './header';
 import { useState, useEffect } from 'react';
-import { data } from '../data';
-import {
-  DndContext,
-  pointerWithin,
-  MouseSensor,
-  TouchSensor,
-  useSensor,
-  useSensors,
-  MeasuringStrategy,
-  DragOverlay,
-} from '@dnd-kit/core';
-import { SortableContext } from '@dnd-kit/sortable';
-import { verticalListSortingStrategy } from '@dnd-kit/sortable';
-import {
-  handleDragEnd,
-  handleDragStart,
-  handleRemoveElement,
-} from '@/utils/tierList/handler';
-import Image from 'next/image';
 import RowDragable from '@/app/components/rowDragable';
-
-const measuringConfig = {
-  droppable: {
-    strategy: MeasuringStrategy.Always,
-  },
-};
+import { data } from '../data';
 
 export default function EditExpand({ params }) {
+  // items = [chosenRow, spawnerRow(a row that has Id = -1)]
   const [items, setItems] = useState([
     {
       id: params.rowId,
+      label: 'some label',
       elements: [
         {
           id: '1',
@@ -100,7 +76,7 @@ export default function EditExpand({ params }) {
     data[data.length - 1],
   ]);
   const [tempItems, setTempItems] = useState(items);
-  const [isEditable, setIsEditable] = useState(true);
+  const [isEditable, setIsEditable] = useState(false);
 
   useEffect(() => {
     console.log(items);
@@ -109,7 +85,6 @@ export default function EditExpand({ params }) {
   return (
     <div className='relative flex h-screen w-full flex-col overflow-hidden'>
       <Header
-        isEditExpand={true}
         isEditable={isEditable}
         setIsEditable={setIsEditable}
         resetItems={() => {
@@ -118,6 +93,9 @@ export default function EditExpand({ params }) {
         saveItems={() => {
           setItems(tempItems);
         }}
+        tierListId={params.tierListId}
+        rowId={params.rowId}
+        data={items}
       />
       <div className='h-[78%] shrink-0 grow-0  rounded-t-[20px] bg-cream'>
         <RowDragable
