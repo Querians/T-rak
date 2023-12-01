@@ -1,7 +1,7 @@
 import Image from "next/image";
-import TierListForm from "@/app/components/createtierlist";
+import TierListDetailEdit from "@/app/components/edittierlist";
 
-export default function CreateTierlist({profile="/profilelight.svg"}) {
+export default function EditTierlistDetail({profile="/profilelight.svg"}) {
   return (
     <main className='flex flex-col h-screen w-full'>
       <div className='h-[18%] w-full pt-10 px-8 flex gap-[15px] justify-left items-center'>
@@ -16,10 +16,10 @@ export default function CreateTierlist({profile="/profilelight.svg"}) {
             priority
           />
         </div> 
-        <p className='text-2xl text-white '>Create New Tier-list</p>
+        <p className='text-2xl text-white '>Edit Tier-list Detail</p>
       </div>
       <div className='h-5/6 p-8 bg-cream rounded-t-2xl'>
-        <TierListForm />
+        <TierListDetailEdit />
       </div>
     </main>
   );

@@ -20,8 +20,8 @@ export function DropButton({onClick, symbol, value}) {
     );
 }
 
-export default function NumberInput({data, text}) {
-    const [count, setCount] = useState(1);
+export default function NumberInput({text,rowcount=1}) {
+    const [count, setCount] = useState(rowcount);
     const max=8
 
     const adding = () => {

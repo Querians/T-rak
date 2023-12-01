@@ -69,7 +69,7 @@ export default function Combobox({data, text}) {
                 <DropButton onClick={handleOnClick} open={isOpen}/>
                 <div className='absolute -bottom-[7.5rem] right-0 h-28 justify-start'>
                     {isOpen && (
-                        <div className='bg-cream  w-[213px] max-h-28 rounded-xl px-[11px] py-1 border-1 border-white overflow-auto shadow-lg'>
+                        <div className='bg-cream w-60 max-h-28 rounded-xl px-[11px] py-1 border-1 border-white overflow-auto shadow-lg'>
                             {filteredCategory.length === 0
                                 ? <p className='text-darkgrey'>Not found</p>
                                 : <div className='divide-y-1 divide-darkgrey'>
