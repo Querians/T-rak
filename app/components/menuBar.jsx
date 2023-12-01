@@ -11,7 +11,7 @@ export default function MenuBar ({type}) {
                 <MenuIcon 
                     logo ={type=='add'?'/plus.svg':'/pluslight.svg'} 
                     type='add' 
-                    status={type=='add'?1:0} link='/createTierList'/>
+                    status={type=='add'?1:0} link='/tierlist/create'/>
                 <MenuIcon 
                     logo ={type=='profile'?'/profile.svg':'/profilelight.svg'} 
                     type='profile' status={type=='profile'?1:0} 
