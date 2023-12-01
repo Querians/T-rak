@@ -1,21 +1,28 @@
 import { Button } from '@/app/components/button';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Header(props) {
   const { tierListId, rowId, data } = props;
+  const [rowLabel, setRowLabel] = useState('');
 
   // query from tierListId
   const tierListData = {
     name: 'this is tier list name',
     description: 'this is description',
     category: 'this is category',
-    coverPhotoUrl: 'vercel.svg',
+    coverPhotoUrl: '/vercel.svg',
   };
   // query from rowId
   const rowData = {
     label: 'this is row label',
   };
+
+  useEffect(() => {
+    setRowLabel(rowData.label);
+  }, [rowData.label]);
 
   const router = useRouter();
 
@@ -100,11 +107,26 @@ export default function Header(props) {
   return (
     <div className='mx-5 mt-[15px] box-border flex h-[22%] shrink-0 flex-col justify-around gap-[15px] px-3 py-3.5'>
       <div className='flex items-center gap-3.5'>
-        <div className='flex h-16 w-16 items-center justify-center rounded-full bg-green-400 text-center'>
-          {tierListData.coverPhotoUrl}
+        <div className='relative flex h-[70px] w-[70px] shrink-0 items-center justify-center rounded-full bg-green-400 text-center'>
+          <Image
+            src={tierListData.coverPhotoUrl}
+            fill={true}
+            alt='my tier list photo'
+          />
         </div>
         <div className='font-bold'>
-          <p className='text-lg text-white'>{rowData.label}</p>
+          {props.isEditable ? (
+            <div className='flex h-[36px] w-full items-center gap-5 rounded-[15px] border-1 border-white bg-lightpink shadow-lg'>
+              <input
+                className='w-full rounded-xl bg-transparent px-5 text-darkgrey placeholder-peach placeholder:text-left focus:ring-0 focus:ring-offset-0 '
+                type='text'
+                value={rowLabel}
+                onChange={(e) => setRowLabel(e.target.value)}
+              />
+            </div>
+          ) : (
+            <p className='text-lg text-white'>{rowLabel}</p>
+          )}
           <p className='text-md text-peach'>{tierListData.category}</p>
           <p className='text-sm text-white'>{tierListData.description}</p>
         </div>
