@@ -27,7 +27,6 @@ export default function TierListDetailEdit({}) {
                 {/* add cover photo */}
                 <Combobox text='Category' data={categoryData}/>
                 <Inputbutton text='Description' name='description' isArea={1}/>
-                <NumberInput text='Number of row'/>
                 <div className="flex gap-[18px] pt-4 justify-between ">
                     <div className="basis-1/3">
                         <Link href={'/home'} className="w-full">
@@ -35,7 +34,7 @@ export default function TierListDetailEdit({}) {
                         </Link>
                     </div>
                     <div className="basis-2/3">
-                        <CustomizeButton text='Create' styles='btnpeach' btType="submit"/>
+                        <CustomizeButton text='Save' styles='btnpeach' btType="submit"/>
                     </div>                 
                 </div>
             </form>
