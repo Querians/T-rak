@@ -2,15 +2,14 @@
 import Image from 'next/image'
 import {useState} from 'react'
 
-export default function Searchbox({text}) {
+export default function Searchbox({text, handleChange}) {
 
-    const [value, setValue] = useState("")
+    // const [value, setValue] = useState("")
 
-    const handleInputChange = (e) => {
-        const searchTerm = e.target.value;
-        setValue(searchTerm)
-    }
-
+    // const handleInputChange = (e) => {
+    //     const searchTerm = e.target.value;
+    //     setValue(searchTerm)
+    // }
 
     return(
             <div className='relative w-full h-[36px] rounded-[15px] border-1 
@@ -28,8 +27,8 @@ export default function Searchbox({text}) {
                  focus:ring-0 focus:ring-offset-0 " 
                         type="text" 
                         placeholder={text}
-                        value={value} 
-                        onChange={handleInputChange}
+                        // value={value} 
+                        onChange={handleChange}
                     />
             </div>
     );

@@ -58,7 +58,7 @@ export default function Combobox({data, text}) {
         <div className="w-full h-[70px] flex flex-col">
             <p className="text-xl text-cherry">{text}</p>
             <div className='relative h-9 rounded-2xl border-1 border-white bg-lightpink flex gap-2 items-center px-2 shadow-lg'>
-                <input className="w-full bg-transparent text-darkblack placeholder-peach pl-3 rounded-xl focus:ring-0 focus:ring-offset-0" 
+                <input className="w-full bg-transparent text-darkgrey placeholder:text-peach pl-3 rounded-xl focus:ring-0 focus:ring-offset-0" 
                         type="text" 
                         placeholder={text}
                         value={value} 
