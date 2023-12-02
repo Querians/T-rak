@@ -50,6 +50,7 @@ export default function CurrentTierList({ params }) {
           setItems(tempItems);
         }}
         tierListId={params.tierListId}
+        data={tempItems}
       />
       <div className='flex h-[78%] shrink-0 grow-0 flex-col items-center gap-y-[22px] rounded-t-[20px] bg-cream px-4 py-[27px]'>
         <div
