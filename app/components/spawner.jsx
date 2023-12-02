@@ -125,34 +125,72 @@ export default function Spawner(props) {
 
   const handleAddElement = async () => {
     await Swal.fire({
-      // title: "Multiple inputs",
       inputLabel: 'Title Name',
       html: `
-        <label htmlFor='titleElement'>Title Name</label>
-        <input name='titleElement' id="swal-input1" class="swal2-input w-full m-0">
-        <label htmlFor='elementFile'>Add Photo</label>
-        <input name='elementFile' id="swal-input2" type="file" class="swal2-input w-full m-0">
+      <div class='flex flex-col gap-y-[15px]'>
+        <div class='text-left'>
+          <p class='text-xl text-cherry font-bold'>Title Name</p>
+          <div class='w-full h-[36px] rounded-[15px] border-1 border-white bg-lightpink flex gap-5 items-center shadow-lg'>
+              <input
+                id="swal-input1"  
+                class="w-full bg-transparent text-darkgrey placeholder-peach placeholder:text-left pl-5 pr-5 rounded-xl focus:ring-0 focus:ring-offset-0 " 
+                type="text" 
+                placeholder='Title Name'
+              />
+          </div>
+        </div>
+        <div class='text-left'>
+          <p class='text-xl text-cherry font-bold'>Add Photo</p>
+          <div class="flex justify-center items-center">
+            <label>
+                <input
+                    id="swal-input2"
+                    type='file'
+                    class='hidden'
+                />
+                <img
+                    src= "/iconInputFilebtn.svg"
+                    alt="add text icon"
+                    class= "inline w-[114px] h-[114px]"
+                />
+            </label>
+          </div>
+        </div>
+      </div>
       `,
       focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'Add',
+      buttonsStyling: false,
       customClass: {
         popup:
-          'px-5 py-[15px] flex flex-col gap-[15px] bg-mint border border-cream rounded-lg',
+          'px-5 pt-[46px] pb-[50px] flex flex-col bg-mint border border-cream rounded-lg',
+        actions: 'flex flex-row-reverse gap-x-[12px] w-full',
+        confirmButton:
+          'bg-peach py-2 text-white min-w-[150px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+        cancelButton:
+          'bg-cherry py-2 text-white min-w-[100px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+        validationMessage: 'my-validation-message',
       },
-      showCancelButton: true,
       preConfirm: () => {
-        return [
-          document.getElementById('swal-input1').value,
-          document.getElementById('swal-input2').files[0],
-        ];
+        const title = document.getElementById('swal-input1').value;
+        const file = document.getElementById('swal-input2').files[0];
+        if (title.length == 0) {
+          Swal.showValidationMessage(
+            '<i class="fa fa-info-circle"></i> Title name is required'
+          );
+          return;
+        } else if (!file) {
+          Swal.showValidationMessage(
+            '<i class="fa fa-info-circle"></i> Please enter a photo'
+          );
+          return;
+        }
+        return [title, file];
       },
     }).then((data) => {
       // user click confirm button
       if (data.isConfirmed) {
-        //
-        if (data.value[0].length == 0 || !data.value[1]) {
-          return;
-        }
-        // console.log(data.value[1]);
         props.setItems((prev) => {
           return [
             ...prev.slice(0, -1),
