@@ -32,6 +32,9 @@ export function handleDragOver(event, setItems, items) {
     (typeof overContainer === 'string' || overContainer == -1) &&
     typeof activeContainer === 'object'
   ) {
+    if (activeContainer.id == -1 && Math.abs(event.delta.y) < 40) {
+      return;
+    }
     const activeContainerIndex = items.findIndex(
       (row) => row.id == activeContainer.id
     );
