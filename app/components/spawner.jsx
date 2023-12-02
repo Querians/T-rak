@@ -75,6 +75,19 @@ export default function Spawner(props) {
           Delete: 'Delete This Image',
         },
       },
+      buttonsStyling: false,
+      customClass: {
+        popup:
+          'px-5 py-[15px] flex gap-[15px] bg-mint border border-cream rounded-lg',
+        title: 'text-cherry',
+        input:
+          'bg-lightpink border-2 rounded-lg shadow-lg border border-[#FAFEFF]',
+        actions: 'flex flex-row-reverse gap-x-[12px] w-full',
+        confirmButton:
+          'bg-peach py-2 text-white min-w-[150px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+        cancelButton:
+          'bg-cherry py-2 text-white min-w-[100px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+      },
       inputPlaceholder: 'Select a menu',
       showCancelButton: true,
       inputValidator: (value) => {
