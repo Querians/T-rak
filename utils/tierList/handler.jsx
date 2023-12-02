@@ -280,7 +280,7 @@ export const handleAddRow = (items, setItems) => {
   setItems([
     ...items.slice(0, -1),
     {
-      id: new Date().getTime().toString(),
+      id: window.crypto.randomUUID({ disableEntropyCache: true }),
       label: defaultRow[items.length - 1].label,
       color: defaultRow[items.length - 1].bgColor,
       elements: [],

@@ -68,7 +68,7 @@ export default function Spawner(props) {
               elements: [
                 {
                   elementId: -2,
-                  id: new Date().getTime().toString(),
+                  id: window.crypto.randomUUID({ disableEntropyCache: true }),
                   title: data.value[0],
                   description: `This is ${data.value[0]}`,
                   pictureUrl: data.value[1],
