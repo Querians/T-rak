@@ -14,6 +14,7 @@ export default function EditExpand({ params }) {
     {
       id: params.rowId,
       label: 'some label',
+      deletedElements: [],
       elements: [
         {
           id: '1',

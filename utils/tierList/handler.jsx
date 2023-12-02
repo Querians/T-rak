@@ -283,6 +283,7 @@ export const handleAddRow = (items, setItems) => {
       id: window.crypto.randomUUID({ disableEntropyCache: true }),
       label: defaultRow[items.length - 1].label,
       color: defaultRow[items.length - 1].bgColor,
+      deletedElements: [],
       elements: [],
     },
     items[items.length - 1],
@@ -295,6 +296,7 @@ const removeElement = (id, parentIndex, setItems) => {
       ...prev.slice(0, parentIndex),
       {
         ...prev[parentIndex],
+        deletedElements: [...prev[parentIndex].deletedElements, id],
         elements: prev[parentIndex].elements.filter(
           (element) => element.id !== id
         ),
