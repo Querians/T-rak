@@ -170,21 +170,27 @@ export default function Spawner(props) {
           'bg-peach py-2 text-white min-w-[150px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
         cancelButton:
           'bg-cherry py-2 text-white min-w-[100px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+        validationMessage: 'my-validation-message',
       },
       preConfirm: () => {
-        return [
-          document.getElementById('swal-input1').value,
-          document.getElementById('swal-input2').files[0],
-        ];
+        const title = document.getElementById('swal-input1').value;
+        const file = document.getElementById('swal-input2').files[0];
+        if (title.length == 0) {
+          Swal.showValidationMessage(
+            '<i class="fa fa-info-circle"></i> Title name is required'
+          );
+          return;
+        } else if (!file) {
+          Swal.showValidationMessage(
+            '<i class="fa fa-info-circle"></i> Please enter an photo'
+          );
+          return;
+        }
+        return [title, file];
       },
     }).then((data) => {
       // user click confirm button
       if (data.isConfirmed) {
-        //
-        if (data.value[0].length == 0 || !data.value[1]) {
-          return;
-        }
-        // console.log(data.value[1]);
         props.setItems((prev) => {
           return [
             ...prev.slice(0, -1),
