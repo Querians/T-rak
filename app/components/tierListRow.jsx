@@ -31,7 +31,7 @@ export default function TierListRow(props) {
         id={row.id}
         items={row.elements}
         className={`flex h-full w-full shrink-0 items-center gap-x-[5px]`}
-        itemClassName={`relative min-w-[70px] min-h-[70px] max-w-[70px] max-h-[70px] rounded-xl shadow-lg`}
+        itemClassName={`shrink-0 relative w-[70px] h-[70px] rounded-xl shadow-lg`}
       />
     </SortableItem>
   );
