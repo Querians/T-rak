@@ -78,7 +78,7 @@ export default function TierList({
           {/* each row of tier list part */}
           {items.map((row, index) => {
             // spawner part
-            if (index == itemsLength - 1) {
+            if (row.id == -1) {
               return (
                 <Spawner
                   setItems={setItems}

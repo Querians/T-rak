@@ -150,7 +150,6 @@ export default function Spawner(props) {
                   elementId: -2,
                   id: window.crypto.randomUUID({ disableEntropyCache: true }),
                   title: data.value[0],
-                  description: `This is ${data.value[0]}`,
                   picture: data.value[1],
                   toShowSrc: URL.createObjectURL(data.value[1]),
                 },

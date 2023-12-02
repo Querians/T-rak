@@ -38,14 +38,14 @@ export default function SortableItem(props) {
   }
 
   const defaultColor = {
-    '#FABEBE': 'bg-[#FABEBE]',
-    '#FAD4BE': 'bg-[#FAD4BE]',
-    '#FAE6BE': 'bg-[#FAE6BE]',
-    '#F2FABE': 'bg-[#F2FABE]',
-    '#D8FABE': 'bg-[#D8FABE]',
-    '#BEFAE4': 'bg-[#BEFAE4]',
-    '#BEECFA': 'bg-[#BEECFA]',
-    '#BED2FA': 'bg-[#BED2FA]',
+    FABEBE: 'bg-[#FABEBE]',
+    FAD4BE: 'bg-[#FAD4BE]',
+    FAE6BE: 'bg-[#FAE6BE]',
+    F2FABE: 'bg-[#F2FABE]',
+    D8FABE: 'bg-[#D8FABE]',
+    BEFAE4: 'bg-[#BEFAE4]',
+    BEECFA: 'bg-[#BEECFA]',
+    BED2FA: 'bg-[#BED2FA]',
     '': '',
   };
 

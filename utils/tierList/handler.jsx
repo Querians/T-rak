@@ -249,35 +249,35 @@ export const handleAddRow = (items, setItems) => {
   const defaultRow = [
     {
       label: 'All of my heart',
-      bgColor: '#FAFEFF',
+      bgColor: 'FAFEFF',
     },
     {
       label: 'Part of my heart',
-      bgColor: '#F1EEE7',
+      bgColor: 'F1EEE7',
     },
     {
       label: 'In my heart',
-      bgColor: '#FAE6BE',
+      bgColor: 'FAE6BE',
     },
     {
       label: 'Love that',
-      bgColor: '#F2FABE',
+      bgColor: 'F2FABE',
     },
     {
       label: 'Ahh Ha',
-      bgColor: '#D8FABE',
+      bgColor: 'D8FABE',
     },
     {
       label: 'Ummm',
-      bgColor: '#BEFAE4',
+      bgColor: 'BEFAE4',
     },
     {
       label: "What that's",
-      bgColor: '#BEECFA',
+      bgColor: 'BEECFA',
     },
     {
       label: 'Nope',
-      bgColor: '#BED2FA',
+      bgColor: 'BED2FA',
     },
   ];
   setItems([
