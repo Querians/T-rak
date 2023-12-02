@@ -199,7 +199,7 @@ export default function RowDragable(props) {
       >
         <div
           className={`mx-4 mt-5 flex transition-[height] ${
-            isEditable ? 'h-2/3' : 'h-[85%]'
+            isEditable ? 'h-2/3' : 'h-[85%] snap-y'
           }  flex-col items-center gap-y-2.5 overflow-y-auto rounded-[20px] px-1 pb-1`}
         >
           {items[0].elements.map((element) => {

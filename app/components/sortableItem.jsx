@@ -74,7 +74,7 @@ export default function SortableItem(props) {
               props?.row?.label
             )}
           </div>
-          <div className='w-full overflow-auto '>{children}</div>
+          <div className='w-full snap-x overflow-auto'>{children}</div>
         </>
       ) : (
         <div>

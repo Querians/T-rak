@@ -33,7 +33,7 @@ export default function ElementCard(props) {
       style={style}
       className={`${
         isDragging && 'opacity-50'
-      } flex h-[92px] w-full items-center justify-between rounded-2xl border border-[#FAFEFF] bg-lightpink p-2.5 shadow-lg`}
+      } flex h-[92px] w-full snap-center items-center justify-between rounded-2xl border border-[#FAFEFF] bg-lightpink p-2.5 shadow-lg`}
     >
       <div
         className={` flex items-center ${

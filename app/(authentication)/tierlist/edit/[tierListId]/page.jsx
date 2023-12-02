@@ -55,7 +55,9 @@ export default function CurrentTierList({ params }) {
         <div
           ref={componentRef}
           className={`${
-            isExporting ? 'w-fit' : 'h-[95%] w-full overflow-y-auto'
+            isExporting
+              ? 'w-fit'
+              : 'h-[95%] w-full touch-auto snap-y overflow-y-auto scroll-auto'
           }`}
         >
           <TierList

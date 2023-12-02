@@ -15,10 +15,12 @@ export default function TierListRow(props) {
       isRow={true}
       className={`transition ${
         rowIndex > props.lastIndexOriginal &&
-        row.id != -2 &&
+        row.id != -1 &&
         !props?.isOverLay &&
         isEditable &&
         'animate-fadeIn'
+      } ${
+        !isEditable && 'snap-center'
       } flex h-[90px] w-full shrink-0 gap-[5px] rounded-xl border border-[#F1EEE7] bg-[#F1EEE7] pr-1 shadow-lg `}
     >
       <Container
@@ -28,7 +30,7 @@ export default function TierListRow(props) {
         onRemove={handleRemoveElement}
         id={row.id}
         items={row.elements}
-        className={`flex h-full w-full shrink-0 items-center gap-x-[5px] `}
+        className={`flex h-full w-full shrink-0 items-center gap-x-[5px]`}
         itemClassName={`relative min-w-[70px] min-h-[70px] max-w-[70px] max-h-[70px] rounded-xl shadow-lg`}
       />
     </SortableItem>
