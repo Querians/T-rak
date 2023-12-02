@@ -3,10 +3,10 @@ import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { Input } from '@nextui-org/react';
 
 export default function Header(props) {
   const { tierListId, rowId, data } = props;
-  const [rowLabel, setRowLabel] = useState('');
 
   // query from tierListId
   const tierListData = {
@@ -15,14 +15,6 @@ export default function Header(props) {
     category: 'this is category',
     coverPhotoUrl: '/vercel.svg',
   };
-  // query from rowId
-  const rowData = {
-    label: 'this is row label',
-  };
-
-  useEffect(() => {
-    setRowLabel(rowData.label);
-  }, [rowData.label]);
 
   const router = useRouter();
 
@@ -81,6 +73,15 @@ export default function Header(props) {
   };
 
   const handleOnClickSave = (e) => {
+    if (data[0].label.length == 0) {
+      Swal.fire({
+        title: 'The Oops...',
+        text: 'The row name cannot be empty.',
+        icon: 'error',
+      });
+      return;
+    }
+
     props?.setIsEditable(false);
     props?.saveItems();
     // space for save tierList function
@@ -116,16 +117,29 @@ export default function Header(props) {
         </div>
         <div className='font-bold'>
           {props.isEditable ? (
-            <div className='flex h-[36px] w-full items-center gap-5 rounded-[15px] border-1 border-white bg-lightpink shadow-lg'>
+            <div className='flex h-[36px] w-full items-center gap-5 bg-transparent'>
               <input
-                className='w-full rounded-xl bg-transparent px-5 text-darkgrey placeholder-peach placeholder:text-left focus:ring-0 focus:ring-offset-0 '
+                className={`w-full border-b-1 bg-transparent px-1 pr-5 focus:border-none ${
+                  data[0].label.length == 0 && 'border-b-winered'
+                } text-darkgrey placeholder-winered placeholder:text-left placeholder:opacity-80 focus:ring-0 focus:ring-offset-0 `}
                 type='text'
-                value={rowLabel}
-                onChange={(e) => setRowLabel(e.target.value)}
+                value={data[0].label}
+                placeholder={'cannot be empty'}
+                onChange={(e) =>
+                  props?.setTempItems((prev) => {
+                    return [
+                      {
+                        ...prev[0],
+                        ['label']: e.target.value,
+                      },
+                      prev[1],
+                    ];
+                  })
+                }
               />
             </div>
           ) : (
-            <p className='text-lg text-white'>{rowLabel}</p>
+            <p className='text-lg text-white'>{data[0].label}</p>
           )}
           <p className='text-md text-peach'>{tierListData.category}</p>
           <p className='text-sm text-white'>{tierListData.description}</p>

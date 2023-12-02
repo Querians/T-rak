@@ -91,6 +91,7 @@ export default function EditExpand({ params }) {
       <Header
         isEditable={isEditable}
         setIsEditable={setIsEditable}
+        setTempItems={setTempItems}
         resetItems={() => {
           setTempItems(items);
         }}
@@ -99,7 +100,7 @@ export default function EditExpand({ params }) {
         }}
         tierListId={params.tierListId}
         rowId={params.rowId}
-        data={items}
+        data={tempItems}
       />
       <div className='h-[78%] shrink-0 grow-0  rounded-t-[20px] bg-cream'>
         <RowDragable
