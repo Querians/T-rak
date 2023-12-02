@@ -182,7 +182,7 @@ export default function Spawner(props) {
           return;
         } else if (!file) {
           Swal.showValidationMessage(
-            '<i class="fa fa-info-circle"></i> Please enter an photo'
+            '<i class="fa fa-info-circle"></i> Please enter a photo'
           );
           return;
         }
