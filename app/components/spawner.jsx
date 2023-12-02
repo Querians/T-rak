@@ -3,7 +3,15 @@ import Swal from 'sweetalert2';
 
 export default function Spawner(props) {
   const { items, handleRemoveElement } = props;
-  const handleSelectRow = (selectRowId, selectElementId) => {
+  const temp = items.map((row) => {
+    if (row.id == -1) return;
+    return {
+      [`${row.id}`]: row.label,
+    };
+  });
+  const menu = Object.assign({}, ...temp);
+
+  const handleSelectRowTop = (selectRowId, selectElementId) => {
     props?.setItems((prev) => {
       const rowIndex = props?.items?.findIndex((row) => row.id === selectRowId);
       const elementIndex = props?.items[prev.length - 1]?.elements?.findIndex(
@@ -27,6 +35,91 @@ export default function Spawner(props) {
           ),
         },
       ];
+    });
+  };
+
+  const handleSelectRowBot = (selectRowId, selectElementId) => {
+    props?.setItems((prev) => {
+      const rowIndex = props?.items?.findIndex((row) => row.id === selectRowId);
+      const elementIndex = props?.items[prev.length - 1]?.elements?.findIndex(
+        (element) => element.id === selectElementId
+      );
+
+      return [
+        ...prev.slice(0, rowIndex),
+        {
+          ...prev[rowIndex],
+          ['elements']: [
+            ...prev[rowIndex].elements,
+            prev[prev.length - 1].elements[elementIndex],
+          ],
+        },
+        ...prev.slice(rowIndex + 1, -1),
+        {
+          ...prev[prev.length - 1],
+          ['elements']: prev[prev.length - 1].elements.filter(
+            (element) => element.id !== selectElementId
+          ),
+        },
+      ];
+    });
+  };
+
+  const handleMenu = async (elementId) => {
+    await Swal.fire({
+      title: 'Select a menu',
+      input: 'select',
+      inputOptions: {
+        Row: props?.isEditExpand ? { add: 'Add' } : menu,
+        Delete: {
+          Delete: 'Delete This Image',
+        },
+      },
+      buttonsStyling: false,
+      customClass: {
+        popup:
+          'px-5 py-[15px] flex gap-[15px] bg-mint border border-cream rounded-lg',
+        title: 'text-cherry',
+        input:
+          'bg-lightpink border-2 rounded-lg shadow-lg border border-[#FAFEFF]',
+        actions: 'flex flex-row-reverse gap-x-[12px] w-full',
+        confirmButton:
+          'bg-peach py-2 text-white min-w-[150px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+        cancelButton:
+          'bg-cherry py-2 text-white min-w-[100px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+      },
+      inputPlaceholder: 'Select a menu',
+      showCancelButton: true,
+      inputValidator: (value) => {
+        return new Promise((resolve) => {
+          if (value === 'Delete') {
+            handleRemoveElement(elementId, items.length - 1);
+            // resolve();
+          } else {
+            if (value.length == 0) return resolve();
+            if (props?.isEditExpand) {
+              handleSelectRowBot(items[0].id, elementId);
+              Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.onmouseenter = Swal.stopTimer;
+                  toast.onmouseleave = Swal.resumeTimer;
+                },
+              }).fire({
+                icon: 'success',
+                title: 'Add successfully',
+              });
+            } else {
+              handleSelectRowTop(value, elementId);
+              resolve();
+            }
+          }
+        });
+      },
     });
   };
 
@@ -70,8 +163,7 @@ export default function Spawner(props) {
                   elementId: -2,
                   id: window.crypto.randomUUID({ disableEntropyCache: true }),
                   title: data.value[0],
-                  description: `This is ${data.value[0]}`,
-                  pictureUrl: data.value[1],
+                  picture: data.value[1],
                   toShowSrc: URL.createObjectURL(data.value[1]),
                 },
                 ...prev[prev.length - 1].elements,
@@ -97,7 +189,7 @@ export default function Spawner(props) {
         isEditable={true}
         rowIndex={items.length - 1}
         handleAddElement={handleAddElement}
-        handleSelectRow={handleSelectRow}
+        handleMenu={handleMenu}
         onRemove={handleRemoveElement}
         id={items[items.length - 1].id}
         items={items[items.length - 1].elements}

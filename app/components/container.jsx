@@ -43,7 +43,7 @@ export default function Container(props) {
                 props.isSpawner ? (
                   <ImageIcon
                     elementId={item.id}
-                    handleSelectRow={props?.handleSelectRow}
+                    handleMenu={props?.handleMenu}
                     id={item.id}
                     rowIndex={props.rowIndex}
                     onRemove={props.onRemove}

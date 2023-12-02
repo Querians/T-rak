@@ -223,6 +223,7 @@ export default function RowDragable(props) {
           setItems={setItems}
           isEditable={isEditable}
           items={items}
+          isEditExpand={true}
           handleRemoveElement={(id, parentIndex) => {
             handleRemoveElement(id, parentIndex, setItems);
           }}
