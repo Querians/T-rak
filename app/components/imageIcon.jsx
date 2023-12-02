@@ -1,14 +1,10 @@
-'use client';
+// 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export default function ImageIcon(props) {
   const { img, imgName, tierRow, onRemove } = props;
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOnClick = () => {
-    setIsOpen(!isOpen);
-  };
+  // const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -21,15 +17,17 @@ export default function ImageIcon(props) {
         sizes='(max-width: 70px) 100vw, 33vw'
         priority
         tabIndex='0'
-        onClick={handleOnClick}
-        onBlur={() => {
-          setTimeout(() => {
-            setIsOpen(false);
-          }, 50);
+        onClick={() => {
+          props?.handleMenu(props.elementId);
         }}
+        // onBlur={() => {
+        //   setTimeout(() => {
+        //     setIsOpen(false);
+        //   }, 50);
+        // }}
       />
 
-      <div
+      {/* <div
         className={`absolute -right-[22px] -top-80 z-30 flex h-[315px] text-sm`}
       >
         {isOpen && (
@@ -70,7 +68,7 @@ export default function ImageIcon(props) {
             />
           </div>
         )}
-      </div>
+      </div> */}
     </>
   );
 }
