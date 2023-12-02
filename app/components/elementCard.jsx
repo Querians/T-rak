@@ -51,7 +51,12 @@ export default function ElementCard(props) {
           className={`${!props.isEditable && 'hidden'}`}
         />
         <div className=' relative h-[70px] w-[70px] rounded-[10px] bg-[#D9D9D9]'>
-          <Image src={props.src} fill={true} alt={props.title || 'sdfsdf'} />
+          <Image
+            src={props.src}
+            className='rounded-[10px] object-cover'
+            fill={true}
+            alt={props.title || 'sdfsdf'}
+          />
         </div>
         <div className='text-lg font-bold'>{props.title}</div>
       </div>
