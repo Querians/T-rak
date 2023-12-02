@@ -68,7 +68,7 @@ export default function Spawner(props) {
               elements: [
                 {
                   elementId: -2,
-                  id: new Date().getTime().toString(),
+                  id: window.crypto.randomUUID({ disableEntropyCache: true }),
                   title: data.value[0],
                   description: `This is ${data.value[0]}`,
                   pictureUrl: data.value[1],
@@ -88,7 +88,7 @@ export default function Spawner(props) {
     <div
       className={`transition ${
         !props.isEditable && 'translate-y-[250%] opacity-0'
-      }  fixed inset-x-0 bottom-0 z-10 h-[152px] rounded-t-[10px] bg-cherry`}
+      }  absolute inset-x-0 bottom-0 z-10 h-[152px] rounded-t-[10px] bg-cherry`}
     >
       {/* <div className='absolute z-10 bottom-[40px] left-1/2 transform -translate-x-1/2 flex items-end w-[325px] mt-96 overflow-y-visible overflow-x-scroll'> */}
       <Container

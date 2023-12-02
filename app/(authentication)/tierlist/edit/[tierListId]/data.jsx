@@ -4,6 +4,7 @@ export const data = [
     id: 'container1', // id of row
     label: 'All of my heart',
     color: '#FABEBE',
+    deletedElements: [],
     elements: [
       // index mean current order of element
       {
@@ -34,6 +35,7 @@ export const data = [
     id: 'container2',
     label: 'Part of my heart',
     color: '#FAD4BE',
+    deletedElements: [],
     elements: [
       {
         id: 'asd2',
@@ -104,24 +106,29 @@ export const data = [
   //   id: 'container3',
   //   label: 'container3',
   //   color: '#FAE6BE',
+  //   deletedElements: [],
+
   //   elements: [],
   // },
   // {
   //   id: 'container4',
   //   label: 'container4',
   //   color: '#FAE6BE',
+  //   deletedElements: [],
   //   elements: [],
   // },
   // {
   //   id: 'container5',
   //   label: 'container5',
   //   color: '#FAE6BE',
+  //   deletedElements: [],
   //   elements: [],
   // },
   // {
   //   id: 'container6',
   //   label: 'container6',
   //   color: '#FAE6BE',
+  //   deletedElements: [],
   //   elements: [],
   // },
   // {
@@ -129,17 +136,20 @@ export const data = [
   //   label: 'container7',
   //   color: '#FAE6BE',
   //   elements: [],
+  //   deletedElements: [],
   // },
   // {
   //   id: 'container8',
   //   label: 'container8',
   //   color: '#FAE6BE',
   //   elements: [],
+  //   deletedElements: [],
   // },
   {
     id: -1,
     label: -1,
     color: '#F2FABE',
+    deletedElements: [],
     elements: [
       {
         id: 'c9',

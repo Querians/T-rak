@@ -59,7 +59,7 @@ export const Button = ({ onClick, text, type }) => {
             height={20}
             quality={100}
           />
-          Delete
+          Delete {text}
         </button>
       ) : (
         <></>

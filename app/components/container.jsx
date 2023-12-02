@@ -57,7 +57,9 @@ export default function Container(props) {
                     src={item.toShowSrc}
                     fill={true}
                     quality={100}
-                    className='rounded-lg object-cover'
+                    className={`rounded-lg object-cover ${
+                      !props.isEditable && 'snap-center'
+                    }`}
                     alt={item.title}
                   />
                 )

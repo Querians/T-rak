@@ -32,6 +32,9 @@ export function handleDragOver(event, setItems, items) {
     (typeof overContainer === 'string' || overContainer == -1) &&
     typeof activeContainer === 'object'
   ) {
+    if (activeContainer.id == -1 && Math.abs(event.delta.y) < 40) {
+      return;
+    }
     const activeContainerIndex = items.findIndex(
       (row) => row.id == activeContainer.id
     );
@@ -280,9 +283,10 @@ export const handleAddRow = (items, setItems) => {
   setItems([
     ...items.slice(0, -1),
     {
-      id: new Date().getTime().toString(),
+      id: window.crypto.randomUUID({ disableEntropyCache: true }),
       label: defaultRow[items.length - 1].label,
       color: defaultRow[items.length - 1].bgColor,
+      deletedElements: [],
       elements: [],
     },
     items[items.length - 1],
@@ -295,6 +299,7 @@ const removeElement = (id, parentIndex, setItems) => {
       ...prev.slice(0, parentIndex),
       {
         ...prev[parentIndex],
+        deletedElements: [...prev[parentIndex].deletedElements, id],
         elements: prev[parentIndex].elements.filter(
           (element) => element.id !== id
         ),
