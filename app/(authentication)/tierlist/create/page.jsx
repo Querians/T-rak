@@ -1,5 +1,5 @@
 import Image from "next/image";
-import TierListForm from "@/app/components/createtierlist";
+import TierListForm from "@/app/components/formInput/createtierlist";
 
 export default function CreateTierlist({profile="/profilelight.svg"}) {
   return (

@@ -1,5 +1,5 @@
 'use client'
-import ProfileSetting from '@/app/components/profileSetting';
+import ProfileSetting from '@/app/components/formInput/profileSetting';
 import { CustomizeButton } from '@/app/components/button';
 import MenuBar from '@/app/components/menuBar';
 import Image from 'next/image';
@@ -25,14 +25,13 @@ export default function ProfileDetail() {
             quality={100}
             className={`transition-transform ${(isEdit) ? 'translate-x-3 mr-6 duration-[3000ms]':''}`}
           />
-          {/* {!isEdit && ()} */}
           {!isEdit && (
             <motion.div 
               className='w-[50%]' 
-              initial={{ opacity: 0, scale: 0.5 }}
+              initial={{ opacity: 0, scale: 0.7 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-              transition={{ duration: 0.5 }}
+              exit={{ opacity: 0, scale: 0.7 }}
+              transition={{ duration: 0.1 }}
               >
               <CustomizeButton text='Sign Out' styles='logoutbtn' btType="submit"/>
             </motion.div>

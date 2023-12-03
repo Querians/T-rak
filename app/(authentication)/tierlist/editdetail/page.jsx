@@ -1,5 +1,5 @@
 import Image from "next/image";
-import TierListDetailEdit from "@/app/components/edittierlist";
+import TierListDetailEdit from "@/app/components/formInput/edittierlist";
 
 export default function EditTierlistDetail({profile="/profilelight.svg"}) {
   return (

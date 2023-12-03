@@ -1,6 +1,6 @@
 'use client'
-import Inputbutton from "./inputbtn"
-import { CustomizeButton } from "./button";
+import Inputbutton from "../inputbtn"
+import { CustomizeButton } from "../button";
 import Link from "next/link";
 // import { Button } from "@nextui-org/react";
 

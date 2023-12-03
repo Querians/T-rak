@@ -1,22 +1,11 @@
 'use client'
-import Inputbutton from "./inputbtn"
-import { CustomizeButton } from "./button";
+import Inputbutton from "../inputbtn"
+import { CustomizeButton } from "../button";
 import Link from "next/link";
-import Combobox from "./combobox";
-import NumberInput from "./numberInput";
+import Combobox from "../combobox";
+import NumberInput from "../numberInput";
 
-// const categoryData = [
-//     {
-//         id: '1',
-//         name: 'Anime',
-//     },
-//     {
-//         id: '2',
-//         name: 'Animehell',
-//     },
-// ]
-
-export default function TierListForm({}) {
+export default function TierListDetailEdit({}) {
     const categoryData = [
         {
             id: '1',
@@ -30,18 +19,17 @@ export default function TierListForm({}) {
     return (
         <div className="flex gap-7 px-2">
             <form 
-                action="/api/auth/createTierlist"
+                action="/api/auth/editTierlist"
                 method='post'
                 className='flex flex-col w-full gap-5'
             >
-                <Inputbutton text='Tier-list Name' type='text' name='name'/>
+                <Inputbutton text='Tierlist Name' type='text' name='name'/>
                 {/* add cover photo */}
                 <Combobox text='Category' data={categoryData}/>
                 <Inputbutton text='Description' name='description' isArea={1}/>
-                <NumberInput text='Number of row'/>
                 <div className="flex gap-[18px] pt-4 justify-between ">
                     <div className="basis-1/3">
-                        <Link href={'/tierlist/edit'} className="w-full">
+                        <Link href={'/home'} className="w-full">
                             <CustomizeButton text='Cancel' styles='btncherry'/>
                         </Link>
                     </div>

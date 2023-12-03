@@ -1,7 +1,7 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import SignInForm from '../components/signIn';
+import SignInForm from '../components/formInput/signIn';
 import Image from 'next/image';
 
 export default async function Signin() {
@@ -9,7 +9,7 @@ export default async function Signin() {
   const supabase = createServerComponentClient({ cookies: () => cookieStore });
   const { data } = await supabase.auth.getSession();
   if (data?.session?.user) {
-    redirect('/tierlist/workspace');
+    redirect('/home');
   }
 
   console.log(data);
