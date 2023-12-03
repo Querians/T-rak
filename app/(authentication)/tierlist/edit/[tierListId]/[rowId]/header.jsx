@@ -1,7 +1,7 @@
 import { Button } from '@/app/components/button';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
-import Image from 'next/image';
+import { Avatar } from '@nextui-org/react';
 
 export default function Header(props) {
   const { tierListId, rowId, data } = props;
@@ -106,14 +106,12 @@ export default function Header(props) {
   return (
     <div className='mx-5 mt-[15px] box-border flex h-[22%] shrink-0 flex-col justify-around gap-[15px] px-3 py-3.5'>
       <div className='flex items-center gap-3.5'>
-        <div className='relative flex h-[70px] w-[70px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-green-400 text-center'>
-          <Image
-            src={tierListData.coverPhotoUrl}
-            className='object-cover'
-            fill={true}
-            alt='my tier list photo'
-          />
-        </div>
+        <Avatar
+          showFallback
+          name='Your Profile'
+          src={tierListData.coverPhotoUrl}
+          className='h-[70px] w-[70px] shrink-0'
+        />
         <div className='font-bold'>
           {props.isEditable ? (
             <div className='flex h-[36px] w-full items-center gap-5 bg-transparent'>
