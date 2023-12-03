@@ -62,7 +62,7 @@ export async function POST(request) {
         },
         update: {
           pictureUrl: element.picture || undefined,
-          order: index || undefined,
+          order: index,
           title: element.title || undefined,
           rowId: rowData[0].id || undefined,
         },
@@ -83,9 +83,9 @@ export async function POST(request) {
           },
           update: {
             pictureUrl: element.picture || undefined,
-            order: index || undefined,
+            order: index,
             title: element.title || undefined,
-            rowId: rowData[1].id || undefined,
+            rowId: rowData[1].id,
           },
         });
       }

@@ -63,7 +63,7 @@ export async function POST(request) {
             },
             update: {
               pictureUrl: element.picture || undefined,
-              order: index || undefined,
+              order: index,
               title: element.title || undefined,
               rowId: row.id || undefined,
             },

@@ -80,7 +80,7 @@ export async function POST(request) {
             },
             update: {
               pictureUrl: element.toShowSrc || undefined,
-              order: index || undefined,
+              order: index,
               title: element.title || undefined,
               rowId: row.id || undefined,
             },
