@@ -75,7 +75,7 @@ export async function POST(request) {
         },
         update: {
           pictureUrl: element.toShowSrc || undefined,
-          order: index || undefined,
+          order: index,
           title: element.title || undefined,
           rowId: rowData[0].id || undefined,
         },
@@ -96,7 +96,7 @@ export async function POST(request) {
           },
           update: {
             pictureUrl: element.toShowSrc || undefined,
-            order: index || undefined,
+            order: index,
             title: element.title || undefined,
             rowId: rowData[1].id || undefined,
           },
@@ -113,6 +113,35 @@ export async function POST(request) {
 
     console.log(dbResponse);
     return NextResponse.json(dbResponse);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(error, {
+      status: 400,
+    });
+  }
+}
+
+// get row in tierlist
+export async function GET(request) {
+  const requestUrl = new URL(request.url);
+  const rowId = requestUrl.searchParams.get('id');
+
+  try {
+    const queriedRow = await prisma.row.findUnique({
+      where: {
+        rowId: rowId,
+      },
+      include: {
+        elements: {
+          orderBy: {
+            order: 'asc',
+          },
+        },
+      },
+    });
+
+    console.log(queriedRow);
+    return NextResponse.json(queriedRow);
   } catch (error) {
     console.log(error);
     return NextResponse.json(error, {
