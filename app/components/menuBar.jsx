@@ -15,7 +15,7 @@ export default function MenuBar ({type}) {
                 <MenuIcon 
                     logo ={type=='profile'?'/profile.svg':'/profilelight.svg'} 
                     type='profile' status={type=='profile'?1:0} 
-                    link='/profile/setting'/>
+                    link='/profile'/>
             </div>
         </>
     );
