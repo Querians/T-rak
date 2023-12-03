@@ -132,7 +132,8 @@ export default function Spawner(props) {
           <p class='text-xl text-cherry font-bold'>Title Name</p>
           <div class='w-full h-[36px] rounded-[15px] border-1 border-white bg-lightpink flex gap-5 items-center shadow-lg'>
               <input
-                id="swal-input1"  
+                id="swal-input1" 
+                tabindex="0" 
                 class="w-full bg-transparent text-darkgrey placeholder-peach placeholder:text-left pl-5 pr-5 rounded-xl focus:ring-0 focus:ring-offset-0 " 
                 type="text" 
                 placeholder='Title Name'
@@ -142,11 +143,12 @@ export default function Spawner(props) {
         <div class='text-left'>
           <p class='text-xl text-cherry font-bold'>Add Photo</p>
           <div class="flex justify-center items-center">
-            <label>
+            <label class="relative">
                 <input
+                    tabindex="0"
                     id="swal-input2"
                     type='file'
-                    class='hidden'
+                    class='opacity-0 absolute w-full inline'
                 />
                 <img
                     src= "/iconInputFilebtn.svg"
@@ -162,10 +164,11 @@ export default function Spawner(props) {
       showCancelButton: true,
       confirmButtonText: 'Add',
       buttonsStyling: false,
+      reverseButtons: true,
       customClass: {
         popup:
           'px-5 pt-[46px] pb-[50px] flex flex-col bg-mint border border-cream rounded-lg',
-        actions: 'flex flex-row-reverse gap-x-[12px] w-full',
+        actions: 'flex gap-x-[12px] w-full',
         confirmButton:
           'bg-peach py-2 text-white min-w-[150px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
         cancelButton:
