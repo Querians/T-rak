@@ -11,18 +11,6 @@ export async function POST(request) {
   const rowData = await request.json();
   // console.log(rowData);
 
-  console.log(
-    rowData[0].elements.map((element, index) => {
-      return {
-        elementId: element.id,
-        pictureUrl: element.toShowSrc,
-        picture: element.picture,
-        title: element.title,
-        order: index,
-      };
-    })
-  );
-
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
   const { data, error } = await supabase.auth.getUser();
@@ -101,13 +89,13 @@ export async function POST(request) {
             elementId: element.id,
           },
           create: {
-            pictureUrl: element.picture,
+            pictureUrl: element.toShowSrc,
             order: index,
             title: element.title,
             rowId: rowData[1].id,
           },
           update: {
-            pictureUrl: element.picture || undefined,
+            pictureUrl: element.toShowSrc || undefined,
             order: index || undefined,
             title: element.title || undefined,
             rowId: rowData[1].id || undefined,
