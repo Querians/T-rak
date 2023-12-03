@@ -9,7 +9,7 @@ import { randomUUID } from 'crypto';
 export async function POST(request) {
   const requestUrl = new URL(request.url);
   const rowData = await request.json();
-  // console.log(rowData);
+  console.log(rowData);
 
   console.log(
     rowData[0].elements.map((element, index) => {
@@ -27,7 +27,7 @@ export async function POST(request) {
   const { data, error } = await supabase.auth.getUser();
 
   try {
-    const updateRow = prisma.row.update({
+    const updateRowInfo = prisma.row.update({
       where: {
         rowId: rowData[0].id,
       },
@@ -40,10 +40,14 @@ export async function POST(request) {
     const deleteElements = prisma.element.deleteMany({
       where: {
         elementId: {
-          notIn: rowData[0].elements.map((element) => element.id),
+          notIn: rowData
+            .map((row) => row.elements.map((element) => element.id))
+            .flat(),
         },
       },
     });
+
+    // console.log(rowData.map((row) => row.elements.map((element) => element.id)).flat())
 
     const upsertElements = rowData[0].elements.map((element, index) => {
       return prisma.element.upsert({
@@ -60,14 +64,38 @@ export async function POST(request) {
           pictureUrl: element.picture || undefined,
           order: index || undefined,
           title: element.title || undefined,
+          rowId: rowData[0].id || undefined,
         },
       });
     });
 
+    const upsertHiddenRowElements = rowData[1].elements.map(
+      (element, index) => {
+        return prisma.element.upsert({
+          where: {
+            elementId: element.id,
+          },
+          create: {
+            pictureUrl: element.picture,
+            order: index,
+            title: element.title,
+            rowId: rowData[1].id,
+          },
+          update: {
+            pictureUrl: element.picture || undefined,
+            order: index || undefined,
+            title: element.title || undefined,
+            rowId: rowData[1].id || undefined,
+          },
+        });
+      }
+    );
+
     const dbResponse = await prisma.$transaction([
-      updateRow,
+      updateRowInfo,
       deleteElements,
       ...upsertElements,
+      ...upsertHiddenRowElements,
     ]);
 
     console.log(dbResponse);

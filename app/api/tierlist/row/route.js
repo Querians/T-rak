@@ -41,7 +41,20 @@ export async function POST(request) {
       })
     );
 
-    const updateRow = prisma.row.update({
+    await Promise.all(
+      rowData[1].elements.map(async (element) => {
+        if (
+          element.picture !== null &&
+          element.picture !== undefined &&
+          element.picture !== ''
+        ) {
+          element.picture = await uploadfile(element.picture);
+          element.toShowSrc = element.picture.path;
+        }
+      })
+    );
+
+    const updateRowInfo = prisma.row.update({
       where: {
         rowId: rowData[0].id,
       },
@@ -54,7 +67,9 @@ export async function POST(request) {
     const deleteElements = prisma.element.deleteMany({
       where: {
         elementId: {
-          notIn: rowData[0].elements.map((element) => element.id),
+          notIn: rowData
+            .map((row) => row.elements.map((element) => element.id))
+            .flat(),
         },
       },
     });
@@ -74,14 +89,38 @@ export async function POST(request) {
           pictureUrl: element.toShowSrc || undefined,
           order: index || undefined,
           title: element.title || undefined,
+          rowId: rowData[0].id || undefined,
         },
       });
     });
 
+    const upsertHiddenRowElements = rowData[1].elements.map(
+      (element, index) => {
+        return prisma.element.upsert({
+          where: {
+            elementId: element.id,
+          },
+          create: {
+            pictureUrl: element.picture,
+            order: index,
+            title: element.title,
+            rowId: rowData[1].id,
+          },
+          update: {
+            pictureUrl: element.picture || undefined,
+            order: index || undefined,
+            title: element.title || undefined,
+            rowId: rowData[1].id || undefined,
+          },
+        });
+      }
+    );
+
     const dbResponse = await prisma.$transaction([
-      updateRow,
+      updateRowInfo,
       deleteElements,
       ...upsertElements,
+      ...upsertHiddenRowElements,
     ]);
 
     console.log(dbResponse);
