@@ -1,6 +1,7 @@
 import { Button } from '@/app/components/button';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import Image from 'next/image';
 
 export default function Header(props) {
   const { tierListId, data } = props;
@@ -10,7 +11,7 @@ export default function Header(props) {
     name: 'this is tier list name',
     description: 'this is description',
     category: 'this is category',
-    coverPhotoUrl: 'vercel.svg',
+    coverPhotoUrl: '/vercel.svg',
   };
 
   const router = useRouter();
@@ -116,8 +117,13 @@ export default function Header(props) {
   return (
     <div className='mx-5 mt-[15px] box-border flex h-[22%] shrink-0 flex-col justify-around gap-[15px] px-3 py-3.5'>
       <div className='flex items-center gap-3.5'>
-        <div className='flex h-16 w-16 items-center justify-center rounded-full bg-green-400 text-center'>
-          {tierListData.coverPhotoUrl}
+        <div className='relative flex h-[70px] w-[70px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-green-400 text-center'>
+          <Image
+            src={tierListData.coverPhotoUrl}
+            className='object-cover'
+            fill={true}
+            alt='my tier list photo'
+          />
         </div>
         <div className='font-bold'>
           <p className='text-lg text-white'>{tierListData.name}</p>
