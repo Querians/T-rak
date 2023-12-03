@@ -140,8 +140,22 @@ export async function GET(request) {
       },
     });
 
-    console.log(queriedRow);
-    return NextResponse.json(queriedRow);
+    const queriedHiddenRow = await prisma.row.findFirst({
+      where: {
+        tierlistId: queriedRow.tierlistId,
+        order: -1,
+      },
+      include: {
+        elements: {
+          orderBy: {
+            order: 'asc',
+          },
+        },
+      },
+    });
+
+    console.log(queriedRow, queriedHiddenRow);
+    return NextResponse.json([queriedRow, queriedHiddenRow]);
   } catch (error) {
     console.log(error);
     return NextResponse.json(error, {
