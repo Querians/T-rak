@@ -5,7 +5,7 @@ import { prisma } from '@/lib/db';
 import { uploadfile } from '@/utils/uploadfile';
 import { randomUUID } from 'crypto';
 
-// update tierlist
+// update tierlist info
 export async function POST(request) {
   const requestUrl = new URL(request.url);
   const formData = await request.formData();
