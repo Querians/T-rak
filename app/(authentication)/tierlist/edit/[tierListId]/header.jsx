@@ -8,9 +8,9 @@ export default function Header(props) {
 
   // query from tierListId
   const tierListData = {
-    name: 'this is tier list name',
-    description: 'this is description',
-    category: 'this is category',
+    name: 'this is tier list nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+    description: 'this is descriptionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
+    category: 'this is categoryyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
     coverPhotoUrl: '/vercel.svg',
   };
 
@@ -18,20 +18,29 @@ export default function Header(props) {
 
   const handleOnClickExport = (e) => {
     props.export();
-    Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      },
-    }).fire({
-      icon: 'success',
-      title: 'Export Complete!',
-    });
+    setTimeout(() => {
+      Swal.fire({
+        title: 'Export Complete!',
+        color: '#000',
+        // titleText: `Export Complete!`,
+        imageUrl: '/iconCheckMark.svg',
+        showCancelButton: false,
+        confirmButtonColor: '#a73440',
+        confirmButtonText: 'Done',
+        buttonsStyling: false,
+        customClass: {
+          popup:
+            'p-5 flex flex-col gap-[15px] bg-peach border border-cream rounded-lg',
+          title: 'p-0 text-black text-[24px]',
+          // titleText: 'text-red-400',
+          htmlContainer: 'm-0',
+          icon: 'border-0',
+          actions: 'flex flex-col mt-0 gap-[15px] w-1/2',
+          confirmButton:
+            'bg-winered px-[20px] py-2 text-white font-bold w-full rounded-full shadow-lg border border-[#FAFEFF]',
+        },
+      });
+    }, 2000);
   };
 
   const handleOnClickDelete = (e) => {
@@ -119,14 +128,19 @@ export default function Header(props) {
       <div className='flex items-center gap-3.5'>
         <Avatar
           showFallback
-          name='Your Profile'
           src={tierListData.coverPhotoUrl}
           className='h-[70px] w-[70px] shrink-0'
         />
         <div className='font-bold'>
-          <p className='text-lg text-white'>{tierListData.name}</p>
-          <p className='text-md text-peach'>{tierListData.category}</p>
-          <p className='text-sm text-white'>{tierListData.description}</p>
+          <p className='max-w-[200px] truncate text-lg text-white'>
+            {tierListData.name}
+          </p>
+          <p className='text-md max-w-[200px] truncate text-peach'>
+            {tierListData.category}
+          </p>
+          <p className='max-w-[200px] truncate text-sm text-white'>
+            {tierListData.description}
+          </p>
         </div>
       </div>
       <div className='flex items-center justify-between gap-2'>

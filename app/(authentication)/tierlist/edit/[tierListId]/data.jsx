@@ -2,7 +2,7 @@ export const data = [
   // index mean current order of row
   {
     id: 'container1', // id of row
-    label: 'All of my heart',
+    label: 'All of my hearttttttttttttttttttttttttttttttttttt',
     color: 'FABEBE',
     deletedElements: [],
     elements: [
@@ -27,7 +27,7 @@ export const data = [
   },
   {
     id: 'container2',
-    label: 'Part of my heart',
+    label: 'Pat',
     color: 'FAD4BE',
     deletedElements: [],
     elements: [

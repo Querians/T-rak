@@ -128,6 +128,9 @@ export default function Spawner(props) {
       inputLabel: 'Title Name',
       html: `
       <div class='flex flex-col gap-y-[15px]'>
+        <div class='text-3xl text-darkgrey'>
+          Add new Element
+        </div>
         <div class='text-left'>
           <p class='text-xl text-cherry font-bold'>Title Name</p>
           <div class='w-full h-[36px] rounded-[15px] border-1 border-white bg-lightpink flex gap-5 items-center shadow-lg'>
@@ -141,22 +144,16 @@ export default function Spawner(props) {
           </div>
         </div>
         <div class='text-left'>
-          <p class='text-xl text-cherry font-bold'>Add Photo</p>
-          <div class="flex justify-center items-center">
-            <label class="relative">
-                <input
-                    tabindex="0"
-                    id="swal-input2"
-                    type='file'
-                    class='opacity-0 absolute w-full inline'
-                />
-                <img
-                    src= "/iconInputFilebtn.svg"
-                    alt="add text icon"
-                    class= "inline w-[114px] h-[114px]"
-                />
-            </label>
-          </div>
+          <p class='text-xl text-cherry font-bold'>Upload Image</p>
+          <input id="swal-input2" 
+          tabindex="0"
+          type="file" class="pb-1 h-[36px] bg-lightpink rounded-full border border-[#fafeff]/50 block w-full text-sm
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-l-full file:border-0
+            file:text-sm file:font-semibold
+          file:bg-peach file:text-cream
+          hover:file:bg-violet-100
+          "/>
         </div>
       </div>
       `,
@@ -168,11 +165,12 @@ export default function Spawner(props) {
       customClass: {
         popup:
           'px-5 pt-[46px] pb-[50px] flex flex-col bg-mint border border-cream rounded-lg',
+        htmlContainer: 'mx-0',
         actions: 'flex gap-x-[12px] w-full',
         confirmButton:
-          'bg-peach py-2 text-white min-w-[150px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+          'bg-peach py-2 px-[20px] text-white w-[150px] font-bold rounded-full shadow-lg border border-[#FAFEFF]',
         cancelButton:
-          'bg-cherry py-2 text-white min-w-[100px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+          'bg-cherry py-2 px-[20px] text-white w-[100px] font-bold rounded-full shadow-lg border border-[#FAFEFF]',
         validationMessage: 'my-validation-message',
       },
       preConfirm: () => {
@@ -185,7 +183,7 @@ export default function Spawner(props) {
           return;
         } else if (!file) {
           Swal.showValidationMessage(
-            '<i class="fa fa-info-circle"></i> Please enter a photo'
+            '<i class="fa fa-info-circle"></i> Image is required'
           );
           return;
         }

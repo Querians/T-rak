@@ -53,12 +53,18 @@ export default function ElementCard(props) {
         <div className=' relative h-[70px] w-[70px] rounded-[10px] bg-[#D9D9D9]'>
           <Image
             src={props.src}
-            className='rounded-[10px] object-cover'
+            className='shrink-0 rounded-[10px] object-cover'
             fill={true}
             alt={props.title || 'sdfsdf'}
           />
         </div>
-        <div className='text-lg font-bold'>{props.title}</div>
+        <div
+          className={`text-lg font-bold ${
+            props.isEditable ? 'max-w-[110px]' : 'max-w-[200px]'
+          }  truncate `}
+        >
+          {props.title}
+        </div>
       </div>
       <button
         disabled={!props.isEditable}

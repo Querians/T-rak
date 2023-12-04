@@ -61,17 +61,17 @@ export default function SortableItem(props) {
             ref={setActivatorNodeRef}
             {...listeners}
             {...attributes}
-            className={`flex h-full w-[90px]  shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg text-center text-lg font-bold text-darkgrey shadow-lg  ${defaultColor[bgColor]}`}
+            className={`text-md flex h-full w-[90px] shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg px-2 text-center font-bold text-darkgrey shadow-lg  ${defaultColor[bgColor]}`}
           >
             {!props.isEditable ? (
               <Link
-                className='flex h-full w-full shrink-0 items-center justify-center text-center'
+                className='overflow-hidden'
                 href={`/tierlist/edit/${props?.tierListId}/${props.id}`}
               >
                 {props?.row?.label}
               </Link>
             ) : (
-              props?.row?.label
+              <div className='overflow-hidden '>{props?.row?.label}</div>
             )}
           </div>
           <div className='w-full snap-x overflow-auto'>{children}</div>

@@ -3,6 +3,7 @@ import Header from './header';
 import { useState, useEffect } from 'react';
 import { data } from '../data';
 import dynamic from 'next/dynamic';
+import MenuBar from '@/app/components/menuComponent/menuBar';
 
 const RowDragable = dynamic(() => import('@/app/components/rowDragable'), {
   ssr: false,
@@ -93,12 +94,25 @@ export default function EditExpand({ params }) {
         rowId={params.rowId}
         data={tempItems}
       />
-      <div className='h-[78%] shrink-0 grow-0  rounded-t-[20px] bg-cream'>
-        <RowDragable
-          items={tempItems}
-          setItems={setTempItems}
-          isEditable={isEditable}
-        />
+      <div className='relative h-[78%] shrink-0 grow-0  rounded-t-[20px] bg-cream'>
+        <div
+          className={` transition-[height] ${
+            isEditable ? 'h-[100%]' : 'h-[85%]'
+          } w-full touch-auto snap-y overflow-y-auto scroll-auto`}
+        >
+          <RowDragable
+            items={tempItems}
+            setItems={setTempItems}
+            isEditable={isEditable}
+          />
+        </div>
+        <div
+          className={`absolute inset-x-0 bottom-5 flex h-1/6 shrink-0 justify-center ${
+            isEditable && 'hidden'
+          }`}
+        >
+          <MenuBar type={'home'} />
+        </div>
       </div>
     </div>
   );
