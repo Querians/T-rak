@@ -14,7 +14,7 @@ import { SortableContext } from '@dnd-kit/sortable';
 import TierListRow from '@/app/components/tierListRow';
 import DragOverLayTierList from '@/app/components/dragOverLayTierList';
 import Spawner from '@/app/components/spawner';
-import { Button } from './inputComponent/button';
+import { CustomizeButton } from './inputComponent/button';
 import {
   handleDragOver,
   handleDragEnd,
@@ -113,11 +113,11 @@ export default function TierList({
             }`}
           >
             <div className='w-[200px]'>
-              <Button
+              <CustomizeButton
                 onClick={() => {
                   handleAddRow(items, setItems);
                 }}
-                type={'addtextbtn'}
+                styles={'addtextbtn'}
                 text={'Add new Level'}
               />
             </div>

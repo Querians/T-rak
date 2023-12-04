@@ -1,4 +1,4 @@
-import { Button } from '@/app/components/inputComponent/button';
+import { CustomizeButton } from '@/app/components/inputComponent/button';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { Avatar } from '@nextui-org/react';
@@ -131,8 +131,8 @@ export default function Header(props) {
       </div>
       <div className='flex items-center justify-between gap-2'>
         <div className={`w-full`}>
-          <Button
-            type={props?.isEditable ? 'redbtn' : 'btnpeach'}
+          <CustomizeButton
+            styles={props?.isEditable ? 'btnred' : 'btnpeach'}
             text={props?.isEditable ? 'Cancel' : 'Edit'}
             onClick={() => {
               props?.setIsEditable(!props?.isEditable);
@@ -141,8 +141,8 @@ export default function Header(props) {
           />
         </div>
         <div className={`w-full`}>
-          <Button
-            type='btnpeach'
+          <CustomizeButton
+            styles='btnpeach'
             text={props?.isEditable ? 'Edit Detail' : 'Export'}
             onClick={
               props?.isEditable ? handleOnClickRedirect : handleOnClickExport
@@ -150,8 +150,8 @@ export default function Header(props) {
           />
         </div>
         <div className={`w-full`}>
-          <Button
-            type={props?.isEditable ? 'btnpeach' : 'deletebtn'}
+          <CustomizeButton
+            styles={props?.isEditable ? 'btnpeach' : 'deletebtn'}
             text={props?.isEditable ? 'Save' : ''}
             onClick={
               props?.isEditable ? handleOnClickSave : handleOnClickDelete
