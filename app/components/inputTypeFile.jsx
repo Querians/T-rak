@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import {Avatar} from "@nextui-org/react";
 
-export default function Inputtypefile({text,type,className}) {
+export default function Inputtypefile({text,type,className,param}) {
 
   const [file, setFile] = useState();
 
@@ -19,10 +19,11 @@ export default function Inputtypefile({text,type,className}) {
         <div className="flex justify-center items-center">
             <Avatar 
               showFallback
-              src={file}
+              src={file||param}
               alt="imageInput" 
               className={className}
             />
+
        </div>
      </div>
     ) : (

@@ -8,6 +8,11 @@ import TierlistCard from "@/app/components/tierlistCard";
 import Link from "next/link";
 import { useState } from "react";
 
+const UserData = {
+    name: 'this is cocoa',
+    image: '/vercel.svg',
+  };
+
 const tierlistChoice =[
     {
         id: '1',
@@ -73,7 +78,7 @@ export default function Home() {
         <div className="px-8 pt-8 flex flex-col gap-4">
             <div className="flex justify-between">
                 <div className="bg-cream rounded-full w-[70px] h-[70px] shadow-lg">
-                    <Inputtypefile type="preview" className=" w-[70px] h-[70px]"/>
+                    <Inputtypefile type="preview" className=" w-[70px] h-[70px]" param={UserData.image}/>
                 </div>
                 <Image
                     src="/logoTRak.svg"

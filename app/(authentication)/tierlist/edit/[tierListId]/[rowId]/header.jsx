@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { Avatar } from '@nextui-org/react';
 import Inputbutton from '@/app/components/inputComponent/inputbtn';
+import Inputtypefile from '@/app/components/inputTypeFile';
 
 export default function Header(props) {
   const { tierListId, rowId, data } = props;
@@ -106,11 +107,7 @@ export default function Header(props) {
   return (
     <div className='mx-5 mt-[15px] box-border flex h-[22%] shrink-0 flex-col justify-around gap-[15px] px-3 py-3.5'>
       <div className='flex items-center gap-3.5'>
-        <Avatar
-          showFallback
-          src={tierListData.coverPhotoUrl}
-          className='h-[70px] w-[70px] shrink-0'
-        />
+      <Inputtypefile type="preview" className=" w-[70px] h-[70px] shrink-0" param ={tierListData.coverPhotoUrl}/>
         <div className='font-bold'>
           {props.isEditable ? (
             <div className='flex h-[36px] w-full items-center gap-5 bg-transparent'>
