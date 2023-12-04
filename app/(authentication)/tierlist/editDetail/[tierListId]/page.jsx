@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import TierListDetailEdit from '@/app/components/formInput/edittierlist';
+import Inputtypefile from '@/app/components/inputTypeFile';
 
 export default function EditTierlistDetail({ params }) {
   const profile = {
@@ -11,15 +12,7 @@ export default function EditTierlistDetail({ params }) {
     <main className='flex h-screen w-full flex-col'>
       <div className='justify-left flex h-[18%] w-full items-center gap-[15px] px-8 pt-10'>
         <div className='relative h-[70px] w-[70px] rounded-full'>
-          <Image
-            src={profile.image}
-            alt='Profile Picture'
-            className='cursor-pointer rounded-full object-cover shadow-lg'
-            fill={true}
-            quality={100}
-            sizes='(max-width: 70px) 100vw, 33vw'
-            priority
-          />
+          <Inputtypefile type="preview" className=" w-[70px] h-[70px]"/>
         </div>
         <p className='text-2xl text-white '>Edit Tier-list Detail</p>
       </div>
