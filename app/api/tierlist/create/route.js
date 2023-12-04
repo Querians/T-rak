@@ -123,7 +123,7 @@ export async function POST(request) {
               ).map((_, index) => ({
                 label: `Row ${index + 1}`,
                 color: hslToHex(Math.floor(Math.random() * 360), 100, 80),
-                order: index + 1,
+                order: index,
               })),
               {
                 label: `hidden row`,

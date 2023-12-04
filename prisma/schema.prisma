@@ -53,4 +53,5 @@ model Element {
   rowId      String @db.Uuid
   pictureUrl String @db.Text
   order      Int    @db.SmallInt
+  title      String @db.VarChar(50)
 }

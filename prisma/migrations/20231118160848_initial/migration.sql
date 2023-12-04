@@ -46,6 +46,7 @@ CREATE TABLE "Element" (
     "rowId" UUID NOT NULL,
     "pictureUrl" TEXT NOT NULL,
     "order" SMALLINT NOT NULL,
+    "title" VARCHAR(50) NOT NULL,
 
     CONSTRAINT "Element_pkey" PRIMARY KEY ("elementId")
 );
