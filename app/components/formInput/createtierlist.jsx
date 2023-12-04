@@ -1,9 +1,9 @@
 'use client'
-import Inputbutton from "../inputbtn"
-import { CustomizeButton } from "../button";
+import Inputbutton from "../inputComponent/inputbtn"
+import { CustomizeButton } from "../inputComponent/button";
 import Link from "next/link";
-import Combobox from "../combobox";
-import NumberInput from "../numberInput";
+import Combobox from "../inputComponent/combobox";
+import NumberInput from "../inputComponent/numberInput";
 
 // const categoryData = [
 //     {

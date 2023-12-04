@@ -1,8 +1,8 @@
 'use client'
-import Searchbox from "@/app/components/searchBox";
+import Searchbox from "@/app/components/inputComponent/searchBox";
 import Image from "next/image";
 import Avartar from "@/app/components/avartar"; {/* profile here!! */}
-import MenuBar from "@/app/components/menuBar";
+import MenuBar from "@/app/components/menuComponent/menuBar";
 import TierlistCard from "@/app/components/tierlistCard";
 import Link from "next/link";
 import { useState } from "react";

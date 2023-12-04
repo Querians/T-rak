@@ -1,7 +1,7 @@
 'use client'
 import ProfileSetting from '@/app/components/formInput/profileSetting';
-import { CustomizeButton } from '@/app/components/button';
-import MenuBar from '@/app/components/menuBar';
+import { CustomizeButton } from '@/app/components/inputComponent/button';
+import MenuBar from '@/app/components/menuComponent/menuBar';
 import Image from 'next/image';
 import {useState} from 'react'
 import { motion } from 'framer-motion';

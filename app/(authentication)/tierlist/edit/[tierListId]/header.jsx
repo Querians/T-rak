@@ -1,4 +1,4 @@
-import { Button } from '@/app/components/button';
+import { Button } from '@/app/components/inputComponent/button';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { Avatar } from '@nextui-org/react';

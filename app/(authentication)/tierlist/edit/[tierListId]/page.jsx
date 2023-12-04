@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { data } from './data';
-import MenuBar from '@/app/components/menuBar';
+import MenuBar from '@/app/components/menuComponent/menuBar';
 import Header from './header';
 import dynamic from 'next/dynamic';
 

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { CustomizeButton } from "./button";
+import { CustomizeButton } from "./inputComponent/button";
 import {Modal, ModalContent, ModalBody, Button, useDisclosure} from "@nextui-org/react";
 
 

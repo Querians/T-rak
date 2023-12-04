@@ -14,7 +14,7 @@ import { SortableContext } from '@dnd-kit/sortable';
 import TierListRow from '@/app/components/tierListRow';
 import DragOverLayTierList from '@/app/components/dragOverLayTierList';
 import Spawner from '@/app/components/spawner';
-import { Button } from './button';
+import { Button } from './inputComponent/button';
 import {
   handleDragOver,
   handleDragEnd,

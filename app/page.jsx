@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link';
-import { CustomizeButton } from './components/button';
+import { CustomizeButton } from './components/inputComponent/button';
 
 export default function Home() {
   return (
