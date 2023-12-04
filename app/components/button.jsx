@@ -1,99 +1,100 @@
-import React from 'react';
-import Image from 'next/image';
-// ***import style*** //
+import React from "react";
+import Image from "next/image";
 
-export const Button = ({ onClick, text, type }) => {
-  return (
-    <>
-      {type == 'btnpeach' ? (
-        <button
-          className='border-littlepink h-fit w-full rounded-[0.625rem] border-1 bg-peach py-2 text-base font-bold text-white drop-shadow-md'
-          onClick={onClick}
-        >
-          {text}
-        </button>
-      ) : (
-        <></>
-      )}
+export const CustomizeButton = ({onClick, text, styles,btType=""}) => {
+    return (
+      <>
+        {styles == 'btnpeach' ? (
+            <button
+            className="h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-peach px-2 text-base text-white drop-shadow-md"
+            onClick={onClick} type={btType}
+            >
+                {text}
+            </button>
+        ) : (
+          <></>
+        )}
 
-      {type == 'btncherry' ? (
-        <button
-          className='border-littlepink h-fit w-full rounded-[0.625rem] border-1 bg-cherry px-20 py-2 text-base font-bold text-white drop-shadow-md'
-          onClick={onClick}
-        >
-          {text}
-        </button>
-      ) : (
-        <></>
-      )}
+        {styles == 'btncherry' ? (
+            <button
+            className="h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-cherry px-2 text-base text-white drop-shadow-md"
+            onClick={onClick} type={btType}
+            >
+                {text}
+            </button>
+        ) : (
+          <></>
+        )}
+      
+        {styles == 'btnred' ? (
+            <button
+            className="h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-winered px-2 text-base text-white drop-shadow-md"
+            onClick={onClick} type={btType}
+            >
+                {text}
+            </button>
+        ) : (
+          <></>
+        )}
 
-      {type == 'addtextbtn' ? (
-        <button
-          className='border-littlepink flex h-fit w-full items-center justify-center gap-2 rounded-full border-1 bg-peach py-1 text-base font-bold text-white drop-shadow-md'
-          onClick={onClick}
-        >
-          <Image
-            src='/iconPlus.svg'
-            className='inline'
-            alt='add text icon'
-            width={20}
-            height={20}
-            quality={100}
-          />
-          {text}
-        </button>
-      ) : (
-        <></>
-      )}
+       
+        {styles == 'addtextbtn' ? (
+            <button
+            className="flex gap-2 items-center justify-center h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-peach px-[20px] py-2 text-base text-white drop-shadow-md"
+            onClick={onClick} type={btType}
+            >
+                <Image
+                src= "/iconPlus.svg"
+                className="inline"
+                alt="add text icon"
+                width={20}
+                height={20}
+                quality={100}
+                />
+                {text}
+            </button>
+        ) : (
+          <></>
+        )}
+        
 
-      {type == 'deletebtn' ? (
-        <button
-          className='border-littlepink flex h-fit w-full items-center justify-center gap-2 rounded-[0.625rem] border-1 bg-winered py-2 text-base font-bold text-white drop-shadow-md'
-          onClick={onClick}
-        >
-          <Image
-            src='/iconTrash.svg'
-            className='inline'
-            alt='delete icon'
-            width={20}
-            height={20}
-            quality={100}
-          />
-          Delete {text}
-        </button>
-      ) : (
-        <></>
-      )}
+        {styles == 'deletebtn' ? (
+            <button
+            className="flex gap-2 items-center justify-center h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-winered px-[20px] py-2 text-base text-white drop-shadow-md"
+            onClick={onClick} type={btType}
+            >
+                <Image
+                src= "/iconTrash.svg"
+                className="inline"
+                alt="delete icon"
+                width={20}
+                height={20}
+                quality={100}
+                />
+                Delete {text}
+            </button>
+        ) : (
+          <></>
+        )}
 
-      {type == 'redbtn' ? (
-        <button
-          className='border-littlepink flex h-fit w-full items-center justify-center gap-2 rounded-[0.625rem] border-1 bg-winered py-2 text-base font-bold text-white drop-shadow-md'
-          onClick={onClick}
-        >
-          {text}
-        </button>
-      ) : (
-        <></>
-      )}
-
-      {type == 'logoutbtn' ? (
-        <button
-          className='border-littlepink flex h-fit w-full items-center justify-center gap-2 rounded-[0.625rem] border-1 bg-winered px-20 py-2 text-base font-bold text-white drop-shadow-md'
-          onClick={onClick}
-        >
-          <Image
-            src='/iconLogout.svg'
-            className='inline'
-            alt='logout icon'
-            width={20}
-            height={20}
-            quality={100}
-          />
-          Logout
-        </button>
-      ) : (
-        <></>
-      )}
-    </>
-  );
+        {styles == 'logoutbtn' ? (
+            <button
+            className="flex gap-2 items-center justify-center h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-winered px-[20px] py-2 text-base text-white drop-shadow-md"
+            onClick={onClick} type={btType}
+            >
+                <Image
+                src= "/iconLogout.svg"
+                className="inline"
+                alt="logout icon"
+                width={20}
+                height={20}
+                quality={100}
+                /> 
+                Logout
+            </button>
+        ) : (
+          <></>
+        )}
+      </>
+    );
 };
