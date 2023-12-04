@@ -39,3 +39,32 @@ export async function GET(request) {
     });
   }
 }
+
+export async function DELETE(request) {
+  const requestUrl = new URL(request.url);
+  const tierlistId = requestUrl.searchParams.get('id');
+  const cookieStore = cookies();
+  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error) {
+    return NextResponse.redirect('/login');
+  }
+
+  try {
+    await prisma.tierlist.delete({
+      where: {
+        tierlistId: tierlistId,
+      },
+    });
+
+    return NextResponse.json({
+      message: `Tierlist ID ${tierlistId} has already deleted`,
+    });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(error, {
+      status: 400,
+    });
+  }
+}
