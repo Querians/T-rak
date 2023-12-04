@@ -8,9 +8,9 @@ export default function Header(props) {
 
   // query from tierListId
   const tierListData = {
-    name: 'this is tier list name',
-    description: 'this is description',
-    category: 'this is category',
+    name: 'this is tier list nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+    description: 'this is descriptionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
+    category: 'this is categoryyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
     coverPhotoUrl: '/vercel.svg',
   };
 
@@ -128,14 +128,19 @@ export default function Header(props) {
       <div className='flex items-center gap-3.5'>
         <Avatar
           showFallback
-          name='Your Profile'
           src={tierListData.coverPhotoUrl}
           className='h-[70px] w-[70px] shrink-0'
         />
         <div className='font-bold'>
-          <p className='text-lg text-white'>{tierListData.name}</p>
-          <p className='text-md text-peach'>{tierListData.category}</p>
-          <p className='text-sm text-white'>{tierListData.description}</p>
+          <p className='max-w-[200px] truncate text-lg text-white'>
+            {tierListData.name}
+          </p>
+          <p className='text-md max-w-[200px] truncate text-peach'>
+            {tierListData.category}
+          </p>
+          <p className='max-w-[200px] truncate text-sm text-white'>
+            {tierListData.description}
+          </p>
         </div>
       </div>
       <div className='flex items-center justify-between gap-2'>

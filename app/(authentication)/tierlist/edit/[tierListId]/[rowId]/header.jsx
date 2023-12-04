@@ -9,9 +9,8 @@ export default function Header(props) {
 
   // query from tierListId
   const tierListData = {
-    name: 'this is tier list name',
-    description: 'this is description',
-    category: 'this is category',
+    description: 'this is descriptionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
+    category: 'this is categoryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
     coverPhotoUrl: '/vercel.svg',
   };
 
@@ -134,9 +133,15 @@ export default function Header(props) {
             </div>
           ) : (
             <>
-              <p className='text-lg text-white'>{data[0].label}</p>
-              <p className='text-md text-peach'>{tierListData.category}</p>
-              <p className='text-sm text-white'>{tierListData.description}</p>
+              <p className='max-w-[200px] truncate text-lg text-white'>
+                {data[0].label}
+              </p>
+              <p className='text-md max-w-[200px] truncate text-peach'>
+                {tierListData.category}
+              </p>
+              <p className='max-w-[200px] truncate text-sm text-white'>
+                {tierListData.description}
+              </p>
             </>
           )}
         </div>
