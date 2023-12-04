@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import Link from 'next/link';
+import { CustomizeButton } from './components/button';
 
 export default function Home() {
   return (
@@ -12,6 +14,12 @@ export default function Home() {
       />
       <p className='text-3xl text-white font-bold'>T-rak</p>
       <p className='text-xl text-white'>sort your favourite</p>
+      <Link
+        href='/signin'
+        className='mt-3 w-[80%]'
+      >
+          <CustomizeButton text='Get Start!' styles='btnpeach'/>
+      </Link>
     </main>
   );
 }

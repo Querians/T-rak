@@ -12,16 +12,16 @@ export default async function AuthLayout({ children }) {
 
   return (
     <div className='h-screen'>
-      <p>Hi {JSON.stringify(data?.session?.user?.email)}</p>
+      {/* <p className='absolute'>Hi {JSON.stringify(data?.session?.user?.email)}</p> */}
       {children}
 
-      <form
+      {/* <form
         action='/api/auth/signout'
         method='post'
         className='absolute top-0 flex w-full justify-end'
       >
         <button>Sign Out</button>
-      </form>
+      </form> */}
     </div>
   );
 }
