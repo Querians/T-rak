@@ -61,7 +61,7 @@ ALTER TABLE "Tierlist" ADD CONSTRAINT "Tierlist_categoryId_fkey" FOREIGN KEY ("c
 ALTER TABLE "Tierlist" ADD CONSTRAINT "Tierlist_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Row" ADD CONSTRAINT "Row_tierlistId_fkey" FOREIGN KEY ("tierlistId") REFERENCES "Tierlist"("tierlistId") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Row" ADD CONSTRAINT "Row_tierlistId_fkey" FOREIGN KEY ("tierlistId") REFERENCES "Tierlist"("tierlistId") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Element" ADD CONSTRAINT "Element_rowId_fkey" FOREIGN KEY ("rowId") REFERENCES "Row"("rowId") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Element" ADD CONSTRAINT "Element_rowId_fkey" FOREIGN KEY ("rowId") REFERENCES "Row"("rowId") ON DELETE CASCADE ON UPDATE CASCADE;

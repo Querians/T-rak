@@ -39,7 +39,7 @@ model Category {
 
 model Row {
   rowId      String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tierlist   Tierlist  @relation(fields: [tierlistId], references: [tierlistId])
+  tierlist   Tierlist  @relation(fields: [tierlistId], references: [tierlistId], onDelete: Cascade, onUpdate: Cascade)
   tierlistId String    @db.Uuid
   label      String?   @db.VarChar(50)
   color      String?   @db.VarChar(6)
@@ -49,7 +49,7 @@ model Row {
 
 model Element {
   elementId  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  row        Row    @relation(fields: [rowId], references: [rowId])
+  row        Row    @relation(fields: [rowId], references: [rowId], onDelete: Cascade, onUpdate: Cascade)
   rowId      String @db.Uuid
   pictureUrl String @db.Text
   order      Int    @db.SmallInt
