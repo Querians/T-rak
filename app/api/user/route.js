@@ -56,6 +56,7 @@ export async function GET(request) {
       name: true,
       email: true,
       image: true,
+      aboutMe: true,
     },
   });
 
