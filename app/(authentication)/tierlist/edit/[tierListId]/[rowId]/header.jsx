@@ -1,4 +1,4 @@
-import { Button } from '@/app/components/inputComponent/button';
+import { CustomizeButton } from '@/app/components/inputComponent/button';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import { Avatar } from '@nextui-org/react';
@@ -144,8 +144,8 @@ export default function Header(props) {
       </div>
       <div className='flex items-center justify-between gap-2'>
         <div className={`basis-1/3`}>
-          <Button
-            type={props?.isEditable ? 'redbtn' : 'btnpeach'}
+          <CustomizeButton
+            styles={props?.isEditable ? 'btnred' : 'btnpeach'}
             text={props?.isEditable ? 'Cancel' : 'Edit'}
             onClick={() => {
               props?.setIsEditable(!props?.isEditable);
@@ -154,8 +154,8 @@ export default function Header(props) {
           />
         </div>
         <div className={`basis-2/3`}>
-          <Button
-            type={props?.isEditable ? 'btnpeach' : 'deletebtn'}
+          <CustomizeButton
+            styles={props?.isEditable ? 'btnpeach' : 'deletebtn'}
             text={props?.isEditable ? 'Save' : 'This Row'}
             onClick={
               props?.isEditable ? handleOnClickSave : handleOnClickDelete
