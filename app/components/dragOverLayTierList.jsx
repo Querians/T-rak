@@ -10,7 +10,7 @@ export default function DragOverLayTierList({ items, activeId }) {
   const activeElementIndex = row?.elements?.findIndex(
     (element) => element.id == activeId
   );
-  const activeElementUrl = row?.elements[activeElementIndex].pictuerUrl;
+  const activeElementUrl = row?.elements[activeElementIndex].toShowSrc;
   return (
     <DragOverlay
       dropAnimation={{
@@ -25,11 +25,13 @@ export default function DragOverLayTierList({ items, activeId }) {
           fill={true}
           quality={100}
           className='rounded-lg object-cover shadow-lg'
-          alt={items[activeRowIndex]?.elements[activeElementIndex]?.title}
+          alt={
+            items[activeRowIndex]?.elements[activeElementIndex]?.title + 'pic'
+          }
         />
       ) : (
         <div>
-          <TierListRow row={items[activeRowIndex]} />
+          <TierListRow row={items[activeRowIndex]} isOverLay={true} />
         </div>
       )}
     </DragOverlay>

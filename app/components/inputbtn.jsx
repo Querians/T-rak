@@ -1,7 +1,7 @@
 'use client'
 import {useState} from 'react'
 
-export default function Inputbutton({text}) {
+export default function Inputbutton({text, type='text', name='',read=1, isArea=0}) {
 
     const [value, setValue] = useState("")
 
@@ -13,14 +13,30 @@ export default function Inputbutton({text}) {
     return(
         <div>
             <p className="text-xl text-cherry">{text}</p>
-            <div className='relative w-full h-[36px] rounded-[15px] border-1 border-white bg-lightpink flex gap-5 items-center shadow-lg'>
-                <input className="w-full bg-transparent text-darkgrey placeholder-peach placeholder:text-left pl-5 pr-5 rounded-xl focus:ring-0 focus:ring-offset-0 " 
-                    type="text" 
-                    placeholder={text}
-                    value={value} 
-                    onChange={handleInputChange}
-                />
-            </div>
+                {isArea ? (
+                <div className='w-full'> 
+                    <textarea 
+                        className="resize-none w-full h-20 rounded-2xl border-1 border-white bg-lightpink items-center shadow-lg text-darkgrey placeholder-peach px-3 py-1"
+                        name='description'
+                        placeholder={text}
+                        value={value} 
+                        onChange={handleInputChange}
+                        
+                    />
+                </div>
+                ) : (
+                <div className='w-full h-[36px] rounded-2xl border-1 border-white bg-lightpink shadow-lg'>
+                    <input 
+                        className='bg-transparent w-full h-full rounded-xl px-3 text-darkgrey placeholder:text-peach focus:ring-0'
+                        name={name}
+                        type={type}
+                        placeholder={text}
+                        value={value} 
+                        onChange={handleInputChange}
+                        readOnly={(read)?0:1}
+                    />
+                </div>
+                )}
         </div>
     );
 }

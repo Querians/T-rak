@@ -17,7 +17,18 @@ export const CustomizeButton = ({onClick, text, styles,btType=""}) => {
 
         {styles == 'btncherry' ? (
             <button
-            className="h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-peach px-2 text-base text-white drop-shadow-md"
+            className="h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-cherry px-2 text-base text-white drop-shadow-md"
+            onClick={onClick} type={btType}
+            >
+                {text}
+            </button>
+        ) : (
+          <></>
+        )}
+      
+        {styles == 'btnred' ? (
+            <button
+            className="h-[33px] w-full rounded-2xl border border-1 border-littlepink bg-winered px-2 text-base text-white drop-shadow-md"
             onClick={onClick} type={btType}
             >
                 {text}
@@ -60,7 +71,7 @@ export const CustomizeButton = ({onClick, text, styles,btType=""}) => {
                 height={20}
                 quality={100}
                 />
-                Delete
+                Delete {text}
             </button>
         ) : (
           <></>

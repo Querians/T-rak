@@ -18,7 +18,7 @@ module.exports = {
         lightpink: '#f6d8df',
         cream: '#fbf3e2',
         winered: '#a73440',
-        darkblack: '#464646',
+        darkgrey: '#464646',
       },
       fontSize: {
         sm: '0.8rem',
@@ -38,16 +38,25 @@ module.exports = {
         '4xl': '2.441rem',
         '5xl': '3rem',
       },
-      fontFamily:{
-        subjectRounded: ['var(--font-subjectRounded)']
+      fontFamily: {
+        subjectRounded: ['var(--font-subjectRounded)'],
       },
       borderRadius: {
-        '2xl': '15px'
+        '2xl': '15px',
       },
       boxShadow: {
-        'lg': '0 4px 4px 0px rgba(0,0,0,0.25)',
+        lg: '0 4px 4px 0px rgba(0,0,0,0.25)',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 100 },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 1s ease-in-out',
       },
     },
   },
-  plugins: [ nextui(), require('react-widgets-tailwind') ]
+  plugins: [nextui(), require('react-widgets-tailwind')],
 };
