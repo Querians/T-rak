@@ -1,53 +1,74 @@
-'use client'
-import Image from "next/image";
-import {useState} from 'react'
+// 'use client';
+import Image from 'next/image';
+// import { useState } from 'react';
 
-export default function ImageIcon ({img, imgName, tierRow, deleting}){
-    const [isOpen, setIsOpen] = useState(false)
-    const [value, setValue] = useState('')
+export default function ImageIcon(props) {
+  const { img, imgName, tierRow, onRemove } = props;
+  // const [isOpen, setIsOpen] = useState(false);
 
-    const handleOnClick = () => {
-        setIsOpen(!isOpen)
-    }
-    const getValue = (rowID) => {
-        setValue(rowID)
-    }
-    return(
-        <div>
-            <div className="border-1 w-[70px] h-[70px] rounded-2xl relative">
-                <Image
-                    src={img}
-                    alt={imgName}
-                    className='rounded-2xl object-cover cursor-pointer'
-                    fill={true}
-                    quality={100}
-                    sizes="(max-width: 70px) 100vw, 33vw"
-                    priority
-                    onClick={handleOnClick}
-                />
-                 <div className='absolute -top-80 -right-[22px] h-[315px] flex text-sm'>
-                    {isOpen && (
-                        <div className="flex flex-col -space-y-[1px] justify-end">
-                            <div className='bg-mint border-1 border-cream w-28 rounded-xl px-2 py-1 border-1 border-white overflow-auto shadow-lg text-center'>
-                                <div className='divide-y-1 divide-darkgrey'>
-                                    {
-                                        tierRow.map((row) =>  
-                                        <p className='text-darkgrey cursor-pointer' onClick={() => {getValue(row.id); handleOnClick()}}>{row.name}</p>)
-                                    }
-                                </div>
-                            <p className="bg-winered rounded-xl my-1 p-[3px] border-1 border-red-200 text-white text-bold cursor-pointer" onClick={deleting}>Delete item</p>
-                            </div>
-                            <Image
-                                src='/arrowDown.svg'
-                                alt='arrowdown'
-                                width={17}
-                                height={13}
-                                className="self-center"
-                                />
-                        </div>
-                    )}
-                </div>
+  return (
+    <>
+      <Image
+        src={img}
+        alt={imgName}
+        className='cursor-pointer rounded-2xl object-cover'
+        fill={true}
+        quality={100}
+        sizes='(max-width: 70px) 100vw, 33vw'
+        priority
+        tabIndex='0'
+        onClick={() => {
+          props?.handleMenu(props.elementId);
+        }}
+        // onBlur={() => {
+        //   setTimeout(() => {
+        //     setIsOpen(false);
+        //   }, 50);
+        // }}
+      />
+
+      {/* <div
+        className={`absolute -right-[22px] -top-80 z-30 flex h-[315px] text-sm`}
+      >
+        {isOpen && (
+          <div className='flex flex-col justify-end -space-y-[1px]'>
+            <div
+              className={`z-30 w-28 overflow-auto rounded-xl border-1 border-cream bg-mint px-2 py-1 text-center shadow-lg`}
+            >
+              <div className='divide-y-1 divide-darkgrey'>
+                {tierRow.map((row, index) => (
+                  <button
+                    key={index}
+                    className='w-full cursor-pointer text-darkgrey'
+                    onClick={() => {
+                      props?.handleSelectRow(row.id, props.elementId);
+                      handleOnClick();
+                    }}
+                  >
+                    {row.label}
+                  </button>
+                ))}
+              </div>
+              <p
+                className='text-bold my-1 cursor-pointer rounded-xl border-1 border-red-200 bg-winered p-[3px] text-white'
+                onClick={() => {
+                  onRemove(props.elementId, props.rowIndex);
+                }}
+              >
+                Delete item
+              </p>
             </div>
-        </div>
-    );
+            <Image
+              src='/arrowDown.svg'
+              alt='arrowdown'
+              width={17}
+              height={13}
+              priority
+              className={`self-center `}
+            />
+          </div>
+        )}
+      </div> */}
+    </>
+  );
 }
