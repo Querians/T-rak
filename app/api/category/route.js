@@ -42,3 +42,43 @@ export async function POST(request) {
     return NextResponse.error(error);
   }
 }
+
+// get all category
+export async function GET(request) {
+  try {
+    const dbResponse = await prisma
+      .$extends({
+        result: {
+          category: {
+            id: {
+              needs: {
+                categoryId: true,
+              },
+              compute(user) {
+                return user.categoryId;
+              },
+            },
+            name: {
+              needs: {
+                categoryName: true,
+              },
+              compute(user) {
+                return user.categoryName;
+              },
+            },
+          },
+        },
+      })
+      .category.findMany({
+        select: {
+          id: true,
+          name: true,
+        },
+      });
+
+    console.log(dbResponse);
+    return NextResponse.json(dbResponse);
+  } catch (error) {
+    return NextResponse.error(error);
+  }
+}
