@@ -1,7 +1,7 @@
 'use client'
 import {useState} from 'react'
 
-export default function Inputbutton({text, type='text', name='',read=1, isArea=0}) {
+export default function Inputbutton({text, type='text', name='',read=1, isArea=0, headingColor=''}) {
 
     const [value, setValue] = useState("")
 
@@ -12,7 +12,7 @@ export default function Inputbutton({text, type='text', name='',read=1, isArea=0
 
     return(
         <div>
-            <p className="text-xl text-cherry">{text}</p>
+            <p className={`text-xl ${(headingColor=='white')?'text-white':'text-cherry'}`}>{text}</p>
                 {isArea ? (
                 <div className='w-full'> 
                     <textarea 
