@@ -147,6 +147,7 @@ export default function Spawner(props) {
           <p class='text-xl text-cherry font-bold'>Upload Image</p>
           <input id="swal-input2" 
           tabindex="0"
+          accept='.jpeg, .png, .jpg'
           type="file" class="pb-1 h-[36px] bg-lightpink rounded-full border border-[#fafeff]/50 block w-full text-sm
             file:mr-4 file:py-2 file:px-4
             file:rounded-l-full file:border-0
