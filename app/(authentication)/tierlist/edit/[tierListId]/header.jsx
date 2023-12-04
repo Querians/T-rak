@@ -18,20 +18,29 @@ export default function Header(props) {
 
   const handleOnClickExport = (e) => {
     props.export();
-    Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      },
-    }).fire({
-      icon: 'success',
-      title: 'Export Complete!',
-    });
+    setTimeout(() => {
+      Swal.fire({
+        title: 'Export Complete!',
+        color: '#000',
+        // titleText: `Export Complete!`,
+        imageUrl: '/iconCheckMark.svg',
+        showCancelButton: false,
+        confirmButtonColor: '#a73440',
+        confirmButtonText: 'Done',
+        buttonsStyling: false,
+        customClass: {
+          popup:
+            'p-5 flex flex-col gap-[15px] bg-peach border border-cream rounded-lg',
+          title: 'p-0 text-black text-[24px]',
+          // titleText: 'text-red-400',
+          htmlContainer: 'm-0',
+          icon: 'border-0',
+          actions: 'flex flex-col mt-0 gap-[15px] w-1/2',
+          confirmButton:
+            'bg-winered px-[20px] py-2 text-white font-bold w-full rounded-full shadow-lg border border-[#FAFEFF]',
+        },
+      });
+    }, 2000);
   };
 
   const handleOnClickDelete = (e) => {
