@@ -16,7 +16,6 @@ export default function SignUpForm() {
                 <Inputbutton text='Username' type='text' name='name'/>
                 <Inputbutton text='Password' type='password' name='password'/>
                 <Inputtypefile read={1} className=" w-[90px] h-[90px]" text ="Upload Profile Photo" name = 'picture' />
-                // <Inputbutton text='About Me' name='aboutMe' isArea={1}/>
                 <div className="flex flex-col items-center pt-4">
                     <div className="w-[70%]">
                         <CustomizeButton text='Confirm' styles='btnpeach' btType="submit"/>

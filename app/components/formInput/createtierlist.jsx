@@ -4,6 +4,7 @@ import { CustomizeButton } from "../inputComponent/button";
 import Link from "next/link";
 import Combobox from "../inputComponent/combobox";
 import NumberInput from "../inputComponent/numberInput";
+import Inputtypefile from "../inputTypeFile";
 
 // const categoryData = [
 //     {
@@ -35,7 +36,7 @@ export default function TierListForm({}) {
                 className='flex flex-col w-full gap-5'
             >
                 <Inputbutton text='Tier-list Name' type='text' name='name' />
-                {/* add cover photo */}
+                <Inputtypefile read={1} className=" w-[90px] h-[90px]" text ="Add Cover Photo" name = 'picture' />
                 <Combobox text='Category' data={categoryData}/>
                 <Inputbutton text='Description' name='description' isArea={1}/>
                 <NumberInput text='Number of row'/>
