@@ -95,8 +95,9 @@ export default function Home() {
                       </div>
                     : <div className='flex flex-col gap-2.5 '>
                     {
-                        filteredCategory.map((choice) =>  
-                            <TierlistCard pic={choice.picture} tierlistName={choice.name} category={choice.category} link='/'/>)
+                        filteredCategory.map((choice,index) =>  
+                            <TierlistCard key={index} pic={choice.picture} tierlistName={choice.name} category={choice.category} link='/'/>
+                        ) 
                     }
                     </div>
                 } 
