@@ -17,9 +17,9 @@ export function DropButton({onClick, open}) {
     );
 }
 
-export default function Combobox({data, text}) {
+export default function Combobox({data, text, defaultValue}) {
     const [isOpen, setIsOpen] = useState(false)
-    const [value, setValue] = useState("")
+    const [value, setValue] = useState(defaultValue)
     const [filteredCategory, setFilteredCategory] = useState(data)
 
     const handleOnClick = () => {
@@ -58,14 +58,16 @@ export default function Combobox({data, text}) {
         <div className="w-full h-[70px] flex flex-col">
             <p className="text-xl text-cherry">{text}</p>
             <div className='relative h-9 rounded-2xl border-1 border-white bg-lightpink flex gap-2 items-center px-2 shadow-lg'>
-                <input className="w-full bg-transparent text-darkgrey placeholder:text-peach pl-3 rounded-xl focus:ring-0 focus:ring-offset-0" 
+                <input className="w-full bg-transparent text-darkgrey placeholder:text-peach pl-2 rounded-xl focus:ring-0 focus:ring-offset-0" 
                         type="text" 
                         placeholder={text}
                         value={value} 
                         onFocus={() => {if(isOpen == false) {setIsOpen(true)}}}
                         onBlur={handleOnClick}
                         onChange={handleInputChange} 
-                        onKeyDown={handleEnter}/>
+                        onKeyDown={handleEnter}
+                        required
+                />
                 <DropButton onClick={handleOnClick} open={isOpen}/>
                 <div className='absolute -bottom-[7.5rem] right-0 h-28 justify-start'>
                     {isOpen && (
@@ -74,8 +76,8 @@ export default function Combobox({data, text}) {
                                 ? <p className='text-darkgrey'>Not found</p>
                                 : <div className='divide-y-1 divide-darkgrey'>
                                 {
-                                    filteredCategory.map((choice) =>  
-                                    <p className='text-darkgrey cursor-pointer' onClick={() => {getValue(choice.name); handleOnClick()}}>{choice.name}</p>)
+                                    filteredCategory.map((choice, index) =>  
+                                    <p key={index} className='text-darkgrey cursor-pointer' onClick={() => {getValue(choice.name); handleOnClick()}}>{choice.name}</p>)
                                 }
                                </div>
                             }   

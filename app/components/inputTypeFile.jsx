@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {Avatar} from "@nextui-org/react";
 
 export default function Inputtypefile({text, type, className, param, read = 0, name ='' }) {
-
+  
   const [file, setFile] = useState();
 
   const handleChange = (e) => {
@@ -24,6 +24,7 @@ export default function Inputtypefile({text, type, className, param, read = 0, n
               className={className}
               readOnly={read ? 0 : 1}
             />
+
        </div>
      </div>
     ) : (

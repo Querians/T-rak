@@ -74,7 +74,7 @@ export default function Home() {
     }
 
     return (
-      <div className='flex flex-col justify-between h-screen gap-4'>
+      <div className='flex flex-col justify-between h-screen '>
         <div className="px-8 pt-8 flex flex-col gap-4">
             <div className="flex justify-between">
                 <div className="bg-cream rounded-full w-[70px] h-[70px] shadow-lg">
@@ -91,7 +91,7 @@ export default function Home() {
             <p className="text-white text-lg">Nice to see you, <span className="font-bold">{name} </span>!</p>
             <Searchbox text='Search' handleChange={handleInputChange}/>
         </div>
-        <div className="bg-cream h-3/4 rounded-t-[20px] flex flex-col items-center px-6 pt-4 pb-8 gap-4">
+        <div className="bg-cream h-3/4 mt-4 rounded-t-[20px] flex flex-col items-center px-6 pt-4 pb-8 gap-4">
             <div className="h-[85%] w-full overflow-y-auto pb-2 rounded-2xl p-1">
                 {filteredCategory.length === 0
                     ? <div className='text-winered text-center p-8 flex flex-col gap-2'>
@@ -100,8 +100,9 @@ export default function Home() {
                       </div>
                     : <div className='flex flex-col gap-2.5 '>
                     {
-                        filteredCategory.map((choice) =>  
-                            <TierlistCard pic={choice.picture} tierlistName={choice.name} category={choice.category} link='/'/>)
+                        filteredCategory.map((choice,index) =>  
+                            <TierlistCard key={index} pic={choice.picture} tierlistName={choice.name} category={choice.category} link='/'/>
+                        ) 
                     }
                     </div>
                 } 

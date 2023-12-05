@@ -6,11 +6,23 @@ import Image from 'next/image';
 import {useState} from 'react'
 import { motion } from 'framer-motion';
 
+const profileData ={ 
+  email:"abd@gmail.com",    
+  name:"Abanda", 
+  image:"/",
+  aboutMe:"Hello how are you",
+}
+
 export default function ProfileDetail() {
   const [isEdit, setIsEdit] = useState(false)
-
+  const [profile, setProfile] = useState(profileData)
   const handleOnClick = () => {
-      setIsEdit(!isEdit)
+    setIsEdit(!isEdit)
+  }
+
+  const handleCancel = () => {
+    setProfile(profileData)
+    setIsEdit(!isEdit)
   }
 
   return (
@@ -38,7 +50,7 @@ export default function ProfileDetail() {
           )}
         </motion.div>
         <div className='h-[85%] p-8 bg-cream rounded-t-2xl static'>
-          <ProfileSetting editState={isEdit} handleOnClick={handleOnClick}/>
+          <ProfileSetting editState={isEdit} handleOnClick={handleOnClick} handleCancel={handleCancel} profileData={profile} setProfile={setProfile}/>
           {!isEdit && (
             <div className={`transition-transform absolute bottom-14 left-1/2 -translate-x-1/2 ${(isEdit) ? '-translate-y-6 mt-6 duration-[3000ms]':''}`}>
               <MenuBar type='profile'/>
