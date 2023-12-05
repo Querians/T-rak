@@ -163,3 +163,25 @@ export async function GET(request) {
     });
   }
 }
+
+// delete row in tierlist
+export async function DELETE(request) {
+  const requestUrl = new URL(request.url);
+  const rowId = requestUrl.searchParams.get('id');
+
+  try {
+    const deletedRow = await prisma.row.delete({
+      where: {
+        rowId: rowId,
+      },
+    });
+
+    console.log(deletedRow);
+    return NextResponse.json(deletedRow);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(error, {
+      status: 400,
+    });
+  }
+}
