@@ -5,7 +5,7 @@ import Link from "next/link";
 import Combobox from "../inputComponent/combobox";
 import NumberInput from "../inputComponent/numberInput";
 
-export default function TierListDetailEdit({}) {
+export default function TierListDetailEdit({tierListData, A='hello'}) {
     const categoryData = [
         {
             id: '1',
@@ -23,10 +23,10 @@ export default function TierListDetailEdit({}) {
                 method='post'
                 className='flex flex-col w-full gap-5'
             >
-                <Inputbutton text='Tierlist Name' type='text' name='name'/>
+                <Inputbutton text='Tierlist Name' type='text' name='name' defaultValue={tierListData.name}/>
                 {/* add cover photo */}
-                <Combobox text='Category' data={categoryData}/>
-                <Inputbutton text='Description' name='description' isArea={1}/>
+                <Combobox text='Category' data={categoryData} defaultValue={tierListData.category}/>
+                <Inputbutton text='Description' name='description' isArea={1} defaultValue={tierListData.description}/>
                 <div className="flex gap-[18px] pt-4 justify-between ">
                     <div className="basis-1/3">
                         <Link href={'/home'} className="w-full">

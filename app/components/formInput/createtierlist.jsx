@@ -34,14 +34,14 @@ export default function TierListForm({}) {
                 method='post'
                 className='flex flex-col w-full gap-5'
             >
-                <Inputbutton text='Tier-list Name' type='text' name='name'/>
+                <Inputbutton text='Tier-list Name' type='text' name='name' />
                 {/* add cover photo */}
                 <Combobox text='Category' data={categoryData}/>
                 <Inputbutton text='Description' name='description' isArea={1}/>
                 <NumberInput text='Number of row'/>
                 <div className="flex gap-[18px] pt-4 justify-between ">
                     <div className="basis-1/3">
-                        <Link href={'/tierlist/edit'} className="w-full">
+                        <Link href={'/home'} className="w-full">
                             <CustomizeButton text='Cancel' styles='btncherry'/>
                         </Link>
                     </div>
