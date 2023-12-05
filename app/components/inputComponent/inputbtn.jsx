@@ -57,8 +57,7 @@ export default function Inputbutton({
                     pattern=".{6,20}"
                     readOnly={read ? 0 : 1}
                     required
-                    onInput={e => e.target.setCustomValidity('')}
-                    onInvalid={e => e.target.setCustomValidity('Enter User Name Here')}               
+                    onInput={e => e.target.setCustomValidity('')}            
                 />
                 <p className='pt-1 text-center text-winered text-sm'>password must contain 6-20 characters</p>
             </div>

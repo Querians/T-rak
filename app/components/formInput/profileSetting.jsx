@@ -30,7 +30,7 @@ export default function ProfileSetting({editState, handleOnClick, profileData, h
                         ['name']: e.target.value
                     })}} 
                 />
-                {(editState) ?
+                {/* {(editState) ?
                     <Inputbutton text='Password' type='password' name='password' value={profileData.password}
                         handleInputChange={(e) => {setProfile({
                             ...profileData,
@@ -39,13 +39,13 @@ export default function ProfileSetting({editState, handleOnClick, profileData, h
                     />
                  :
                     <></>   
-                }
-                {/* <Inputbutton text='About Me' name='aboutMe' isArea={1} read={editState} value={profileData.aboutMe}
+                } */}
+                <Inputbutton text='About Me' name='aboutMe' isArea={1} read={editState} value={profileData.aboutMe}
                     handleInputChange={(e) => {setProfile({
                         ...profileData,
                         ['aboutMe']: e.target.value
                     })}}
-                /> */}
+                />
                 {(editState) ? 
                     <div className="flex gap-[18px] pt-4 justify-between ">
                         <div className="basis-1/3">
