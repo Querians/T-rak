@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import {Avatar} from "@nextui-org/react";
 
-export default function Inputtypefile({text,type,className,param}) {
+export default function Inputtypefile({text,type,className,param, read = 0 }) {
 
   const [file, setFile] = useState();
 
@@ -13,7 +13,7 @@ export default function Inputtypefile({text,type,className,param}) {
   
   return (
     <>
-    {type == 'preview' ? (
+    {read == 0 || type == 'preview' ? (
     <div>
     <p className='text-xl text-cherry'> {text}</p>
         <div className="flex justify-center items-center">
@@ -22,6 +22,7 @@ export default function Inputtypefile({text,type,className,param}) {
               src={file||param}
               alt="imageInput" 
               className={className}
+              readOnly={read ? 0 : 1}
             />
 
        </div>
@@ -30,7 +31,7 @@ export default function Inputtypefile({text,type,className,param}) {
       <></>
     )}
 
-{type == 'edit' ? (
+  {read == 1 || type == 'edit' ? (
        <div>
        <p className='text-xl text-cherry'> {text}</p>
  
@@ -38,7 +39,7 @@ export default function Inputtypefile({text,type,className,param}) {
  
          <label>
 
-          <div className='overflow-hidden w-[70px] h-[70px] rounded-full relative'>
+          <div className='overflow-hidden w-[90px] rounded-full relative'>
           <Avatar 
              showFallback
              src={file}
@@ -46,7 +47,7 @@ export default function Inputtypefile({text,type,className,param}) {
              className={className}
            />
 
-           <span className='absolute bottom-0 h-[30px] w-[70px] bg-lightpink text-center text-lg text-cherry'
+           <span className='absolute bottom-0 h-[30px] w-[90px] bg-lightpink text-center text-lg text-cherry'
            clip-path= "circle(50%)">
             Edit
            </span>
