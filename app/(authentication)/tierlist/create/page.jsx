@@ -3,6 +3,7 @@ import TierListForm from "@/app/components/formInput/createtierlist";
 import Inputtypefile from "@/app/components/inputTypeFile";
 
 const UserData = {
+  name: 'krukri',
   image: '/vercel.svg'
 };
 
