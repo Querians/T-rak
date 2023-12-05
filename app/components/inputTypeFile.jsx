@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import {Avatar} from "@nextui-org/react";
 
-export default function Inputtypefile({text,type,className,param, read = 0 }) {
+export default function Inputtypefile({text, type, className, param, read = 0, name ='' }) {
 
   const [file, setFile] = useState();
 
@@ -16,7 +16,7 @@ export default function Inputtypefile({text,type,className,param, read = 0 }) {
     {read == 0 || type == 'preview' ? (
     <div>
     <p className='text-xl text-cherry'> {text}</p>
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center" name = {name} >
             <Avatar 
               showFallback
               src={file||param}
@@ -24,7 +24,6 @@ export default function Inputtypefile({text,type,className,param, read = 0 }) {
               className={className}
               readOnly={read ? 0 : 1}
             />
-
        </div>
      </div>
     ) : (
@@ -55,6 +54,7 @@ export default function Inputtypefile({text,type,className,param, read = 0 }) {
           </div>
            
              <input
+                 name = {name}
                  type='file'
                  accept='.jpeg, .png, .jpg'
                  style = {{'display':'none'}} 

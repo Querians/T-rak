@@ -13,7 +13,7 @@ export default function ProfileSetting({editState, handleOnClick, profileData}) 
                 className='flex flex-col w-full gap-5'
             >
                 <div className="self-center bg-red-400 rounded-full w-[90px] h-[90px]">
-                    <Inputtypefile className="rounded-full w-[90px] h-[90px] shrink-0" read={editState} param ={profileData.image}/>
+                    <Inputtypefile className="rounded-full w-[90px] h-[90px] shrink-0" name='picture' read={editState} param={profileData.image}/>
                 </div> 
                 <Inputbutton text='Email' type='email' name='email' read={editState}/>
                 <Inputbutton text='Username' type='text' name='name' read={editState}/>
