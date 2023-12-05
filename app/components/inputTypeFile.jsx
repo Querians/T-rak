@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import {Avatar} from "@nextui-org/react";
 
-export default function Inputtypefile({text,type}) {
+export default function Inputtypefile({text,type,className,param, read = 0 }) {
 
   const [file, setFile] = useState();
 
@@ -13,23 +13,25 @@ export default function Inputtypefile({text,type}) {
   
   return (
     <>
-    {type == 'preview' ? (
+    {read == 0 || type == 'preview' ? (
     <div>
     <p className='text-xl text-cherry'> {text}</p>
         <div className="flex justify-center items-center">
             <Avatar 
               showFallback
-              src={file}
+              src={file||param}
               alt="imageInput" 
-              className="w-[90px] h-[90px]"
+              className={className}
+              readOnly={read ? 0 : 1}
             />
+
        </div>
      </div>
     ) : (
       <></>
     )}
 
-{type == 'edit' ? (
+  {read == 1 || type == 'edit' ? (
        <div>
        <p className='text-xl text-cherry'> {text}</p>
  
@@ -37,12 +39,12 @@ export default function Inputtypefile({text,type}) {
  
          <label>
 
-          <div className='overflow-hidden w-[90px] h-[90px] rounded-full relative'>
+          <div className='overflow-hidden w-[90px] rounded-full relative'>
           <Avatar 
              showFallback
              src={file}
              alt="imageInput" 
-             className="w-[90px] h-[90px]"
+             className={className}
            />
 
            <span className='absolute bottom-0 h-[30px] w-[90px] bg-lightpink text-center text-lg text-cherry'
@@ -54,7 +56,7 @@ export default function Inputtypefile({text,type}) {
            
              <input
                  type='file'
-                 accept='.jpeg, .png'
+                 accept='.jpeg, .png, .jpg'
                  style = {{'display':'none'}} 
                  onChange = {handleChange}
              />
