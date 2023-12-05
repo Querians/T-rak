@@ -2,6 +2,13 @@ import Image from 'next/image';
 import TierListDetailEdit from '@/app/components/formInput/edittierlist';
 import Inputtypefile from '@/app/components/inputTypeFile';
 
+const tierListData ={ 
+  tierlistId:"1234",
+  name:"Animeeeeee",    
+  category:"Abanda", 
+  description:"kdhivgibvbvjhvodpuh",
+}
+
 export default function EditTierlistDetail({ params }) {
   const profile = {
     image: '/profilelight.svg',
@@ -21,7 +28,7 @@ export default function EditTierlistDetail({ params }) {
         <p className='text-2xl text-white '>Edit Tier-list Detail</p>
       </div>
       <div className='h-5/6 rounded-t-2xl bg-cream p-8'>
-        <TierListDetailEdit />
+        <TierListDetailEdit tierListData={tierListData} />
       </div>
     </main>
   );
