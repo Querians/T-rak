@@ -1,11 +1,17 @@
 'use client'
 import Searchbox from "@/app/components/inputComponent/searchBox";
 import Image from "next/image";
-import Avartar from "@/app/components/avartar"; {/* profile here!! */}
+import Avartar from "@/app/components/avartar"; 
+import Inputtypefile from "@/app/components/inputTypeFile";
 import MenuBar from "@/app/components/menuComponent/menuBar";
 import TierlistCard from "@/app/components/tierlistCard";
 import Link from "next/link";
 import { useState } from "react";
+
+const UserData = {
+    name: 'this is cocoa',
+    image: '/vercel.svg',
+  };
 
 const tierlistChoice =[
     {
@@ -72,8 +78,7 @@ export default function Home() {
         <div className="px-8 pt-8 flex flex-col gap-4">
             <div className="flex justify-between">
                 <div className="bg-cream rounded-full w-[70px] h-[70px] shadow-lg">
-                    {/* profile here!! */}
-                    <Avartar /> 
+                    <Inputtypefile type="preview" className=" w-[70px] h-[70px]" param={UserData.image}/>
                 </div>
                 <Image
                     src="/logoTRak.svg"
