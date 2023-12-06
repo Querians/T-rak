@@ -1,30 +1,12 @@
 'use client';
 import ProfileSetting from '@/app/components/formInput/profileSetting';
 import { CustomizeButton } from '@/app/components/inputComponent/button';
-import MenuBar from '@/app/components/menuComponent/menuBar';
 import Image from 'next/image';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const profileData = {
-  email: 'abd@gmail.com',
-  name: 'Abanda',
-  image: '/vercel.svg',
-  imageUrl: '/vercel.svg',
-  aboutMe: 'Hello how are you',
-};
-
 export default function ProfileDetail() {
   const [isEdit, setIsEdit] = useState(false);
-  const [profile, setProfile] = useState(profileData);
-  const handleOnClick = () => {
-    setIsEdit(!isEdit);
-  };
-
-  const handleCancel = () => {
-    setProfile(profileData);
-    setIsEdit(!isEdit);
-  };
 
   return (
     <div className='flex'>
@@ -61,22 +43,7 @@ export default function ProfileDetail() {
           )}
         </motion.div>
         <div className='static h-[85%] rounded-t-2xl bg-cream p-8'>
-          <ProfileSetting
-            editState={isEdit}
-            handleOnClick={handleOnClick}
-            handleCancel={handleCancel}
-            profileData={profile}
-            setProfile={setProfile}
-          />
-          {!isEdit && (
-            <div
-              className={`absolute bottom-14 left-1/2 -translate-x-1/2 transition-transform ${
-                isEdit ? 'mt-6 -translate-y-6 duration-[3000ms]' : ''
-              }`}
-            >
-              <MenuBar type='profile' />
-            </div>
-          )}
+          <ProfileSetting editState={isEdit} setIsEdit={setIsEdit} />
         </div>
       </main>
     </div>
