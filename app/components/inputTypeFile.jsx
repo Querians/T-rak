@@ -2,15 +2,8 @@
 import { useState } from 'react';
 import {Avatar} from "@nextui-org/react";
 
-export default function Inputtypefile({text, type, className, param, read = 0, name ='' }) {
-  
-  const [file, setFile] = useState();
+export default function Inputtypefile({text, type, className, param, read = 0, name ='', isRequired = false, handleChange }) {
 
-  const handleChange = (e) => {
-        console.log(e.target.files);
-        setFile(URL.createObjectURL(e.target.files[0]));
-    }
-  
   return (
     <>
     {read == 0 || type == 'preview' ? (
@@ -19,12 +12,11 @@ export default function Inputtypefile({text, type, className, param, read = 0, n
         <div className="flex justify-center items-center" name = {name} >
             <Avatar 
               showFallback
-              src={file||param}
+              src={param}
               alt="imageInput" 
               className={className}
               readOnly={read ? 0 : 1}
             />
-
        </div>
      </div>
     ) : (
@@ -37,31 +29,27 @@ export default function Inputtypefile({text, type, className, param, read = 0, n
  
        <div className="flex justify-center items-center">
  
-         <label>
+          <label className='overflow-hidden w-[90px] rounded-full relative'>
+            <Avatar 
+              showFallback
+              src={param}
+              alt="imageInput" 
+              className={className}
+            />
 
-          <div className='overflow-hidden w-[90px] rounded-full relative'>
-          <Avatar 
-             showFallback
-             src={file}
-             alt="imageInput" 
-             className={className}
-           />
-
-           <span className='absolute bottom-0 h-[30px] w-[90px] bg-lightpink text-center text-lg text-cherry'
-           clip-path= "circle(50%)">
-            Edit
-           </span>
-                    
-          </div>
-           
-             <input
+            <span className='absolute bottom-0 h-[30px] w-[90px] bg-lightpink text-center text-lg text-cherry'
+            clipPath= "circle(50%)">
+              Edit
+            </span>  
+            <input
+                 required = {isRequired}
                  name = {name}
                  type='file'
                  accept='.jpeg, .png, .jpg'
-                 style = {{'display':'none'}} 
+                 className='opacity-0 inline absolute bottom-0'
                  onChange = {handleChange}
-             />
-         </label>
+             />       
+          </label>
  
        </div>
      </div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Combobox from "../inputComponent/combobox";
 import NumberInput from "../inputComponent/numberInput";
 import Inputtypefile from "../inputTypeFile";
+import {useState} from 'react';
 
 // const categoryData = [
 //     {
@@ -18,6 +19,7 @@ import Inputtypefile from "../inputTypeFile";
 // ]
 
 export default function TierListForm({}) {
+    const [tierlistFormDetails, settierlistFormDetails] = useState()
     const categoryData = [
         {
             id: '1',
@@ -36,7 +38,10 @@ export default function TierListForm({}) {
                 className='flex flex-col w-full gap-5'
             >
                 <Inputbutton text='Tier-list Name' type='text' name='name' />
-                <Inputtypefile read={1} className=" w-[90px] h-[90px]" text ="Add Cover Photo" name = 'picture' />
+                <Inputtypefile read={1} className=" w-[90px] h-[90px]" text ="Add Cover Photo" name = 'picture' isRequired={true} param={tierlistFormDetails}
+                handleChange={(e)=> {settierlistFormDetails(
+                    URL.createObjectURL(e.target.files[0])
+                )}}/>
                 <Combobox text='Category' data={categoryData}/>
                 <Inputbutton text='Description' name='description' isArea={1}/>
                 <NumberInput text='Number of row'/>

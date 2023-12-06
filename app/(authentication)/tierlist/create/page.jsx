@@ -1,6 +1,8 @@
+'use client'
 import Image from "next/image";
 import TierListForm from "@/app/components/formInput/createtierlist";
 import Inputtypefile from "@/app/components/inputTypeFile";
+import {useState} from 'react';
 
 const UserData = {
   name: 'krukri',
