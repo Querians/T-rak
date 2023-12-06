@@ -13,9 +13,18 @@ export default function ProfileSetting({
   return (
     <div className='flex gap-7 px-2'>
       <form
-        action='/api/auth/profile' //editlinkhere
-        method='post'
-        onSubmit={(e) => {
+        // action='/api/auth/profile' //editlinkhere
+        // method='post'
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const formData = new FormData();
+          Object.entries(profileData).forEach(([key, value]) => {
+            formData.append(key, value);
+          });
+          const res = await fetch('api/auth/profile', {
+            method: 'POST',
+            body: formData,
+          });
           handleOnClick();
         }}
         className='flex w-full flex-col gap-5'
@@ -25,15 +34,15 @@ export default function ProfileSetting({
             className='h-[90px] w-[90px] shrink-0 rounded-full'
             name='picture'
             read={editState}
-            param={profileData.image}
+            param={profileData.imageUrl}
             handleChange={(e) => {
               if (!e.target.files[0]) {
                 return;
               }
               setProfile({
                 ...profileData,
-                ['imageFile']: e.target.files[0],
-                ['image']: URL.createObjectURL(e.target.files[0]),
+                ['image']: e.target.files[0],
+                ['imageUrl']: URL.createObjectURL(e.target.files[0]),
               });
             }}
           />
@@ -44,6 +53,12 @@ export default function ProfileSetting({
           name='email'
           read={0}
           value={profileData.email}
+          handleInputChange={(e) => {
+            setProfile({
+              ...profileData,
+              ['email']: e.target.value,
+            });
+          }}
         />
         <Inputbutton
           text='Username'
@@ -58,16 +73,6 @@ export default function ProfileSetting({
             });
           }}
         />
-        {/* {(editState) ?
-                    <Inputbutton text='Password' type='password' name='password' value={profileData.password}
-                        handleInputChange={(e) => {setProfile({
-                            ...profileData,
-                            ['password']: e.target.value
-                        })}} 
-                    />
-                 :
-                    <></>   
-                } */}
         <Inputbutton
           text='About Me'
           name='aboutMe'
