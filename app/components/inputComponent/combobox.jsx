@@ -20,7 +20,13 @@ export function DropButton({ onClick, open }) {
   );
 }
 
-export default function Combobox({ data, text, defaultValue, handleCombobox }) {
+export default function Combobox({
+  data,
+  text,
+  defaultValue,
+  handleCombobox,
+  name,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState(defaultValue);
   const [filteredCategory, setFilteredCategory] = useState(data);
@@ -43,7 +49,9 @@ export default function Combobox({ data, text, defaultValue, handleCombobox }) {
   const handleInputChange = (e) => {
     const searchTerm = e.target.value;
     setValue(searchTerm);
-    handleCombobox(e);
+    if (handleCombobox) {
+      handleCombobox(e);
+    }
 
     const filteredItems = data.filter((dataCategory) =>
       dataCategory.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -66,6 +74,7 @@ export default function Combobox({ data, text, defaultValue, handleCombobox }) {
           className='w-full rounded-xl bg-transparent pl-2 text-darkgrey placeholder:text-peach focus:ring-0 focus:ring-offset-0'
           type='text'
           placeholder={text}
+          name={name}
           value={value}
           onFocus={() => {
             if (isOpen == false) {
