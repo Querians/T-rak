@@ -1,29 +1,26 @@
-import Image from 'next/image';
 import TierListDetailEdit from '@/app/components/formInput/edittierlist';
 import Inputtypefile from '@/app/components/inputTypeFile';
 
-const tierListData ={ 
-  tierlistId:"1234",
-  name:"Animeeeeee",    
-  category:"Abanda", 
-  description:"kdhivgibvbvjhvodpuh",
-}
+const tierListData = {
+  tierlistId: '1234',
+  name: 'Animeeeeee',
+  category: 'Abanda',
+  description: 'kdhivgibvbvjhvodpuh',
+  coverPhotoUrl: '/vercel.svg',
+};
 
 export default function EditTierlistDetail({ params }) {
-  const profile = {
-    image: '/profilelight.svg',
-  };
   console.log('params.tierListId', params.tierListId);
-
-  const UserData = {
-    image: '/vercel.svg'
-  };
 
   return (
     <main className='flex h-screen w-full flex-col'>
       <div className='justify-left flex h-[18%] w-full items-center gap-[15px] px-8 pt-10'>
         <div className='relative h-[70px] w-[70px] rounded-full'>
-          <Inputtypefile type="preview" className=" w-[70px] h-[70px]" param = {UserData.image} />
+          <Inputtypefile
+            type='preview'
+            className=' h-[70px] w-[70px]'
+            param={tierListData.coverPhotoUrl}
+          />
         </div>
         <p className='text-2xl text-white '>Edit Tier-list Detail</p>
       </div>
