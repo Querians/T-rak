@@ -19,7 +19,13 @@ export default function ProfileSetting({editState, handleOnClick, profileData, h
                 className='flex flex-col w-full gap-5'
             >
                 <div className="self-center bg-red-400 rounded-full w-[90px] h-[90px]">
-                    <Inputtypefile className="rounded-full w-[90px] h-[90px] shrink-0" name='picture' read={editState} param={profileData.image}/>
+                    <Inputtypefile className="rounded-full w-[90px] h-[90px] shrink-0" name='picture' read={editState} param={profileData.image}
+                    handleChange={(e)=> {setProfile({
+                        ...profileData,
+                        ['imageFile']: e.target.files[0],
+                        ['image'] : URL.createObjectURL(e.target.files[0])
+                    })}}
+                    />
                 </div> 
                 <Inputbutton text='Email' type='email' name='email' read={0} value={profileData.email} />
                 <Inputbutton text='Username' type='text' name='name' read={editState} value={profileData.name}

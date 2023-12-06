@@ -6,7 +6,7 @@ import Combobox from "../inputComponent/combobox";
 import NumberInput from "../inputComponent/numberInput";
 import Inputtypefile from "../inputTypeFile";
 
-export default function TierListDetailEdit({tierListData, A='hello'}) {
+export default function TierListDetailEdit({tierListData, A='hello', setTierListDetails, tierlistDetails}) {
     const categoryData = [
         {
             id: '1',
@@ -25,7 +25,13 @@ export default function TierListDetailEdit({tierListData, A='hello'}) {
                 className='flex flex-col w-full gap-5'
             >
                 <Inputbutton text='Tierlist Name' type='text' name='name' defaultValue={tierListData.name}/>
-                <Inputtypefile read={1} className=" w-[90px] h-[90px]" text ="Edit Cover Photo" name= 'picture' defaultValue={tierListData.coverPhotoUrl}/>
+                <Inputtypefile read={1} className=" w-[90px] h-[90px]" text ="Edit Cover Photo" name= 'CoverPhoto' param={tierlistDetails.coverPhotoUrl} isRequired={true}
+                 handleChange={(e)=> {setTierListDetails({
+                    ...tierlistDetails,
+                    ['coverPhotoFile']: e.target.files[0],
+                    ['coverPhotoUrl'] : URL.createObjectURL(e.target.files[0])
+                })}}
+                />
                 <Combobox text='Category' data={categoryData} defaultValue={tierListData.category}/>
                 <Inputbutton text='Description' name='description' isArea={1} defaultValue={tierListData.description}/>
                 <div className="flex gap-[18px] pt-4 justify-between ">

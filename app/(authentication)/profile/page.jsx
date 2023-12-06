@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 const profileData ={ 
   email:"abd@gmail.com",    
   name:"Abanda", 
-  image:"/",
+  image:"/vercel.svg",
   aboutMe:"Hello how are you",
 }
 
