@@ -11,8 +11,9 @@ export default async function Signup() {
   if (data?.session?.user) {
     redirect('/home');
   }
-
+  
   console.log(data);
+
 
   return (
      <main className='flex flex-col h-screen w-full'>
