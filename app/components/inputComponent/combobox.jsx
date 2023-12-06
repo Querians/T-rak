@@ -1,90 +1,108 @@
-'use client'
-import Image from 'next/image'
-import {useState} from 'react'
+'use client';
+import Image from 'next/image';
+import { useState } from 'react';
 
-export function DropButton({onClick, open}) {
-    return(
-        <div onClick={onClick} className="bg-cherry w-10 h-[1.625rem] rounded-[0.625rem] border-1 border-[#ECB7BD] relative flex justify-center cursor-pointer shadow-md" >
-            <Image
-                src="/toggle.svg"
-                alt="Toggle"
-                width={17.38}
-                height={8.69}
-                priority
-                className={`${(open==0) ? '':'rotate-180'}`}
-            />
-        </div>
-    );
+export function DropButton({ onClick, open }) {
+  return (
+    <div
+      onClick={onClick}
+      className='relative flex h-[1.625rem] w-10 cursor-pointer justify-center rounded-[0.625rem] border-1 border-[#ECB7BD] bg-cherry shadow-md'
+    >
+      <Image
+        src='/toggle.svg'
+        alt='Toggle'
+        width={17.38}
+        height={8.69}
+        priority
+        className={`${open == 0 ? '' : 'rotate-180'}`}
+      />
+    </div>
+  );
 }
 
-export default function Combobox({data, text, defaultValue}) {
-    const [isOpen, setIsOpen] = useState(false)
-    const [value, setValue] = useState(defaultValue)
-    const [filteredCategory, setFilteredCategory] = useState(data)
+export default function Combobox({ data, text, defaultValue, handleCombobox }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState(defaultValue);
+  const [filteredCategory, setFilteredCategory] = useState(data);
 
-    const handleOnClick = () => {
-        setTimeout(function() {
-            setIsOpen(!isOpen)
-        }, 150)
-    }
+  const handleOnClick = () => {
+    setTimeout(function () {
+      setIsOpen(!isOpen);
+    }, 150);
+  };
 
-    const getValue = (category) => {
-        setValue(category)
+  const getValue = (category) => {
+    setValue(category);
 
-        const filteredItems = data.filter((dataCategory) =>
-            dataCategory.name.toLowerCase().includes(category.toLowerCase())
-        );
-        setFilteredCategory(filteredItems)
-    }
-
-    const handleInputChange = (e) => {
-        const searchTerm = e.target.value;
-        setValue(searchTerm)
-          
-        const filteredItems = data.filter((dataCategory) =>
-            dataCategory.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredCategory(filteredItems)
-    }
-
-    const handleEnter = (e) => {
-        if (e.key === 'Enter') {
-            e.target.blur();
-            setIsOpen(false)
-        }
-    }
-
-    return(
-        <div className="w-full h-[70px] flex flex-col">
-            <p className="text-xl text-cherry">{text}</p>
-            <div className='relative h-9 rounded-2xl border-1 border-white bg-lightpink flex gap-2 items-center px-2 shadow-lg'>
-                <input className="w-full bg-transparent text-darkgrey placeholder:text-peach pl-2 rounded-xl focus:ring-0 focus:ring-offset-0" 
-                        type="text" 
-                        placeholder={text}
-                        value={value} 
-                        onFocus={() => {if(isOpen == false) {setIsOpen(true)}}}
-                        onBlur={handleOnClick}
-                        onChange={handleInputChange} 
-                        onKeyDown={handleEnter}
-                        required
-                />
-                <DropButton onClick={handleOnClick} open={isOpen}/>
-                <div className='absolute -bottom-[7.5rem] right-0 h-28 justify-start'>
-                    {isOpen && (
-                        <div className='bg-cream w-60 max-h-28 rounded-xl px-[11px] py-1 border-1 border-white overflow-auto shadow-lg'>
-                            {filteredCategory.length === 0
-                                ? <p className='text-darkgrey'>Not found</p>
-                                : <div className='divide-y-1 divide-darkgrey'>
-                                {
-                                    filteredCategory.map((choice, index) =>  
-                                    <p key={index} className='text-darkgrey cursor-pointer' onClick={() => {getValue(choice.name); handleOnClick()}}>{choice.name}</p>)
-                                }
-                               </div>
-                            }   
-                        </div>
-                    )}
-                </div>
-            </div>
-        </div>
+    const filteredItems = data.filter((dataCategory) =>
+      dataCategory.name.toLowerCase().includes(category.toLowerCase())
     );
+    setFilteredCategory(filteredItems);
+  };
+
+  const handleInputChange = (e) => {
+    const searchTerm = e.target.value;
+    setValue(searchTerm);
+    handleCombobox(e);
+
+    const filteredItems = data.filter((dataCategory) =>
+      dataCategory.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredCategory(filteredItems);
+  };
+
+  const handleEnter = (e) => {
+    if (e.key === 'Enter') {
+      e.target.blur();
+      setIsOpen(false);
+    }
+  };
+
+  return (
+    <div className='flex h-[70px] w-full flex-col'>
+      <p className='text-xl text-cherry'>{text}</p>
+      <div className='relative flex h-9 items-center gap-2 rounded-2xl border-1 border-white bg-lightpink px-2 shadow-lg'>
+        <input
+          className='w-full rounded-xl bg-transparent pl-2 text-darkgrey placeholder:text-peach focus:ring-0 focus:ring-offset-0'
+          type='text'
+          placeholder={text}
+          value={value}
+          onFocus={() => {
+            if (isOpen == false) {
+              setIsOpen(true);
+            }
+          }}
+          onBlur={handleOnClick}
+          onChange={handleInputChange}
+          onKeyDown={handleEnter}
+          required
+        />
+        <DropButton onClick={handleOnClick} open={isOpen} />
+        <div className='absolute -bottom-[7.5rem] right-0 h-28 justify-start'>
+          {isOpen && (
+            <div className='max-h-28 w-60 overflow-auto rounded-xl border-1 border-white bg-cream px-[11px] py-1 shadow-lg'>
+              {filteredCategory.length === 0 ? (
+                <p className='text-darkgrey'>Not found</p>
+              ) : (
+                <div className='divide-y-1 divide-darkgrey'>
+                  {filteredCategory.map((choice, index) => (
+                    <p
+                      key={index}
+                      className='cursor-pointer text-darkgrey'
+                      onClick={() => {
+                        getValue(choice.name);
+                        handleOnClick();
+                      }}
+                    >
+                      {choice.name}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
