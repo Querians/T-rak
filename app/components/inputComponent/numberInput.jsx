@@ -47,10 +47,12 @@ export default function NumberInput({ text, rowcount = 1, name }) {
         <DropButton onClick={subtracting} symbol='minus' value={count} />
         <div className='w-10 text-center'>
           <input
+            onClick={(e) => e.preventDefault()}
+            tabIndex='-1'
             name={name}
             value={count}
             readOnly={true}
-            className='align-center inline bg-transparent text-base text-darkgrey'
+            className='align-center inline bg-transparent text-base text-darkgrey focus:outline-none'
           />
         </div>
         <DropButton onClick={adding} symbol='add' value={count} />

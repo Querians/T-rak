@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function DropButton({ onClick, open }) {
   return (
@@ -34,7 +34,7 @@ export default function Combobox({
   const handleOnClick = () => {
     setTimeout(function () {
       setIsOpen(!isOpen);
-    }, 150);
+    }, 50);
   };
 
   const getValue = (category) => {
@@ -65,6 +65,9 @@ export default function Combobox({
       setIsOpen(false);
     }
   };
+  useEffect(() => {
+    setFilteredCategory(data);
+  }, [data]);
 
   return (
     <div className='flex h-[70px] w-full flex-col'>
@@ -81,7 +84,11 @@ export default function Combobox({
               setIsOpen(true);
             }
           }}
-          onBlur={handleOnClick}
+          onBlur={() => {
+            setTimeout(() => {
+              setIsOpen(false);
+            }, 150);
+          }}
           onChange={handleInputChange}
           onKeyDown={handleEnter}
           required
@@ -90,12 +97,13 @@ export default function Combobox({
         <div className='absolute -bottom-[7.5rem] right-0 h-28 justify-start'>
           {isOpen && (
             <div className='max-h-28 w-60 overflow-auto rounded-xl border-1 border-white bg-cream px-[11px] py-1 shadow-lg'>
-              {filteredCategory.length === 0 ? (
+              {!filteredCategory?.length ? (
                 <p className='text-darkgrey'>Not found</p>
               ) : (
                 <div className='divide-y-1 divide-darkgrey'>
-                  {filteredCategory.map((choice, index) => (
+                  {filteredCategory?.map((choice, index) => (
                     <p
+                      tabIndex='0'
                       key={index}
                       className='cursor-pointer text-darkgrey'
                       onClick={() => {

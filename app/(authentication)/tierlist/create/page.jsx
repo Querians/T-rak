@@ -1,24 +1,18 @@
-'use client'
-import Image from "next/image";
-import TierListForm from "@/app/components/formInput/createtierlist";
-import Inputtypefile from "@/app/components/inputTypeFile";
-import {useState} from 'react';
+'use client';
+import Image from 'next/image';
+import TierListForm from '@/app/components/formInput/createtierlist';
+import Inputtypefile from '@/app/components/inputTypeFile';
+import { useState } from 'react';
+import Profile from './profile';
 
-const UserData = {
-  name: 'krukri',
-  image: '/vercel.svg'
-};
-
-export default function CreateTierlist({profile="/profilelight.svg"}) {
+export default function CreateTierlist() {
   return (
-    <main className='flex flex-col h-screen w-full'>
-      <div className='h-[18%] w-full pt-10 px-8 flex gap-[15px] justify-left items-center'>
-        <div className="w-[70px] h-[70px] rounded-full relative">
-          <Inputtypefile type="preview" className=" w-[70px] h-[70px]" param ={UserData.image}/>
-        </div> 
+    <main className='flex h-screen w-full flex-col'>
+      <div className='justify-left flex h-[18%] w-full items-center gap-[15px] px-8 pt-10'>
+        <Profile />
         <p className='text-2xl text-white '>Create New Tier-list</p>
       </div>
-      <div className='h-5/6 p-8 bg-cream rounded-t-2xl'>
+      <div className='h-5/6 rounded-t-2xl bg-cream p-8'>
         <TierListForm />
       </div>
     </main>
