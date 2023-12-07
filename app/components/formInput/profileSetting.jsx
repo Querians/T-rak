@@ -4,12 +4,13 @@ import { CustomizeButton } from '../inputComponent/button';
 import Inputtypefile from '../inputTypeFile';
 import MenuBar from '@/app/components/menuComponent/menuBar';
 import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import axfetch from '@/utils/axfetch';
 import { Spinner } from '@nextui-org/react';
 
 export default function ProfileSetting({ editState, setIsEdit }) {
-  const fetchUserData = () => axios.get('api/user').then((res) => res.data);
+  const queryClient = useQueryClient();
+  const fetchUserData = () => axfetch.get('api/user').then((res) => res.data);
 
   const { data, error, isLoading, isSuccess } = useQuery({
     queryKey: ['userData'],
@@ -60,6 +61,7 @@ export default function ProfileSetting({ editState, setIsEdit }) {
               body: formData,
             });
             handleOnClick();
+            queryClient.invalidateQueries({ queryKey: ['userData'] });
           }}
           className='flex w-full flex-col gap-5'
         >
