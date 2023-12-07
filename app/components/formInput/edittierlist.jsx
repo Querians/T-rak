@@ -2,39 +2,56 @@
 import Inputbutton from '../inputComponent/inputbtn';
 import { CustomizeButton } from '../inputComponent/button';
 import Link from 'next/link';
-import Combobox from '../inputComponent/combobox';
 import Inputtypefile from '../inputTypeFile';
 import { useState, useEffect } from 'react';
+import Category from '@/app/(authentication)/tierlist/editDetail/[tierListId]/category';
+import axfetch from '@/utils/axfetch';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
-export default function TierListDetailEdit({ tierListData }) {
-  const [tierlistDetails, setTierListDetails] = useState(tierListData);
+export default function TierListDetailEdit({ tierListId }) {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const fetchTierListData = () =>
+    axfetch.get(`api/tierlist/show/?id=${tierListId}`).then((res) => res.data);
+  const { data, error, isLoading, isSuccess } = useQuery({
+    queryKey: ['tierListData', tierListId],
+    queryFn: fetchTierListData,
+  });
+  const [tierlistDetails, setTierListDetails] = useState(data);
+
   useEffect(() => {
-    console.log(tierlistDetails);
-  }, [tierlistDetails]);
-  const categoryData = [
-    {
-      id: '1',
-      name: 'Anime',
-    },
-    {
-      id: '2',
-      name: 'Animehell',
-    },
-  ];
+    setTierListDetails(data);
+  }, [data]);
+
   return (
     <div className='flex gap-7 px-2'>
       <form
-        // action='/api/auth/editTierlist'
-        // method='post'
         onSubmit={async (e) => {
           e.preventDefault();
           const formData = new FormData();
+          formData.append('tierlistId', tierListId);
           Object.entries(tierlistDetails).forEach(([key, value]) => {
             formData.append(key, value);
           });
-          const res = await fetch('/api/auth/editTierlist', {
+          const res = await fetch(`/api/tierlist/update`, {
             method: 'POST',
             body: formData,
+          }).then(() => {
+            queryClient.invalidateQueries({ queryKey: ['tierListData'] });
+            queryClient.invalidateQueries({ queryKey: ['fetchTierListCards'] });
+            const Toast = Swal.mixin({
+              timer: 1500,
+              showConfirmButton: false,
+              text: 'Going back to home',
+            });
+            Toast.fire({
+              icon: 'success',
+              title: 'Edit successfully',
+            }).then(() => {
+              router.push(`/home`);
+            });
           });
         }}
         className='flex w-full flex-col gap-5'
@@ -43,7 +60,7 @@ export default function TierListDetailEdit({ tierListData }) {
           text='Tierlist Name'
           type='text'
           name='name'
-          defaultValue={tierListData.name}
+          defaultValue={tierlistDetails?.name || ''}
           handleInputChange={(e) => {
             setTierListDetails({
               ...tierlistDetails,
@@ -56,26 +73,31 @@ export default function TierListDetailEdit({ tierListData }) {
           className=' h-[90px] w-[90px]'
           text='Edit Cover Photo'
           name='CoverPhoto'
-          param={tierlistDetails.coverPhotoUrl}
+          param={
+            !tierlistDetails?.coverPhoto
+              ? isSuccess &&
+                process.env.NEXT_PUBLIC_SUPABASE_URL +
+                  '/storage/v1/object/public/images/' +
+                  tierlistDetails?.coverPhotoUrl
+              : tierlistDetails.coverPhotoUrl
+          }
           handleChange={(e) => {
             if (!e.target.files[0]) {
               return;
             }
             setTierListDetails({
               ...tierlistDetails,
-              ['coverPhotoFile']: e.target.files[0],
+              ['coverPhoto']: e.target.files[0],
               ['coverPhotoUrl']: URL.createObjectURL(e.target.files[0]),
             });
           }}
         />
-        <Combobox
-          text='Category'
-          data={categoryData}
-          defaultValue={tierListData.category}
+        <Category
+          defaultValue={tierlistDetails?.category?.categoryName || ''}
           handleCombobox={(e) => {
             setTierListDetails({
               ...tierlistDetails,
-              ['category']: e.target.value,
+              ['categoryName']: e.target.value,
             });
           }}
         />
@@ -83,7 +105,7 @@ export default function TierListDetailEdit({ tierListData }) {
           text='Description'
           name='description'
           isArea={1}
-          defaultValue={tierListData.description}
+          defaultValue={tierlistDetails?.description || ''}
           handleInputChange={(e) => {
             setTierListDetails({
               ...tierlistDetails,

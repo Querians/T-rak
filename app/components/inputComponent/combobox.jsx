@@ -28,7 +28,7 @@ export default function Combobox({
   name,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState('');
   const [filteredCategory, setFilteredCategory] = useState(data);
 
   const handleOnClick = () => {
@@ -67,7 +67,8 @@ export default function Combobox({
   };
   useEffect(() => {
     setFilteredCategory(data);
-  }, [data]);
+    setValue(defaultValue);
+  }, [data, defaultValue]);
 
   return (
     <div className='flex h-[70px] w-full flex-col'>
