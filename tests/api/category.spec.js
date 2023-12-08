@@ -1,3 +1,9 @@
+/** To run tests, you need to specify following variables in `.env.local`:
+ * NEXT_PUBLIC_BASE_URL,
+ * NEXT_PUBLIC_USER,
+ * NEXT_PUBLIC_PASSWORD
+ * */
+
 const { test, expect, request } = require('@playwright/test');
 
 const generateRandomString = function (length = 6) {
@@ -6,23 +12,23 @@ const generateRandomString = function (length = 6) {
 
 let apiContext;
 
-test.beforeAll('TC_A001: sign in', async () => {
+test.beforeAll('TC_A002: sign in', async () => {
   apiContext = await request.newContext();
   console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signin`);
-  const signinResponse = await apiContext.post(
+  const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signin`,
     {
       form: {
         email: process.env.NEXT_PUBLIC_USER,
         password: process.env.NEXT_PUBLIC_PASSWORD,
       },
-      maxRedirects: 0,
+      maxRedirects: 1,
     }
   );
-  expect(signinResponse._initializer).toHaveProperty('status', 301);
+  expect(response.status()).toBe(200);
 });
 
-test('TC_A201: create category (fail)', async () => {
+test('TC_A201_2: create category (fail due to already exist )', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/category`,
     {
@@ -38,9 +44,7 @@ test('TC_A201: create category (fail)', async () => {
   expect(responseBody.message).toBe('Category already exist');
 });
 
-test('TC_A202: create category (success)', async () => {
-  const file = path.resolve('./tests/picture', 'Wendy.jpg');
-  const image = fs.readFileSync(file);
+test('TC_A202_1: create category (success)', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/category`,
     {
