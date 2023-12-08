@@ -16,7 +16,11 @@
     "db:studio": "pnpm dotenv -e .env.local -- prisma studio",
     "db:generate": "pnpm dotenv -e .env.local -- prisma generate",
     "db:reset": "pnpm dotenv -e .env.local -- prisma migrate reset --force",
-    "production:build": "pnpm prisma generate && pnpm prisma migrate deploy && pnpm next build"
+    "production:build": "pnpm prisma generate && pnpm prisma migrate deploy && pnpm next build",
+    "pw:test": "pnpm dotenv -e .env.local -- playwright test",
+    "pw:test-api": "pnpm dotenv -e .env.local -- playwright test tests/api",
+    "pw:test-frontend": "pnpm dotenv -e .env.local -- playwright test tests/frontend",
+    "pw:report":"pnpm exec playwright show-report"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
