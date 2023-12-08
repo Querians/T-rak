@@ -137,7 +137,13 @@ export async function POST(request) {
     });
 
     console.log(dbResponse);
-    return NextResponse.json(dbResponse);
+    return NextResponse.redirect(
+      requestUrl.origin + `/tierlist/edit/${dbResponse.tierlistId}`,
+      {
+        status: 301,
+      }
+    );
+    // return NextResponse.json(dbResponse);
   } catch (error) {
     console.log(error);
     return NextResponse.json(error, {

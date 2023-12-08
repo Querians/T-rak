@@ -30,6 +30,7 @@ export async function POST(request) {
       },
       data: {
         name: formData.get('name') || undefined,
+        aboutMe: formData.get('aboutMe') || undefined,
         image: fileResponse.path || undefined,
       },
     });
