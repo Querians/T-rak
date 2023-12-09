@@ -6,14 +6,15 @@ import { Spinner } from '@nextui-org/react';
 export default function TierListCards({ value }) {
   const fetchTierListCards = () =>
     axfetch.get('api/tierlist').then((res) => res.data);
-  const { data, error, isLoading, isSuccess } = useQuery({
-    queryKey: ['fetchTierListCards'],
+  const { data, error, isLoading, isSuccess, isFetching } = useQuery({
+    queryKey: ['TierListCards'],
     queryFn: fetchTierListCards,
   });
 
   if (error) return <p>{error.message}</p>;
 
-  if (isLoading) return <Spinner className='h-full w-full' size='lg' />;
+  if (isLoading || isFetching)
+    return <Spinner className='h-full w-full' size='lg' />;
   return (
     <div className='flex flex-col gap-2.5 '>
       {data &&
@@ -26,8 +27,6 @@ export default function TierListCards({ value }) {
               tierList?.name?.toLowerCase().includes(value.toLowerCase())
           )
           .map((tierList, index) => {
-            console.log('tierList', tierList);
-            // console.log('tierlistId', tierList.tierlistId);
             return (
               <TierlistCard
                 key={index}
