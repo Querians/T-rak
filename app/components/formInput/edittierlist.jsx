@@ -50,17 +50,30 @@ export default function TierListDetailEdit({ tierListId }) {
         onSubmit={async (e) => {
           e.preventDefault();
           const formData = new FormData();
-          formData.append('tierlistId', tierListId);
           Object.entries(tierlistDetails).forEach(([key, value]) => {
             formData.append(key, value);
           });
+
+          // old data doesn't haave description
+          if (
+            !tierlistDetails?.description &&
+            tierlistDetails.description != ''
+          ) {
+            formData.delete('description');
+          } else if (tierlistDetails.description.length == 0) {
+            // if user want to delete descirption
+            formData.set('description', ' ');
+          }
+
           await fetch(`/api/tierlist/update`, {
             method: 'POST',
             body: formData,
           })
             .then((res) => {
               if (res.status == 200) {
-                queryClient.invalidateQueries({ queryKey: ['tierListData'] });
+                queryClient.invalidateQueries({
+                  queryKey: ['tierListData', tierListId],
+                });
                 queryClient.invalidateQueries({ queryKey: ['TierListCards'] });
                 router.push(`/home`);
                 Swal.mixin({
