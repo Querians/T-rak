@@ -6,6 +6,37 @@ import { uploadfile } from '@/utils/uploadfile';
 import { randomUUID } from 'crypto';
 import hslToHex from '@/utils/hslToHex';
 
+const tierlistColor = [
+  {
+    name: 'red',
+    hex: 'F8AFB1',
+  },
+  {
+    name: 'orange',
+    hex: 'FAD4BE',
+  },
+  {
+    name: 'yellow',
+    hex: 'FAE6BE',
+  },
+  {
+    name: 'lightgreen',
+    hex: 'F2FABE',
+  },
+  {
+    name: 'green',
+    hex: 'D8FABE',
+  },
+  {
+    name: 'lightblue',
+    hex: 'BEFAE4',
+  },
+  {
+    name: 'blue',
+    hex: 'BED2FA',
+  },
+];
+
 // create tierlist
 export async function POST(request) {
   const requestUrl = new URL(request.url);
@@ -122,7 +153,7 @@ export async function POST(request) {
                 (v, k) => k
               ).map((_, index) => ({
                 label: `Row ${index + 1}`,
-                color: hslToHex(Math.floor(Math.random() * 360), 100, 80),
+                color: tierlistColor[index % tierlistColor.length]['hex'],
                 order: index,
               })),
               {
