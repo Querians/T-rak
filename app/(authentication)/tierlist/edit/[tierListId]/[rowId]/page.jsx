@@ -6,6 +6,8 @@ import MenuBar from '@/app/components/menuComponent/menuBar';
 import { useQuery } from '@tanstack/react-query';
 import axfetch from '@/utils/axfetch';
 import { Spinner } from '@nextui-org/react';
+import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 const RowDragable = dynamic(
   () => import('@/app/components/dragComponent/rowDragable'),
@@ -23,6 +25,8 @@ export default function EditExpand({ params }) {
     queryKey: ['tierListData', params.rowId],
     queryFn: fetchRowData,
   });
+  const router = useRouter();
+
   // items = [chosenRow, spawnerRow(a row that has Id = -1)]
   const [items, setItems] = useState([]);
   const [tempItems, setTempItems] = useState(items);
@@ -54,9 +58,26 @@ export default function EditExpand({ params }) {
     setTempItems(formatData);
   }, [data]);
 
+  useEffect(() => {
+    if (error) {
+      router.push(`/home`);
+      Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      }).fire({
+        icon: 'error',
+        title: 'Row NOT Found',
+      });
+    }
+  }, [error, router]);
+
   if (error) {
-    return <p>{error.message}</p>;
+    return <></>;
   }
+
   if (isLoading) return <Spinner className='h-screen w-screen' size='lg' />;
 
   return (
