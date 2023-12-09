@@ -55,7 +55,7 @@ export default function ElementCard(props) {
             src={props.src}
             priority={true}
             sizes='70px'
-            className='shrink-0 rounded-[10px] object-cover'
+            className='shrink-0 rounded-2xl object-cover'
             fill={true}
             alt={props.title || 'sdfsdf'}
           />

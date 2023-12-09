@@ -66,62 +66,91 @@ export default function Spawner(props) {
   };
 
   const handleMenu = async (elementId) => {
-    await Swal.fire({
-      title: 'Choose your element row',
-      input: 'select',
-      inputOptions: props?.isEditExpand ? { add: 'Add' } : menu,
-      buttonsStyling: false,
-      showDenyButton: true,
-      denyButtonText: `Delete This Element`,
-      confirmButtonText: `Done`,
-      inputLabel: 'Row list',
-      customClass: {
-        popup:
-          'px-6 py-[15px] pb-16 flex bg-mint border border-cream rounded-2xl',
-        title: 'text-darkgrey mb-[15px]',
-        inputLabel: 'mt-0 w-full inline text-cherry text-2xl',
-        input:
-          'm-0 mb-[15px] bg-lightpink border-2 rounded-2xl shadow-lg border border-[#FAFEFF]',
-        actions: 'flex flex-row gap-x-[12px] gap-y-[15px] w-full',
-        confirmButton:
-          'h-[33px] order-3 bg-peach text-white min-w-[168px] rounded-2xl shadow-lg border border-[#FAFEFF]',
-        cancelButton:
-          'h-[33px] order-2 bg-cherry text-white min-w-[112px] rounded-2xl shadow-lg border border-[#FAFEFF]',
-        denyButton:
-          'h-[33px] order-1 bg-winered text-white w-full min-w-[70px] rounded-2xl shadow-lg border border-[#FAFEFF]',
-      },
-      inputPlaceholder: 'Select a row',
-      showCancelButton: true,
-      inputValidator: (value) => {
-        return new Promise((resolve) => {
-          if (value.length == 0) return resolve();
-          if (props?.isEditExpand) {
-            handleSelectRowBot(items[0].id, elementId);
-            Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 2000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-              },
-            }).fire({
-              icon: 'success',
-              title: 'Add successfully',
-            });
-          } else {
+    if (props?.isEditExpand) {
+      await Swal.fire({
+        title: 'Add element to row',
+        buttonsStyling: false,
+        showDenyButton: true,
+        denyButtonText: `Delete This Element`,
+        confirmButtonText: `Add`,
+        customClass: {
+          popup:
+            'px-6 py-[15px] pb-16 flex bg-mint border border-cream rounded-2xl',
+          title: 'text-darkgrey mb-[15px]',
+          inputLabel: 'mt-0 w-full inline text-cherry text-2xl',
+          input:
+            'm-0 mb-[15px] bg-lightpink border-2 rounded-2xl shadow-lg border border-[#FAFEFF]',
+          actions: 'flex flex-row gap-x-[12px] gap-y-[15px] w-full',
+          confirmButton:
+            'h-[33px] order-3 bg-peach text-white min-w-[168px] rounded-2xl shadow-lg border border-[#FAFEFF]',
+          cancelButton:
+            'h-[33px] order-2 bg-cherry text-white min-w-[112px] rounded-2xl shadow-lg border border-[#FAFEFF]',
+          denyButton:
+            'h-[33px] order-1 bg-winered text-white w-full min-w-[70px] rounded-2xl shadow-lg border border-[#FAFEFF]',
+        },
+        inputPlaceholder: 'Select a row',
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.isDenied) {
+          handleRemoveElement(elementId, items.length - 1);
+        } else if (result.isConfirmed) {
+          handleSelectRowBot(items[0].id, elementId);
+          Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          }).fire({
+            icon: 'success',
+            title: 'Add successfully',
+          });
+        }
+      });
+    } else {
+      await Swal.fire({
+        title: 'Choose your element row',
+        input: 'select',
+        inputOptions: { add: 'Add' },
+        buttonsStyling: false,
+        showDenyButton: true,
+        denyButtonText: `Delete This Element`,
+        confirmButtonText: `Done`,
+        inputLabel: 'Row list',
+        customClass: {
+          popup:
+            'px-6 py-[15px] pb-16 flex bg-mint border border-cream rounded-2xl',
+          title: 'text-darkgrey mb-[15px]',
+          inputLabel: 'mt-0 w-full inline text-cherry text-2xl',
+          input:
+            'm-0 mb-[15px] bg-lightpink border-2 rounded-2xl shadow-lg border border-[#FAFEFF]',
+          actions: 'flex flex-row gap-x-[12px] gap-y-[15px] w-full',
+          confirmButton:
+            'h-[33px] order-3 bg-peach text-white min-w-[168px] rounded-2xl shadow-lg border border-[#FAFEFF]',
+          cancelButton:
+            'h-[33px] order-2 bg-cherry text-white min-w-[112px] rounded-2xl shadow-lg border border-[#FAFEFF]',
+          denyButton:
+            'h-[33px] order-1 bg-winered text-white w-full min-w-[70px] rounded-2xl shadow-lg border border-[#FAFEFF]',
+        },
+        inputPlaceholder: 'Select a row',
+        showCancelButton: true,
+        inputValidator: (value) => {
+          return new Promise((resolve) => {
+            if (value.length == 0) return resolve();
             handleSelectRowTop(value, elementId);
             resolve();
-          }
-        });
-      },
-    }).then((result) => {
-      if (result.isDenied) {
-        handleRemoveElement(elementId, items.length - 1);
-      }
-    });
+          });
+        },
+      }).then((result) => {
+        if (result.isDenied) {
+          handleRemoveElement(elementId, items.length - 1);
+        }
+      });
+    }
   };
 
   const handleAddElement = async () => {
