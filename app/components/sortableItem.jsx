@@ -37,18 +37,6 @@ export default function SortableItem(props) {
     bgColor = props.row.color;
   }
 
-  const defaultColor = {
-    FABEBE: 'bg-[#FABEBE]',
-    FAD4BE: 'bg-[#FAD4BE]',
-    FAE6BE: 'bg-[#FAE6BE]',
-    F2FABE: 'bg-[#F2FABE]',
-    D8FABE: 'bg-[#D8FABE]',
-    BEFAE4: 'bg-[#BEFAE4]',
-    BEECFA: 'bg-[#BEECFA]',
-    BED2FA: 'bg-[#BED2FA]',
-    '': '',
-  };
-
   return (
     <div
       ref={setNodeRef}
@@ -61,7 +49,10 @@ export default function SortableItem(props) {
             ref={setActivatorNodeRef}
             {...listeners}
             {...attributes}
-            className={`text-md flex h-full w-[90px] shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg px-2 text-center font-bold text-darkgrey shadow-lg  ${defaultColor[bgColor]}`}
+            style={{
+              backgroundColor: `#${bgColor}`,
+            }}
+            className={`text-md flex h-full w-[90px] shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg px-2 text-center font-bold text-darkgrey shadow-lg `}
           >
             {!props.isEditable ? (
               <Link
