@@ -115,7 +115,7 @@ export default function Spawner(props) {
       await Swal.fire({
         title: 'Choose your element row',
         input: 'select',
-        inputOptions: { add: 'Add' },
+        inputOptions: menu,
         buttonsStyling: false,
         showDenyButton: true,
         denyButtonText: `Delete This Element`,
