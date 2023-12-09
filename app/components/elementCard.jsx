@@ -53,6 +53,8 @@ export default function ElementCard(props) {
         <div className=' relative h-[70px] w-[70px] rounded-[10px] bg-[#D9D9D9]'>
           <Image
             src={props.src}
+            priority={true}
+            sizes='70px'
             className='shrink-0 rounded-[10px] object-cover'
             fill={true}
             alt={props.title || 'sdfsdf'}

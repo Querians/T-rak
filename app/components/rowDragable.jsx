@@ -241,6 +241,7 @@ export default function RowDragable(props) {
               priority={true}
               src={activeElementUrl}
               fill={true}
+              sizes='70px'
               quality={100}
               className='rounded-lg object-cover shadow-lg'
               alt={activeElementTitle + 'pic'}
