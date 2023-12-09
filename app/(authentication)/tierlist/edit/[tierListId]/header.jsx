@@ -1,19 +1,13 @@
 import { CustomizeButton } from '@/app/components/inputComponent/button';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
-import { Avatar } from '@nextui-org/react';
 import Inputtypefile from '@/app/components/inputTypeFile';
+import axfetch from '@/utils/axfetch';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function Header(props) {
-  const { tierListId, data } = props;
-
-  // query from tierListId
-  const tierListData = {
-    name: 'this is tier list nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-    description: 'this is descriptionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
-    category: 'this is categoryyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
-    coverPhotoUrl: '/vercel.svg',
-  };
+  const { tierListId, tierListData, data } = props;
+  const queryClient = useQueryClient();
 
   const router = useRouter();
 
@@ -45,7 +39,6 @@ export default function Header(props) {
   };
 
   const handleOnClickDelete = (e) => {
-    console.log('handleOnClickDelete');
     Swal.fire({
       title: 'Are you sure?',
       color: '#A73440',
@@ -69,32 +62,48 @@ export default function Header(props) {
         cancelButton:
           'bg-cherry py-2 text-white font-bold w-full rounded-lg shadow-lg border border-[#FAFEFF]',
       },
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        // space for remove tierList function
-        // tierlistId can find from variable "tierListId"
-        //
-        //
-        // after delete complete
-        Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-          },
-        }).fire({
-          icon: 'success',
-          title: 'Delete successfully',
-        });
-        // if success (just didn't want to wait until popup is end then change page)
-        router.push(`/tierlist/workspace`);
+        await axfetch
+          .delete(`api/tierlist`, {
+            params: { id: tierListId },
+          })
+          .then((res) => {
+            if (res.status == 200) {
+              queryClient.invalidateQueries({ queryKey: ['TierListCards'] });
+              router.push(`/home`);
+              Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+              }).fire({
+                icon: 'success',
+                title: 'Delete successfully',
+              });
+            }
+          })
+          .catch((e) => {
+            Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1500,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              },
+            }).fire({
+              icon: 'error',
+              title: `ERROR cannot delete this tierList\n ${e}`,
+            });
+          });
       }
     });
   };
+
   const handleOnClickSave = (e) => {
     props?.setIsEditable(false);
     props?.saveItems();
@@ -127,16 +136,24 @@ export default function Header(props) {
   return (
     <div className='mx-5 mt-[15px] box-border flex h-[22%] shrink-0 flex-col justify-around gap-[15px] px-3 py-3.5'>
       <div className='flex items-center gap-3.5'>
-      <Inputtypefile type="preview" className=" w-[70px] h-[70px] shrink-0" param ={tierListData.coverPhotoUrl}/>
+        <Inputtypefile
+          type='preview'
+          className=' h-[70px] w-[70px] shrink-0'
+          param={
+            process.env.NEXT_PUBLIC_SUPABASE_URL +
+            '/storage/v1/object/public/images/' +
+            tierListData?.coverPhotoUrl
+          }
+        />
         <div className='font-bold'>
           <p className='max-w-[200px] truncate text-lg text-white'>
-            {tierListData.name}
+            {tierListData?.name}
           </p>
           <p className='text-md max-w-[200px] truncate text-peach'>
-            {tierListData.category}
+            {tierListData?.category?.categoryName}
           </p>
           <p className='max-w-[200px] truncate text-sm text-white'>
-            {tierListData.description}
+            {tierListData?.description}
           </p>
         </div>
       </div>
