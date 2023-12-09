@@ -1,5 +1,5 @@
-import SortableItem from '@/app/components/sortableItem';
-import Container from '@/app/components/container';
+import SortableItem from '@/app/components/dragComponent/sortableItem';
+import Container from '@/app/components/dragComponent/container';
 
 export default function TierListRow(props) {
   const { row, rowIndex, handleRemoveElement, isEditable } = props;

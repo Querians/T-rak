@@ -7,9 +7,12 @@ import { useQuery } from '@tanstack/react-query';
 import axfetch from '@/utils/axfetch';
 import { Spinner } from '@nextui-org/react';
 
-const RowDragable = dynamic(() => import('@/app/components/rowDragable'), {
-  ssr: false,
-});
+const RowDragable = dynamic(
+  () => import('@/app/components/dragComponent/rowDragable'),
+  {
+    ssr: false,
+  }
+);
 
 export default function EditExpand({ params }) {
   const fetchRowData = async () =>

@@ -1,4 +1,4 @@
-import Container from '@/app/components/container';
+import Container from '@/app/components/dragComponent/container';
 import Swal from 'sweetalert2';
 
 export default function Spawner(props) {

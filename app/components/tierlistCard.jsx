@@ -1,7 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-// import {Image} from "@nextui-org/react";
-// import NextImage from "next/image";
 
 export default function TierlistCard({
   pic,
@@ -16,13 +14,9 @@ export default function TierlistCard({
           <div className='relative flex h-[90px] w-[90px] shrink-0 items-center justify-center rounded-l-2xl rounded-r-md bg-lightpink shadow-lg'>
             <div className='relative h-[70px] w-[70px] shrink-0'>
               <Image
-                // as={NextImage}
                 src={pic}
                 alt='TierList picture'
                 sizes='70px'
-                // placeholder="blur"
-                // width={70}
-                // height={70}
                 fill={true}
                 className='rounded-lg object-cover'
                 priority={true}

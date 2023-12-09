@@ -1,5 +1,5 @@
 import { DragOverlay } from '@dnd-kit/core';
-import TierListRow from '@/app/components/tierListRow';
+import TierListRow from '@/app/components/dragComponent/tierListRow';
 import Image from 'next/image';
 
 export default function DragOverLayTierList({ items, activeId }) {

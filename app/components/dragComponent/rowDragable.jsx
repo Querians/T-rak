@@ -1,6 +1,6 @@
 'use client';
-import ElementCard from '@/app/components/elementCard';
-import Spawner from '@/app/components/spawner';
+import ElementCard from '@/app/components/dragComponent/elementCard';
+import Spawner from '@/app/components/dragComponent/spawner';
 import { useState, useEffect } from 'react';
 import {
   DndContext,

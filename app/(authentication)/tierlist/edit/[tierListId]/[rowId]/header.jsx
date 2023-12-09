@@ -5,7 +5,6 @@ import Inputbutton from '@/app/components/inputComponent/inputbtn';
 import Inputtypefile from '@/app/components/inputTypeFile';
 import axfetch from '@/utils/axfetch';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Spinner } from '@nextui-org/react';
 
 export default function Header(props) {
   const { tierListId, rowId, data } = props;

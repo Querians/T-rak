@@ -11,10 +11,10 @@ import {
 import { restrictToWindowEdges } from '@dnd-kit/modifiers';
 import { verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { SortableContext } from '@dnd-kit/sortable';
-import TierListRow from '@/app/components/tierListRow';
-import DragOverLayTierList from '@/app/components/dragOverLayTierList';
-import Spawner from '@/app/components/spawner';
-import { CustomizeButton } from './inputComponent/button';
+import TierListRow from '@/app/components/dragComponent/tierListRow';
+import DragOverLayTierList from '@/app/components/dragComponent/dragOverLayTierList';
+import Spawner from '@/app/components/dragComponent/spawner';
+import { CustomizeButton } from '../inputComponent/button';
 import {
   handleDragOver,
   handleDragEnd,
