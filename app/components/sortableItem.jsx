@@ -76,13 +76,13 @@ export default function SortableItem(props) {
                   onClick={() => {
                     props.onRemove(props.id, props.rowIndex);
                   }}
+                  className='absolute -right-2 -top-2 z-10'
                 >
                   <Image
                     src='/delete.svg'
                     width={20}
                     height={20}
                     alt={'delete button'}
-                    className='absolute -right-2 -top-2 z-10'
                   />
                 </button>
               )}
