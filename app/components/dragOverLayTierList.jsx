@@ -24,6 +24,7 @@ export default function DragOverLayTierList({ items, activeId }) {
           src={activeElementUrl}
           fill={true}
           quality={100}
+          sizes='70px'
           className='rounded-lg object-cover shadow-lg'
           alt={
             items[activeRowIndex]?.elements[activeElementIndex]?.title + 'pic'

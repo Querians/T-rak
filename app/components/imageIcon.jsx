@@ -15,7 +15,7 @@ export default function ImageIcon(props) {
         fill={true}
         quality={100}
         sizes='(max-width: 70px) 100vw, 33vw'
-        priority
+        priority={true}
         tabIndex='0'
         onClick={() => {
           props?.handleMenu(props.elementId);

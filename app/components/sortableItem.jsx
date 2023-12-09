@@ -96,12 +96,17 @@ export default function SortableItem(props) {
                     setIsClick(false);
                   }, 50);
                 }}
+                className='relative h-[70px] w-[70px]'
               >
                 {children}
               </div>
             </>
           ) : (
-            <div {...listeners} {...attributes}>
+            <div
+              className='relative h-[70px] w-[70px]'
+              {...listeners}
+              {...attributes}
+            >
               {children}
             </div>
           )}
