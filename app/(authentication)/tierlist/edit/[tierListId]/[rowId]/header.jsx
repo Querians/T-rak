@@ -26,7 +26,7 @@ export default function Header(props) {
     Swal.fire({
       title: 'Are you sure?',
       color: '#A73440',
-      text: `Do you really want to delete this Tier List row?`,
+      text: `Do you really want to delete this Tier-list row?`,
       iconHtml:
         '<Image src="/iconTrash.svg" width=65px height=65px alt="delete icon" />',
       showCancelButton: true,
@@ -71,11 +71,11 @@ export default function Header(props) {
           Swal.mixin({
             // toast: true,
             title: `Oops...`,
-            text: `Tier list must have atleast one row`,
+            text: `Tier-list must have atleast one row`,
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
-            footer: `<a class='underline decoration-cherry text-cherry' href="/tierlist/edit/${tierListId}">Please remove this tier list instead</a>`,
+            footer: `<a class='underline decoration-cherry text-cherry' href="/tierlist/edit/${tierListId}">Please remove this Tier-list instead</a>`,
             customClass: {
               popup:
                 'flex flex-col gap-[15px] bg-peach border border-cream rounded-2xl',

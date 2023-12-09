@@ -42,7 +42,7 @@ export default function Header(props) {
     Swal.fire({
       title: 'Are you sure?',
       color: '#A73440',
-      text: `Do you really want to delete this Tier List?`,
+      text: `Do you really want to delete this Tier-list?`,
       iconHtml:
         '<Image src="/iconTrash.svg" width=65px height=65px alt="delete icon" />',
       showCancelButton: true,
