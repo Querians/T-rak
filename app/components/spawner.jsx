@@ -67,59 +67,60 @@ export default function Spawner(props) {
 
   const handleMenu = async (elementId) => {
     await Swal.fire({
-      title: 'Select a menu',
+      title: 'Choose your element row',
       input: 'select',
-      inputOptions: {
-        Row: props?.isEditExpand ? { add: 'Add' } : menu,
-        Delete: {
-          Delete: 'Delete This Image',
-        },
-      },
+      inputOptions: props?.isEditExpand ? { add: 'Add' } : menu,
       buttonsStyling: false,
+      showDenyButton: true,
+      denyButtonText: `Delete This Element`,
+      confirmButtonText: `Done`,
+      inputLabel: 'Row list',
       customClass: {
         popup:
-          'px-5 py-[15px] flex gap-[15px] bg-mint border border-cream rounded-lg',
-        title: 'text-cherry',
+          'px-6 py-[15px] pb-16 flex bg-mint border border-cream rounded-2xl',
+        title: 'text-darkgrey mb-[15px]',
+        inputLabel: 'mt-0 w-full inline text-cherry text-2xl',
         input:
-          'bg-lightpink border-2 rounded-lg shadow-lg border border-[#FAFEFF]',
-        actions: 'flex flex-row-reverse gap-x-[12px] w-full',
+          'm-0 mb-[15px] bg-lightpink border-2 rounded-2xl shadow-lg border border-[#FAFEFF]',
+        actions: 'flex flex-row gap-x-[12px] gap-y-[15px] w-full',
         confirmButton:
-          'bg-peach py-2 text-white min-w-[150px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+          'h-[33px] order-3 bg-peach text-white min-w-[168px] rounded-2xl shadow-lg border border-[#FAFEFF]',
         cancelButton:
-          'bg-cherry py-2 text-white min-w-[100px] font-bold rounded-lg shadow-lg border border-[#FAFEFF]',
+          'h-[33px] order-2 bg-cherry text-white min-w-[112px] rounded-2xl shadow-lg border border-[#FAFEFF]',
+        denyButton:
+          'h-[33px] order-1 bg-winered text-white w-full min-w-[70px] rounded-2xl shadow-lg border border-[#FAFEFF]',
       },
-      inputPlaceholder: 'Select a menu',
+      inputPlaceholder: 'Select a row',
       showCancelButton: true,
       inputValidator: (value) => {
         return new Promise((resolve) => {
-          if (value === 'Delete') {
-            handleRemoveElement(elementId, items.length - 1);
-            // resolve();
+          if (value.length == 0) return resolve();
+          if (props?.isEditExpand) {
+            handleSelectRowBot(items[0].id, elementId);
+            Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              },
+            }).fire({
+              icon: 'success',
+              title: 'Add successfully',
+            });
           } else {
-            if (value.length == 0) return resolve();
-            if (props?.isEditExpand) {
-              handleSelectRowBot(items[0].id, elementId);
-              Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.onmouseenter = Swal.stopTimer;
-                  toast.onmouseleave = Swal.resumeTimer;
-                },
-              }).fire({
-                icon: 'success',
-                title: 'Add successfully',
-              });
-            } else {
-              handleSelectRowTop(value, elementId);
-              resolve();
-            }
+            handleSelectRowTop(value, elementId);
+            resolve();
           }
         });
       },
+    }).then((result) => {
+      if (result.isDenied) {
+        handleRemoveElement(elementId, items.length - 1);
+      }
     });
   };
 
@@ -132,20 +133,20 @@ export default function Spawner(props) {
           Add new Element
         </div>
         <div class='text-left'>
-          <p class='text-xl text-cherry font-bold'>Title Name</p>
-          <div class='w-full h-[36px] rounded-[15px] border-1 border-white bg-lightpink flex gap-5 items-center shadow-lg'>
+          <p class='text-xl text-cherry'>Title Name</p>
+          <div class='w-full h-[36px] rounded-2xl border-1 border-white bg-lightpink flex gap-5 items-center shadow-lg'>
               <input
-                id="swal-input1" 
-                tabindex="0" 
-                class="w-full bg-transparent text-darkgrey placeholder-peach placeholder:text-left pl-5 pr-5 rounded-xl focus:ring-0 focus:ring-offset-0 " 
-                type="text" 
+                id="swal-input1"
+                tabindex="0"
+                class="w-full bg-transparent text-darkgrey placeholder-peach placeholder:text-left pl-5 pr-5 rounded-xl focus:ring-0 focus:ring-offset-0 "
+                type="text"
                 placeholder='Title Name'
               />
           </div>
         </div>
         <div class='text-left'>
-          <p class='text-xl text-cherry font-bold'>Upload Image</p>
-          <input id="swal-input2" 
+          <p class='text-xl text-cherry'>Upload Image</p>
+          <input id="swal-input2"
           tabindex="0"
           accept='.jpeg, .png, .jpg'
           type="file" class="pb-1 h-[36px] bg-lightpink rounded-full border border-[#fafeff]/50 block w-full text-sm
@@ -153,7 +154,7 @@ export default function Spawner(props) {
             file:rounded-l-full file:border-0
             file:text-sm file:font-semibold
           file:bg-peach file:text-cream
-          hover:file:bg-violet-100
+          hover:file:bg-peach/50
           "/>
         </div>
       </div>
