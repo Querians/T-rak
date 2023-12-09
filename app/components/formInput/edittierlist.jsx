@@ -24,6 +24,25 @@ export default function TierListDetailEdit({ tierListId }) {
   useEffect(() => {
     setTierListDetails(data);
   }, [data]);
+  useEffect(() => {
+    if (error) {
+      router.push(`/home`);
+      Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      }).fire({
+        icon: 'error',
+        title: 'TierList NOT Found',
+      });
+    }
+  }, [error, router]);
+
+  if (error) {
+    return <></>;
+  }
 
   return (
     <div className='flex gap-7 px-2'>
@@ -35,24 +54,43 @@ export default function TierListDetailEdit({ tierListId }) {
           Object.entries(tierlistDetails).forEach(([key, value]) => {
             formData.append(key, value);
           });
-          const res = await fetch(`/api/tierlist/update`, {
+          await fetch(`/api/tierlist/update`, {
             method: 'POST',
             body: formData,
-          }).then(() => {
-            queryClient.invalidateQueries({ queryKey: ['tierListData'] });
-            queryClient.invalidateQueries({ queryKey: ['fetchTierListCards'] });
-            const Toast = Swal.mixin({
-              timer: 1500,
-              showConfirmButton: false,
-              text: 'Going back to home',
+          })
+            .then((res) => {
+              if (res.status == 200) {
+                queryClient.invalidateQueries({ queryKey: ['tierListData'] });
+                queryClient.invalidateQueries({ queryKey: ['TierListCards'] });
+                router.push(`/home`);
+                Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 1500,
+                  timerProgressBar: true,
+                }).fire({
+                  icon: 'success',
+                  title: 'Edit successfully',
+                });
+              }
+            })
+            .catch((e) => {
+              Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.onmouseenter = Swal.stopTimer;
+                  toast.onmouseleave = Swal.resumeTimer;
+                },
+              }).fire({
+                icon: 'error',
+                title: `ERROR cannot edit this tierList\n ${e}`,
+              });
             });
-            Toast.fire({
-              icon: 'success',
-              title: 'Edit successfully',
-            }).then(() => {
-              router.push(`/home`);
-            });
-          });
         }}
         className='flex w-full flex-col gap-5'
       >
@@ -120,7 +158,12 @@ export default function TierListDetailEdit({ tierListId }) {
             </Link>
           </div>
           <div className='basis-2/3'>
-            <CustomizeButton text='Save' styles='btnpeach' btType='submit' />
+            <CustomizeButton
+              text='Save'
+              styles='btnpeach'
+              btType='submit'
+              isDisabled={!isSuccess}
+            />
           </div>
         </div>
       </form>

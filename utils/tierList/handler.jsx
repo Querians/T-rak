@@ -60,7 +60,7 @@ export function handleDragOver(event, setItems, items) {
       });
       return;
     }
-    if (!isSpawner) {
+    if (!isSpawner && event.over.data.current?.sortable) {
       const overContainerIndex = event.over.data.current.sortable.index;
       if (items[overContainerIndex].elements.length == 0) {
         setItems((prev) => {
@@ -249,48 +249,52 @@ export const handleAddRow = (items, setItems) => {
   const defaultRow = [
     {
       label: 'All of my heart',
-      bgColor: 'FAFEFF',
+      bgColor: 'fafeff',
     },
     {
       label: 'Part of my heart',
-      bgColor: 'F1EEE7',
+      bgColor: 'fad4be',
     },
     {
       label: 'In my heart',
-      bgColor: 'FAE6BE',
+      bgColor: 'fae6be',
     },
     {
       label: 'Love that',
-      bgColor: 'F2FABE',
+      bgColor: 'f2fabe',
     },
     {
       label: 'Ahh Ha',
-      bgColor: 'D8FABE',
+      bgColor: 'd8fabe',
     },
     {
       label: 'Ummm',
-      bgColor: 'BEFAE4',
+      bgColor: 'befae4',
     },
     {
       label: "What that's",
-      bgColor: 'BEECFA',
+      bgColor: 'beecfa',
     },
     {
       label: 'Nope',
-      bgColor: 'BED2FA',
+      bgColor: 'bed2fa',
     },
   ];
-  setItems([
-    ...items.slice(0, -1),
-    {
-      id: window.crypto.randomUUID({ disableEntropyCache: true }),
-      label: defaultRow[items.length - 1].label,
-      color: defaultRow[items.length - 1].bgColor,
-      deletedElements: [],
-      elements: [],
-    },
-    items[items.length - 1],
-  ]);
+  setItems((prev) => {
+    const id = window.crypto.randomUUID({ disableEntropyCache: true });
+    return [
+      ...items.slice(0, -1),
+      {
+        rowId: id,
+        id: id,
+        label: defaultRow[items.length - 1].label,
+        color: defaultRow[items.length - 1].bgColor,
+        deletedElements: [],
+        elements: [],
+      },
+      items[items.length - 1],
+    ];
+  });
 };
 
 const removeElement = (id, parentIndex, setItems) => {
