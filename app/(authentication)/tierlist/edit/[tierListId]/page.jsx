@@ -133,7 +133,7 @@ export default function CurrentTierList({ params }) {
           );
           setIsExporting(true);
           setTimeout(() => {
-            exportComponentAsJPEG(componentRef);
+            exportComponentAsJPEG(componentRef, { fileName: data?.name });
           }, 1);
         }}
         resetItems={() => {
