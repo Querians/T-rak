@@ -24,6 +24,9 @@ export async function POST(request) {
             .map((row) => row.elements.map((element) => element.id))
             .flat(),
         },
+        rowId: {
+          in: rowData.map((row) => row.id),
+        },
       },
     });
 
@@ -59,7 +62,11 @@ export async function POST(request) {
               pictureUrl: element.picture,
               order: index,
               title: element.title,
-              rowId: row.id,
+              row: {
+                connect: {
+                  rowId: row.id,
+                },
+              },
             },
             update: {
               pictureUrl: element.picture || undefined,
@@ -72,16 +79,8 @@ export async function POST(request) {
       })
       .flat();
 
-    const deleteRows = prisma.row.deleteMany({
-      where: {
-        rowId: {
-          notIn: rowData.map((row) => row.id),
-        },
-      },
-    });
-
     const dbResponse = await prisma.$transaction(
-      [deleteElements, ...upsertRows, ...upsertElements, deleteRows],
+      [deleteElements, ...upsertRows, ...upsertElements],
       {
         isolationLevel: Prisma.TransactionIsolationLevel.Serializable,
       }

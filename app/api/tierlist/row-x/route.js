@@ -44,52 +44,41 @@ export async function POST(request) {
             .map((row) => row.elements.map((element) => element.id))
             .flat(),
         },
+        rowId: {
+          in: rowData.map((row) => row.id),
+        },
       },
     });
 
     // console.log(rowData.map((row) => row.elements.map((element) => element.id)).flat())
 
-    const upsertElements = rowData[0].elements.map((element, index) => {
-      return prisma.element.upsert({
-        where: {
-          elementId: element.id,
-        },
-        create: {
-          pictureUrl: element.picture,
-          order: index,
-          title: element.title,
-          rowId: rowData[0].id,
-        },
-        update: {
-          pictureUrl: element.picture || undefined,
-          order: index,
-          title: element.title || undefined,
-          rowId: rowData[0].id || undefined,
-        },
-      });
-    });
-
-    const upsertHiddenRowElements = rowData[1].elements.map(
-      (element, index) => {
-        return prisma.element.upsert({
-          where: {
-            elementId: element.id,
-          },
-          create: {
-            pictureUrl: element.picture,
-            order: index,
-            title: element.title,
-            rowId: rowData[1].id,
-          },
-          update: {
-            pictureUrl: element.picture || undefined,
-            order: index,
-            title: element.title || undefined,
-            rowId: rowData[1].id,
-          },
+    const upsertElements = rowData
+      .map((row) => {
+        return row.elements.map((element, index) => {
+          return prisma.element.upsert({
+            where: {
+              elementId: element.id,
+            },
+            create: {
+              pictureUrl: element.picture || '',
+              order: index,
+              title: element.title,
+              row: {
+                connect: {
+                  rowId: row.id,
+                },
+              },
+            },
+            update: {
+              pictureUrl: element.picture || undefined,
+              order: index,
+              title: element.title || undefined,
+              rowId: row.id || undefined,
+            },
+          });
         });
-      }
-    );
+      })
+      .flat();
 
     const dbResponse = await prisma.$transaction([
       updateRowInfo,
