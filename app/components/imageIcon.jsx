@@ -9,6 +9,7 @@ export default function ImageIcon(props) {
   return (
     <>
       <Image
+        id={props.id}
         src={img}
         alt={imgName}
         className='cursor-pointer rounded-2xl object-cover'

@@ -41,6 +41,7 @@ export default function ElementCard(props) {
         } `}
       >
         <Image
+          id={props.id}
           ref={setActivatorNodeRef}
           {...listeners}
           {...attributes}
