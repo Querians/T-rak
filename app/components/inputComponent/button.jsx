@@ -12,7 +12,7 @@ export const CustomizeButton = ({
     <>
       {styles == 'btnpeach' ? (
         <button
-          className='border-littlepink h-[33px] w-full rounded-2xl border border-1 bg-peach px-2 text-base text-white drop-shadow-md'
+          className='border-littlepink h-[33px] w-full rounded-2xl border-1 bg-peach px-2 text-base text-white drop-shadow-md'
           onClick={onClick}
           type={btType}
           disabled={isDisabled}
@@ -25,7 +25,7 @@ export const CustomizeButton = ({
 
       {styles == 'btncherry' ? (
         <button
-          className='border-littlepink h-[33px] w-full rounded-2xl border border-1 bg-cherry px-2 text-base text-white drop-shadow-md'
+          className='border-littlepink h-[33px] w-full rounded-2xl border-1 bg-cherry px-2 text-base text-white drop-shadow-md'
           onClick={onClick}
           type={btType}
         >
@@ -37,7 +37,7 @@ export const CustomizeButton = ({
 
       {styles == 'btnred' ? (
         <button
-          className='border-littlepink h-[33px] w-full rounded-2xl border border-1 bg-winered px-2 text-base text-white drop-shadow-md'
+          className='border-littlepink h-[33px] w-full rounded-2xl border-1 bg-winered px-2 text-base text-white drop-shadow-md'
           onClick={onClick}
           type={btType}
         >
@@ -49,7 +49,7 @@ export const CustomizeButton = ({
 
       {styles == 'addtextbtn' ? (
         <button
-          className='border-littlepink flex h-[33px] w-full items-center justify-center gap-2 rounded-2xl border border-1 bg-peach px-2 text-base text-white drop-shadow-md'
+          className='border-littlepink flex h-[33px] w-full items-center justify-center gap-2 rounded-2xl border-1 bg-peach px-2 text-base text-white drop-shadow-md'
           onClick={onClick}
           type={btType}
         >
@@ -69,16 +69,16 @@ export const CustomizeButton = ({
 
       {styles == 'deletebtn' ? (
         <button
-          className='border-littlepink flex h-[33px] w-full items-center justify-center gap-2 rounded-2xl border border-1 bg-winered px-2 text-base text-white drop-shadow-md'
+          className='border-littlepink flex h-[33px] w-full items-center justify-center gap-2 rounded-2xl border-1 bg-winered px-2 text-base text-white drop-shadow-md'
           onClick={onClick}
           type={btType}
         >
           <Image
             src='/iconTrash.svg'
-            className='inline'
             alt='delete icon'
-            width={20}
-            height={20}
+            width={0}
+            height={0}
+            className='h-[20px] w-[20px]'
             quality={100}
           />
           Delete {text}
@@ -90,16 +90,16 @@ export const CustomizeButton = ({
       {styles == 'logoutbtn' ? (
         <form action='/api/auth/signout' method='post' className='w-full'>
           <button
-            className='border-littlepink flex h-[33px] w-full items-center justify-center gap-2 rounded-2xl border border-1 bg-winered text-base text-white drop-shadow-md'
+            className='border-littlepink flex h-[33px] w-full items-center justify-center gap-2 rounded-2xl border-1 bg-winered text-base text-white drop-shadow-md'
             onClick={onClick}
             type={btType}
           >
             <Image
               src='/iconLogout.svg'
-              className='inline'
               alt='logout icon'
-              width={20}
-              height={20}
+              width={0}
+              height={0}
+              className='h-[20px] w-[20px]'
               quality={100}
             />
             Logout

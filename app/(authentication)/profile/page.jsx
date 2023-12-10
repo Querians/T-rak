@@ -22,6 +22,7 @@ export default function ProfileDetail() {
             width={60}
             height={60}
             quality={100}
+            priority={true}
             className={`transition-transform ${
               isEdit ? 'mr-6 translate-x-3 duration-[3000ms]' : ''
             }`}

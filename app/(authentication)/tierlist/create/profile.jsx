@@ -11,7 +11,6 @@ export default function Profile() {
   });
 
   if (error) return <p>{error.message}</p>;
-  // if (isLoading) return <Spinner className='h-full w-full' size='lg' />;
   return (
     <div className='relative h-[70px] w-[70px] rounded-full'>
       <Inputtypefile

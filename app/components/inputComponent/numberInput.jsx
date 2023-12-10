@@ -16,8 +16,9 @@ export function DropButton({ onClick, symbol, value }) {
       <Image
         src={`${symbol == 'add' ? '/addCream.svg' : '/minusCream.svg'}`}
         alt={`${symbol == 'add' ? 'add' : 'minus'}`}
-        width={16}
-        height={16}
+        width={0}
+        height={0}
+        className='h-[16px] w-[16px]'
       />
     </Button>
   );

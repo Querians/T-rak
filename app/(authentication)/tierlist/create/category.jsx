@@ -6,14 +6,12 @@ import { Spinner } from '@nextui-org/react';
 export default function Category() {
   const fetchCategory = async () =>
     await axfetch.get('api/category').then((res) => res.data);
-  const { data, error, isLoading, isSuccess } = useQuery({
+  const { data, error, isSuccess } = useQuery({
     queryKey: ['category'],
     queryFn: fetchCategory,
   });
 
   if (error) return <p>{error.message}</p>;
-  // if (isLoading) return <Spinner className='h-full w-full' size='lg' />;
-  console.log(data);
   return (
     <Combobox
       text='Category'
