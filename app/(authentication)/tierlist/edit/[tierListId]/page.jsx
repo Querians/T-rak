@@ -22,7 +22,7 @@ export default function CurrentTierList({ params }) {
     await axfetch
       .get(`api/tierlist/show/?id=${params.tierListId}`)
       .then((res) => res.data);
-  
+
   const saveTierlistData = async (data) => {
     const reqdata = structuredClone(data);
 
@@ -53,6 +53,7 @@ export default function CurrentTierList({ params }) {
   const { data, error, isSuccess, isLoading, isFetching } = useQuery({
     queryKey: ['tierListData', params.tierListId],
     queryFn: fetchTierListData,
+    retry: 2,
   });
 
   const router = useRouter();

@@ -18,6 +18,7 @@ export default function TierListDetailEdit({ tierListId }) {
   const { data, error, isLoading, isSuccess } = useQuery({
     queryKey: ['tierListData', tierListId],
     queryFn: fetchTierListData,
+    retry: 2,
   });
   const [tierlistDetails, setTierListDetails] = useState(data);
 

@@ -24,6 +24,7 @@ export default function EditExpand({ params }) {
   const { data, error, isSuccess, isLoading } = useQuery({
     queryKey: ['tierListData', params.rowId],
     queryFn: fetchRowData,
+    retry: 2,
   });
   const router = useRouter();
 
