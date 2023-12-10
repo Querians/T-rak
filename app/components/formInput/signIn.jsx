@@ -3,7 +3,7 @@ import Inputbutton from '../inputComponent/inputbtn';
 import { CustomizeButton } from '../inputComponent/button';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
-import axios from 'axios';
+import axfetch from '@/utils/axfetch';
 // import { Button } from "@nextui-org/react";
 
 export default function SignInForm() {
@@ -16,7 +16,7 @@ export default function SignInForm() {
         onSubmit={(event) => {
           event.preventDefault();
           const data = new FormData(event.target);
-          axios
+          axfetch
             .post('/api/auth/signin', data)
             .then(() => {
               window.location.href = '/home';
