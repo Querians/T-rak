@@ -43,6 +43,7 @@ export default function SortableItem(props) {
         <>
           {!props.isEditable ? (
             <Link
+              id={props.id}
               className={`h-full w-[90px] shrink-0`}
               href={`/tierlist/edit/${props?.tierListId}/${props.id}`}
             >

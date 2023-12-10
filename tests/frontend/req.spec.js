@@ -274,7 +274,7 @@ test.skip('TC_R011: User can search owned tier list', async ({ page }) => {
   await expect(page.locator('body')).toContainText('Nice to see you');
 });
 
-test.only('TC_R012: User can add new category in tierlist creation', async ({
+test.skip('TC_R012: User can add new category in tierlist creation', async ({
   page,
 }) => {
   await page.goto(`${process.env.NEXT_PUBLIC_BASE_URL}`);
@@ -299,12 +299,97 @@ test.only('TC_R012: User can add new category in tierlist creation', async ({
   );
 });
 
-test('TC_R013: User can rename tier list row label', async ({ page }) => {});
+test.skip('TC_R013: User can rename tier list row label', async ({ page }) => {
+  await page.goto(`${process.env.NEXT_PUBLIC_BASE_URL}`);
+  await page.getByRole('button', { name: 'Get Start!' }).click();
+  await page.getByPlaceholder('Email').click();
+  await page.getByPlaceholder('Email').fill(process.env.NEXT_PUBLIC_USER);
+  await page.getByPlaceholder('Password').click();
+  await page
+    .getByPlaceholder('Password')
+    .fill(process.env.NEXT_PUBLIC_PASSWORD);
+  await page.getByRole('button', { name: 'Sign in' }).click();
+  await page.getByRole('button', { name: 'Get Start!' }).click();
+  await expect(page.locator('body')).toContainText('Nice to see you');
 
-test('TC_R014: User can swap rows in tier list', async ({ page }) => {});
+  await page
+    .getByRole('link', {
+      name: 'TierList picture test_tier_list_operations Required',
+    })
+    .click();
+  await page.getByRole('link', { name: 'Modified' }).click();
+  await page.waitForTimeout(3000);
+  await page.getByRole('button', { name: 'Edit' }).click();
 
-test('TC_R015: User can add or delete rows in tier list', async ({
+  await page.getByRole('textbox').click();
+  await page.getByRole('textbox').fill('Modifie');
+  await page.getByRole('button', { name: 'Save' }).click();
+  await page
+    .locator('div')
+    .filter({ hasText: /^EditDelete This Row$/ })
+    .getByRole('button')
+    .first()
+    .click();
+  await expect(page.getByRole('main')).toContainText('Modifie');
+});
+
+test.skip('TC_R014: User can add or delete rows in tier list', async ({
   page,
-}) => {});
+}) => {
+  await page.goto(`${process.env.NEXT_PUBLIC_BASE_URL}`);
+  await page.getByRole('button', { name: 'Get Start!' }).click();
+  await page.getByPlaceholder('Email').click();
+  await page.getByPlaceholder('Email').fill(process.env.NEXT_PUBLIC_USER);
+  await page.getByPlaceholder('Password').click();
+  await page
+    .getByPlaceholder('Password')
+    .fill(process.env.NEXT_PUBLIC_PASSWORD);
+  await page.getByRole('button', { name: 'Sign in' }).click();
+  await page.getByRole('button', { name: 'Get Start!' }).click();
+  await expect(page.locator('body')).toContainText('Nice to see you');
 
-test('TC_R016: User can export tier list as image', async ({ page }) => {});
+  await page
+    .getByRole('link', {
+      name: 'TierList picture test_tier_list_operations Required',
+    })
+    .click();
+  await page.getByRole('button', { name: 'Edit' }).click();
+  await page
+    .getByRole('button', { name: 'add text icon Add new Level' })
+    .click();
+  await page.getByRole('button', { name: 'Save' }).click();
+  await expect(page.getByRole('button', { name: 'Ummm' })).toBeVisible();
+  await page.getByRole('link', { name: 'Ummm' }).click();
+  await page.waitForTimeout(3000);
+  await page
+    .getByRole('button', { name: 'delete icon Delete This Row' })
+    .click();
+  await page.getByRole('button', { name: 'Delete' }).click();
+  await expect(page.getByText('Delete Ummm row successfully')).toBeVisible();
+});
+
+test.only('TC_R015: User can export tier list as image', async ({ page }) => {
+  await page.goto(`${process.env.NEXT_PUBLIC_BASE_URL}`);
+  await page.getByRole('button', { name: 'Get Start!' }).click();
+  await page.getByPlaceholder('Email').click();
+  await page.getByPlaceholder('Email').fill(process.env.NEXT_PUBLIC_USER);
+  await page.getByPlaceholder('Password').click();
+  await page
+    .getByPlaceholder('Password')
+    .fill(process.env.NEXT_PUBLIC_PASSWORD);
+  await page.getByRole('button', { name: 'Sign in' }).click();
+  await page.getByRole('button', { name: 'Get Start!' }).click();
+  await expect(page.locator('body')).toContainText('Nice to see you');
+
+  await page
+    .getByRole('link', {
+      name: 'TierList picture test_tier_list_operations Required',
+    })
+    .click();
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export' }).click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toContain('.jpg');
+  await expect(page.getByLabel('Export Complete!')).toBeVisible();
+  await page.getByRole('button', { name: 'Done' }).click();
+});
