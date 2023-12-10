@@ -19,10 +19,42 @@ export default function CurrentTierList({ params }) {
     await axfetch
       .get(`api/tierlist/show/?id=${params.tierListId}`)
       .then((res) => res.data);
+
+  const saveTierlistData = async (data) => {
+    const reqdata = structuredClone(data);
+
+    console.log('data:', reqdata);
+    const request = new FormData();
+
+    reqdata.map((row, index) => {
+      if (row.id == -1) {
+        reqdata[index].id = reqdata[index].rowId;
+      }
+      row.elements.map((element, idx) => {
+        console.log('element:', element.picture);
+        if (element.picture !== undefined) {
+          request.append(`picture[${index}][${idx}]`, element.picture);
+          console.log(`picture[${index}][${idx}]:`, element.picture);
+        } else {
+          request.append(`picture[${index}][${idx}]`, undefined);
+        }
+      });
+    });
+
+    request.append('data', JSON.stringify(reqdata));
+
+    await axfetch
+      .post(`api/tierlist/modify/?id=${params.tierListId}`, request)
+      .then(() => {
+        window.location.reload();
+      });
+  };
+
   const { data, error, isSuccess, isLoading } = useQuery({
     queryKey: ['tierListData', params.tierListId],
     queryFn: fetchTierListData,
   });
+
   const router = useRouter();
 
   const [items, setItems] = useState([]);
@@ -46,6 +78,10 @@ export default function CurrentTierList({ params }) {
         elements: row.elements.map((element) => {
           return {
             ...element,
+            toShowSrc:
+              process.env.NEXT_PUBLIC_SUPABASE_URL +
+              '/storage/v1/object/public/images/' +
+              element?.pictureUrl,
             id: element.elementId,
           };
         }),
@@ -53,7 +89,10 @@ export default function CurrentTierList({ params }) {
     });
     setItems(formatData);
     setTempItems(formatData);
+
+    console.log('formatData:', formatData);
   }, [data]);
+
   useEffect(() => {
     if (isExporting) {
       setTimeout(() => {
@@ -103,6 +142,7 @@ export default function CurrentTierList({ params }) {
         }}
         saveItems={() => {
           setItems(tempItems);
+          saveTierlistData(tempItems);
         }}
         tierListId={params.tierListId}
         tierListData={data}
