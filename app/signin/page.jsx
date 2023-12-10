@@ -23,6 +23,7 @@ export default async function Signin() {
           width={110}
           height={110}
           quality={100}
+          priority={true}
         />
         <p className='text-3xl font-bold text-white'>T-rak</p>
         <p className='text-xl text-white'>sort your favourite</p>

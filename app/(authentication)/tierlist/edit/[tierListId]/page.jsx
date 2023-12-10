@@ -67,9 +67,6 @@ export default function CurrentTierList({ params }) {
   const componentRef = useRef();
 
   useEffect(() => {
-    console.log('items:', items);
-  }, [items]);
-  useEffect(() => {
     if (!data) return;
     const formatData = data.rows.map((row, index) => {
       return {

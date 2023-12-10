@@ -1,35 +1,31 @@
-'use client'
-import Image from 'next/image'
-import {useState} from 'react'
+'use client';
+import Image from 'next/image';
+import { useState } from 'react';
 
-export default function Searchbox({text, handleChange}) {
-
-    // const [value, setValue] = useState("")
-
-    // const handleInputChange = (e) => {
-    //     const searchTerm = e.target.value;
-    //     setValue(searchTerm)
-    // }
-
-    return(
-            <div className='relative w-full h-[36px] rounded-[15px] border-1 
-            border-white bg-lightpink flex gap-3 items-center
-            px-5 shadow-lg'>
-                <Image
-                    src="/iconSearchcherry.svg"
-                    alt="search icon"
-                    width={19}
-                    height={19}
-                    priority
-                />
-                <input className="w-full bg-transparent text-darkgrey
-                 placeholder-cherry placeholder:text-left pl-2 rounded-xl 
-                 focus:ring-0 focus:ring-offset-0 " 
-                        type="text" 
-                        placeholder={text}
-                        // value={value} 
-                        onChange={handleChange}
-                    />
-            </div>
-    );
+export default function Searchbox({ text, handleChange }) {
+  return (
+    <div
+      className='relative flex h-[36px] w-full items-center 
+            gap-3 rounded-[15px] border-1 border-white bg-lightpink
+            px-5 shadow-lg'
+    >
+      <Image
+        src='/iconSearchcherry.svg'
+        alt='search icon'
+        width={0}
+        height={0}
+        className='h-[19px] w-[19px]'
+        priority
+      />
+      <input
+        className='w-full rounded-xl bg-transparent
+                 pl-2 text-darkgrey placeholder-cherry placeholder:text-left 
+                 focus:ring-0 focus:ring-offset-0 '
+        type='text'
+        placeholder={text}
+        // value={value}
+        onChange={handleChange}
+      />
+    </div>
+  );
 }

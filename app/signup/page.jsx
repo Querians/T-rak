@@ -41,9 +41,9 @@ export default async function Signup() {
               width='39'
               height='39'
               filterUnits='userSpaceOnUse'
-              color-interpolation-filters='sRGB'
+              colorInterpolationFilters='sRGB'
             >
-              <feFlood flood-opacity='0' result='BackgroundImageFix' />
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
               <feColorMatrix
                 in='SourceAlpha'
                 type='matrix'
@@ -79,6 +79,7 @@ export default async function Signup() {
           width={80}
           height={80}
           quality={100}
+          priority={true}
         />
         <div className='flex flex-col'>
           <p className='text-3xl font-bold text-white'>T-rak</p>

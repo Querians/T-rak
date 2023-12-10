@@ -58,7 +58,7 @@ export default function ElementCard(props) {
             sizes='70px'
             className='shrink-0 rounded-2xl object-cover'
             fill={true}
-            alt={props.title || 'sdfsdf'}
+            alt={props.title || 'title'}
           />
         </div>
         <div
@@ -78,7 +78,14 @@ export default function ElementCard(props) {
           !props.isEditable ? 'opacity-0' : 'opacity-100'
         } fadeIn flex h-full w-[50px] shrink-0 items-center justify-center rounded-[15px] border border-[#FAFEFF] bg-winered shadow-lg`}
       >
-        <Image src='/iconTrash.svg' width={18} height={18} alt={'trash icon'} />
+        <Image
+          src='/iconTrash.svg'
+          width={0}
+          height={0}
+          alt={'trash icon'}
+          className='h-[18px] w-[18px]'
+          quality={100}
+        />
       </button>
     </div>
   );

@@ -37,7 +37,7 @@ export default function EditExpand({ params }) {
         } else {
           request.append(`picture[${index}][${idx}]`, undefined);
         }
-        console.log(request.get(`picture[${index}][${idx}]`));
+        // console.log(request.get(`picture[${index}][${idx}]`));
       });
     });
 
@@ -60,9 +60,6 @@ export default function EditExpand({ params }) {
   const [tempItems, setTempItems] = useState(items);
   const [isEditable, setIsEditable] = useState(false);
 
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
   useEffect(() => {
     if (!data) return;
     const formatData = data.map((row, index) => {

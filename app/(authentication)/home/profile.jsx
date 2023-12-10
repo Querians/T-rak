@@ -30,8 +30,9 @@ export default function Profile() {
         <Image
           src='/logoTRak.svg'
           alt='T-Rak Logo'
-          width={65}
-          height={65}
+          width={0}
+          height={0}
+          className='h-[65px] w-[65px]'
           priority
         />
       </div>
