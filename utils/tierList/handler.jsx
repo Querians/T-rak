@@ -317,7 +317,7 @@ export const handleRemoveElement = (id, parentIndex, setItems) => {
   Swal.fire({
     title: 'Are you sure?',
     color: '#A73440',
-    text: 'Do you really want to delete this Image?',
+    html: '<span class="text-darkgrey">Do you really want to delete this Image?</span>',
     iconHtml:
       '<Image src="/iconTrash.svg" width=65px height=65px alt="delete icon" />',
     showCancelButton: true,
@@ -326,15 +326,16 @@ export const handleRemoveElement = (id, parentIndex, setItems) => {
     confirmButtonText: 'Delete',
     buttonsStyling: false,
     customClass: {
-      popup: 'flex flex-col gap-[15px] bg-peach border border-cream rounded-lg',
+      popup:
+        'flex flex-col gap-[15px] bg-peach border border-cream rounded-2xl',
       title: 'p-0',
       htmlContainer: 'm-0',
       icon: 'border-0',
       actions: 'flex flex-col gap-[15px] w-1/2',
       confirmButton:
-        'bg-winered py-2 text-white font-bold w-full rounded-lg shadow-lg border border-[#FAFEFF]',
+        'bg-winered py-2 text-white font-bold w-full rounded-2xl shadow-lg border border-[#FAFEFF]',
       cancelButton:
-        'bg-cherry py-2 text-white font-bold w-full rounded-lg shadow-lg border border-[#FAFEFF]',
+        'bg-cherry py-2 text-white font-bold w-full rounded-2xl shadow-lg border border-[#FAFEFF]',
     },
   }).then((result) => {
     if (result.isConfirmed) {

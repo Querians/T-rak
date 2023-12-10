@@ -7,7 +7,7 @@ import Profile from './profile';
 
 export default function CreateTierlist() {
   return (
-    <main className='flex h-screen w-full flex-col'>
+    <main className='flex min-h-screen w-full flex-col'>
       <div className='justify-left flex h-[18%] w-full items-center gap-[15px] px-8 pt-10'>
         <Profile />
         <p className='text-2xl text-white '>Create New Tier-list</p>

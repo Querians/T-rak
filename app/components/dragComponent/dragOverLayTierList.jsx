@@ -1,5 +1,5 @@
 import { DragOverlay } from '@dnd-kit/core';
-import TierListRow from '@/app/components/tierListRow';
+import TierListRow from '@/app/components/dragComponent/tierListRow';
 import Image from 'next/image';
 
 export default function DragOverLayTierList({ items, activeId }) {
@@ -24,6 +24,7 @@ export default function DragOverLayTierList({ items, activeId }) {
           src={activeElementUrl}
           fill={true}
           quality={100}
+          sizes='70px'
           className='rounded-lg object-cover shadow-lg'
           alt={
             items[activeRowIndex]?.elements[activeElementIndex]?.title + 'pic'

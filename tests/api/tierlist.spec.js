@@ -37,7 +37,7 @@ test.beforeAll('TC_A002: sign in', async () => {
   expect(response.status()).toBe(200);
 });
 
-test('TC_A401_1: create new tierlist (success)', async () => {
+test('TC_A301_1: create new tierlist (success)', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/create`,
     {
@@ -65,7 +65,7 @@ test('TC_A401_1: create new tierlist (success)', async () => {
   expect(responseBody).toHaveProperty('coverPhotoUrl');
 });
 
-test('TC_A401_2: create new tierlist (fail due to category missing)', async () => {
+test('TC_A301_2: create new tierlist (fail due to category missing)', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/create`,
     {
@@ -88,7 +88,7 @@ test('TC_A401_2: create new tierlist (fail due to category missing)', async () =
   expect(responseBody.message).toBe('Category name is required');
 });
 
-test('TC_A401_3: create new tierlist (fail due to name missing)', async () => {
+test('TC_A301_3: create new tierlist (fail due to name missing)', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/create`,
     {
@@ -111,7 +111,7 @@ test('TC_A401_3: create new tierlist (fail due to name missing)', async () => {
   expect(responseBody.message).toBe('Tierlist name is required');
 });
 
-test('TC_A401_4: create new tierlist (fail due to description missing)', async () => {
+test('TC_A301_4: create new tierlist (fail due to description missing)', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/create`,
     {
@@ -134,7 +134,7 @@ test('TC_A401_4: create new tierlist (fail due to description missing)', async (
   expect(responseBody.message).toBe('Tierlist description is required');
 });
 
-test('TC_A401_5: create new tierlist (fail due to coverPhoto missing)', async () => {
+test('TC_A301_5: create new tierlist (fail due to coverPhoto missing)', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/create`,
     {
@@ -157,7 +157,7 @@ test('TC_A401_5: create new tierlist (fail due to coverPhoto missing)', async ()
   expect(responseBody.message).toBe('Tierlist cover photo is required');
 });
 
-test('TC_A402: update tierlist', async () => {
+test('TC_A302: update tierlist', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/update`,
     {
@@ -184,7 +184,7 @@ test('TC_A402: update tierlist', async () => {
   expect(responseBody).toHaveProperty('coverPhotoUrl');
 });
 
-test.skip('TC_A403: update row (no picture version)', async () => {
+test.skip('TC_A303: update row (no picture version)', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/row-x`,
     {
@@ -196,7 +196,7 @@ test.skip('TC_A403: update row (no picture version)', async () => {
   expect(response.status()).toBe(200);
 });
 
-test.skip('TC_A404: modify tierlist/ update all rows (no picture insert version)', async () => {
+test.skip('TC_A304: modify tierlist/ update all rows (no picture insert version)', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/modify-x`,
     {
@@ -211,7 +211,7 @@ test.skip('TC_A404: modify tierlist/ update all rows (no picture insert version)
   expect(response.status()).toBe(200);
 });
 
-test.skip('TC_A405: show all element in row', async () => {
+test.skip('TC_A305: show all element in row', async () => {
   const response = await apiContext.get(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/row`,
     {
@@ -226,7 +226,7 @@ test.skip('TC_A405: show all element in row', async () => {
   expect(response.status()).toBe(200);
 });
 
-test('TC_A406: show all rows and elements in tierlist', async () => {
+test('TC_A306: show all rows and elements in tierlist', async () => {
   const response = await apiContext.get(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/show`,
     {
@@ -241,7 +241,7 @@ test('TC_A406: show all rows and elements in tierlist', async () => {
   expect(response.status()).toBe(200);
 });
 
-test('TC_A407: show all tierlists of user', async () => {
+test('TC_A307: show all tierlists of user', async () => {
   const response = await apiContext.get(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist`,
     {
@@ -253,7 +253,7 @@ test('TC_A407: show all tierlists of user', async () => {
   expect(response.status()).toBe(200);
 });
 
-test('TC_A408: delete row', async () => {
+test('TC_A308: delete row', async () => {
   const response = await apiContext.delete(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist/row`,
     {
@@ -268,7 +268,7 @@ test('TC_A408: delete row', async () => {
   expect(response.status()).toBe(200);
 });
 
-test('TC_A409: delete tierlist', async () => {
+test('TC_A309: delete tierlist', async () => {
   const response = await apiContext.delete(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/tierlist`,
     {

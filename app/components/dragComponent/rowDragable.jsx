@@ -1,6 +1,6 @@
 'use client';
-import ElementCard from '@/app/components/elementCard';
-import Spawner from '@/app/components/spawner';
+import ElementCard from '@/app/components/dragComponent/elementCard';
+import Spawner from '@/app/components/dragComponent/spawner';
 import { useState, useEffect } from 'react';
 import {
   DndContext,
@@ -241,6 +241,7 @@ export default function RowDragable(props) {
               priority={true}
               src={activeElementUrl}
               fill={true}
+              sizes='70px'
               quality={100}
               className='rounded-lg object-cover shadow-lg'
               alt={activeElementTitle + 'pic'}

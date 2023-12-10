@@ -76,13 +76,13 @@ export default function SortableItem(props) {
                   onClick={() => {
                     props.onRemove(props.id, props.rowIndex);
                   }}
+                  className='absolute -right-2 -top-2 z-10'
                 >
                   <Image
                     src='/delete.svg'
                     width={20}
                     height={20}
                     alt={'delete button'}
-                    className='absolute -right-2 -top-2 z-10'
                   />
                 </button>
               )}
@@ -96,12 +96,17 @@ export default function SortableItem(props) {
                     setIsClick(false);
                   }, 50);
                 }}
+                className='relative h-[70px] w-[70px]'
               >
                 {children}
               </div>
             </>
           ) : (
-            <div {...listeners} {...attributes}>
+            <div
+              className='relative h-[70px] w-[70px]'
+              {...listeners}
+              {...attributes}
+            >
               {children}
             </div>
           )}

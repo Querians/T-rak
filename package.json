@@ -20,7 +20,8 @@
     "pw:test": "pnpm dotenv -e .env.local -- playwright test",
     "pw:test-api": "pnpm dotenv -e .env.local -- playwright test tests/api",
     "pw:test-frontend": "pnpm dotenv -e .env.local -- playwright test tests/frontend",
-    "pw:report":"pnpm exec playwright show-report"
+    "pw:report":"pnpm exec playwright show-report",
+    "pw:codegen":"pnpm exec playwright codegen http://localhost:3000/"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",

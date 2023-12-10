@@ -10,16 +10,19 @@ import { Spinner } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 
-const TierList = dynamic(() => import('@/app/components/tierList'), {
-  ssr: false,
-});
+const TierList = dynamic(
+  () => import('@/app/components/dragComponent/tierList'),
+  {
+    ssr: false,
+  }
+);
 
 export default function CurrentTierList({ params }) {
   const fetchTierListData = async () =>
     await axfetch
       .get(`api/tierlist/show/?id=${params.tierListId}`)
       .then((res) => res.data);
-
+  
   const saveTierlistData = async (data) => {
     const reqdata = structuredClone(data);
 
@@ -47,7 +50,7 @@ export default function CurrentTierList({ params }) {
       });
   };
 
-  const { data, error, isSuccess, isLoading } = useQuery({
+  const { data, error, isSuccess, isLoading, isFetching } = useQuery({
     queryKey: ['tierListData', params.tierListId],
     queryFn: fetchTierListData,
   });
@@ -152,7 +155,7 @@ export default function CurrentTierList({ params }) {
               : 'h-[95%] w-full touch-auto snap-y overflow-y-auto scroll-auto'
           }`}
         >
-          {isSuccess && (
+          {isSuccess && !isFetching && (
             <TierList
               originalLength={items?.length || 0}
               isExporting={isExporting}

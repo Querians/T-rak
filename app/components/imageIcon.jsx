@@ -9,13 +9,14 @@ export default function ImageIcon(props) {
   return (
     <>
       <Image
+        id={props.id}
         src={img}
         alt={imgName}
         className='cursor-pointer rounded-2xl object-cover'
         fill={true}
         quality={100}
         sizes='(max-width: 70px) 100vw, 33vw'
-        priority
+        priority={true}
         tabIndex='0'
         onClick={() => {
           props?.handleMenu(props.elementId);
