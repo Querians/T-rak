@@ -15,19 +15,19 @@ export default async function Signin() {
   console.log(data);
 
   return (
-    <main className='flex flex-col h-screen w-full'>
-      <div className='h-[40%] w-full pt-10 flex flex-col items-center justify-center'>
+    <main className='flex h-screen w-full flex-col'>
+      <div className='flex h-[40%] w-full flex-col items-center justify-center pt-10'>
         <Image
-          src= "/logoTRak.svg"
-          alt="logo"
+          src='/logoTRak.svg'
+          alt='logo'
           width={110}
           height={110}
           quality={100}
         />
-        <p className='text-3xl text-white font-bold'>T-rak</p>
-        <p className='text-xl text-white'>sort your favourite</p> 
+        <p className='text-3xl font-bold text-white'>T-rak</p>
+        <p className='text-xl text-white'>sort your favourite</p>
       </div>
-      <div className='h-[60%] p-8 bg-cream rounded-t-2xl'>
+      <div className='h-[60%] rounded-t-2xl bg-cream p-8'>
         <SignInForm />
       </div>
     </main>
