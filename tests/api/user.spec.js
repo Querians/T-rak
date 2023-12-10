@@ -22,7 +22,7 @@ test.beforeAll('TC_A002: sign in', async () => {
         email: process.env.NEXT_PUBLIC_USER,
         password: process.env.NEXT_PUBLIC_PASSWORD,
       },
-      maxRedirects: 1,
+      maxRedirects: 2,
     }
   );
   expect(response.status()).toBe(200);
