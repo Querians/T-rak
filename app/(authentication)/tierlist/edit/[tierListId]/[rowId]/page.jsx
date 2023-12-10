@@ -44,7 +44,7 @@ export default function EditExpand({ params }) {
     request.append('data', JSON.stringify(reqdata));
 
     await axfetch.post(`api/tierlist/row`, request).then(() => {
-      // window.location.reload();
+      window.location.reload();
     });
   };
 
