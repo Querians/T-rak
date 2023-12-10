@@ -6,34 +6,46 @@ import { uploadfile } from '@/utils/uploadfile';
 import { randomUUID } from 'crypto';
 import hslToHex from '@/utils/hslToHex';
 
-const tierlistColor = [
+const tierlistInitial = [
   {
-    name: 'red',
+    color: 'red',
     hex: 'F8AFB1',
+    label: 'All of my heart',
   },
   {
-    name: 'orange',
+    color: 'orange',
     hex: 'FAD4BE',
+    label: 'Part of my heart',
   },
   {
-    name: 'yellow',
+    color: 'yellow',
     hex: 'FAE6BE',
+    label: 'In my heart',
   },
   {
-    name: 'lightgreen',
+    color: 'lightgreen',
     hex: 'F2FABE',
+    label: 'Love that',
   },
   {
-    name: 'green',
+    color: 'green',
     hex: 'D8FABE',
+    label: 'Ahh Ha',
   },
   {
-    name: 'lightblue',
+    color: 'lightblue',
     hex: 'BEFAE4',
+    label: 'Umm',
   },
   {
-    name: 'blue',
+    color: 'blue',
+    hex: 'BEECFA',
+    label: "What that's",
+  },
+  {
+    color: 'violet',
     hex: 'BED2FA',
+    label: 'Nope',
   },
 ];
 
@@ -152,8 +164,8 @@ export async function POST(request) {
                 { length: formData.get('rowCount') },
                 (v, k) => k
               ).map((_, index) => ({
-                label: `Row ${index + 1}`,
-                color: tierlistColor[index % tierlistColor.length]['hex'],
+                label: tierlistInitial[index % tierlistInitial.length]['label'],
+                color: tierlistInitial[index % tierlistInitial.length]['hex'],
                 order: index,
               })),
               {
