@@ -46,6 +46,10 @@ export default function CurrentTierList({ params }) {
         elements: row.elements.map((element) => {
           return {
             ...element,
+            toShowSrc:
+              process.env.NEXT_PUBLIC_SUPABASE_URL +
+              '/storage/v1/object/public/images/' +
+              element?.pictureUrl,
             id: element.elementId,
           };
         }),
