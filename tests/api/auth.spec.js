@@ -19,7 +19,7 @@ const generateRandomString = function (length = 6) {
 
 var apiContext;
 
-test.beforeAll('TC_A001: sign up', async () => {
+test('TC_A001: sign up', async () => {
   apiContext = await request.newContext();
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signup`,
@@ -33,7 +33,7 @@ test.beforeAll('TC_A001: sign up', async () => {
         password: 'Se@2023',
         name: generateRandomString(),
       },
-      maxRedirects: 1,
+      maxRedirects: 2,
     }
   );
   console.log(response);
@@ -50,14 +50,14 @@ test('TC_A002: sign in', async () => {
         email: process.env.NEXT_PUBLIC_USER,
         password: process.env.NEXT_PUBLIC_PASSWORD,
       },
-      maxRedirects: 1,
+      maxRedirects: 2,
     }
   );
   console.log(response);
   expect(response.status()).toBe(200);
 });
 
-test('TC_A003: sign out', async () => {
+test.afterAll('TC_A003: sign out', async () => {
   const response = await apiContext.post(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signout`,
     { maxRedirects: 1 }
