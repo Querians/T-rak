@@ -21,6 +21,33 @@ export default function EditExpand({ params }) {
     await axfetch
       .get(`api/tierlist/row/?id=${params.rowId}`)
       .then((res) => res.data);
+
+  const saveTierlistData = async (data) => {
+    const reqdata = structuredClone(data);
+
+    const request = new FormData();
+
+    reqdata.map((row, index) => {
+      if (row.id == -1) {
+        reqdata[index].id = reqdata[index].rowId;
+      }
+      row.elements.map((element, idx) => {
+        if (element.picture !== undefined) {
+          request.append(`picture[${index}][${idx}]`, element.picture);
+        } else {
+          request.append(`picture[${index}][${idx}]`, undefined);
+        }
+        console.log(request.get(`picture[${index}][${idx}]`));
+      });
+    });
+
+    request.append('data', JSON.stringify(reqdata));
+
+    await axfetch.post(`api/tierlist/row`, request).then(() => {
+      window.location.reload();
+    });
+  };
+
   const { data, error, isSuccess, isLoading } = useQuery({
     queryKey: ['tierListData', params.rowId],
     queryFn: fetchRowData,
@@ -92,6 +119,7 @@ export default function EditExpand({ params }) {
         }}
         saveItems={() => {
           setItems(tempItems);
+          saveTierlistData(tempItems);
         }}
         tierListId={params.tierListId}
         rowId={params.rowId}

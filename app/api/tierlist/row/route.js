@@ -8,39 +8,30 @@ import { randomUUID } from 'crypto';
 // update row in tierlist
 export async function POST(request) {
   const requestUrl = new URL(request.url);
-  const rowData = await request.json();
-  // console.log(rowData);
+  const tierlistData = await request.formData();
+  const rowData = await JSON.parse(tierlistData.get('data'));
+  console.log(rowData);
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
   const { data, error } = await supabase.auth.getUser();
 
   try {
-    await Promise.all(
-      rowData[0].elements.map(async (element) => {
-        if (
-          element.picture !== null &&
-          element.picture !== undefined &&
-          element.picture !== ''
-        ) {
-          element.picture = await uploadfile(element.picture);
-          element.toShowSrc = element.picture.path;
+    for (let i = 0; i < 2; i++) {
+      for (let j = 0; j < rowData[i].elements.length; j++) {
+        console.log('ij :', i, j);
+        console.log(tierlistData.get(`picture[${i}][${j}]`));
+        const file = tierlistData.get(`picture[${i}][${j}]`) || null;
+        if (file !== null && file !== 'undefined' && file !== '') {
+          console.log(`file : ${file}`);
+          rowData[i].elements[j].picture = await uploadfile(file);
+          rowData[i].elements[j].toShowSrc =
+            await rowData[i].elements[j].picture.path;
+        } else {
+          rowData[i].elements[j].toShowSrc = null;
         }
-      })
-    );
-
-    await Promise.all(
-      rowData[1].elements.map(async (element) => {
-        if (
-          element.picture !== null &&
-          element.picture !== undefined &&
-          element.picture !== ''
-        ) {
-          element.picture = await uploadfile(element.picture);
-          element.toShowSrc = element.picture.path;
-        }
-      })
-    );
+      }
+    }
 
     const updateRowInfo = prisma.row.update({
       where: {
@@ -59,56 +50,44 @@ export async function POST(request) {
             .map((row) => row.elements.map((element) => element.id))
             .flat(),
         },
+        rowId: {
+          in: rowData.map((row) => row.id),
+        },
       },
     });
 
-    const upsertElements = rowData[0].elements.map((element, index) => {
-      return prisma.element.upsert({
-        where: {
-          elementId: element.id,
-        },
-        create: {
-          pictureUrl: element.toShowSrc,
-          order: index,
-          title: element.title,
-          rowId: rowData[0].id,
-        },
-        update: {
-          pictureUrl: element.toShowSrc || undefined,
-          order: index,
-          title: element.title || undefined,
-          rowId: rowData[0].id || undefined,
-        },
-      });
-    });
-
-    const upsertHiddenRowElements = rowData[1].elements.map(
-      (element, index) => {
-        return prisma.element.upsert({
-          where: {
-            elementId: element.id,
-          },
-          create: {
-            pictureUrl: element.toShowSrc,
-            order: index,
-            title: element.title,
-            rowId: rowData[1].id,
-          },
-          update: {
-            pictureUrl: element.toShowSrc || undefined,
-            order: index,
-            title: element.title || undefined,
-            rowId: rowData[1].id || undefined,
-          },
+    const upsertElements = rowData
+      .map((row) => {
+        return row.elements.map((element, index) => {
+          return prisma.element.upsert({
+            where: {
+              elementId: element.id,
+            },
+            create: {
+              pictureUrl: element.toShowSrc || '',
+              order: index,
+              title: element.title,
+              row: {
+                connect: {
+                  rowId: row.id,
+                },
+              },
+            },
+            update: {
+              pictureUrl: element.toShowSrc || undefined,
+              order: index,
+              title: element.title || undefined,
+              rowId: row.id || undefined,
+            },
+          });
         });
-      }
-    );
+      })
+      .flat();
 
     const dbResponse = await prisma.$transaction([
       updateRowInfo,
       deleteElements,
       ...upsertElements,
-      ...upsertHiddenRowElements,
     ]);
 
     console.log(dbResponse);
