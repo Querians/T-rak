@@ -2,31 +2,56 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("NEXT_PUBLIC_SUPABASE_URL")
+  url      = env("NEXT_PUBLIC_DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
-  token     String?
-  image     String?
-  aboutme   String?
-  tierlist  Tierlist[]
+  userId    String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email     String     @unique @db.VarChar(254)
+  name      String     @db.VarChar(50)
+  image     String?    @db.Text
+  aboutMe   String?    @db.Text
+  tierlists Tierlist[]
 }
 
 model Tierlist {
-  id        String   @id @default(uuid())
-  name      String
-  description String?
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
-  categories Category @relation("Category")
-  categoriesId String[]
-  rows      Row[]
+  tierlistId    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  category      Category @relation(fields: [categoryId], references: [categoryId])
+  categoryId    String   @db.Uuid
+  user          User     @relation(fields: [userId], references: [userId])
+  userId        String   @db.Uuid
+  name          String   @db.VarChar(50)
+  description   String?  @db.Text
+  coverPhotoUrl String?  @db.Text
+  rows          Row[]
+}
+
+model Category {
+  categoryId   String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  categoryName String     @db.VarChar(50)
+  tierlists    Tierlist[]
+}
+
+model Row {
+  rowId      String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tierlist   Tierlist  @relation(fields: [tierlistId], references: [tierlistId], onDelete: Cascade, onUpdate: Cascade)
+  tierlistId String    @db.Uuid
+  label      String?   @db.VarChar(50)
+  color      String?   @db.VarChar(6)
+  order      Int       @db.SmallInt
+  elements   Element[]
+}
+
+model Element {
+  elementId  String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  row        Row    @relation(fields: [rowId], references: [rowId], onDelete: Cascade, onUpdate: Cascade)
+  rowId      String @db.Uuid
+  pictureUrl String @db.Text
+  order      Int    @db.SmallInt
+  title      String @db.VarChar(50)
 }
