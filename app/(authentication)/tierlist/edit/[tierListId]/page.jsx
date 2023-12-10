@@ -23,7 +23,6 @@ export default function CurrentTierList({ params }) {
   const saveTierlistData = async (data) => {
     const reqdata = structuredClone(data);
 
-    console.log('data:', reqdata);
     const request = new FormData();
 
     reqdata.map((row, index) => {
@@ -31,10 +30,8 @@ export default function CurrentTierList({ params }) {
         reqdata[index].id = reqdata[index].rowId;
       }
       row.elements.map((element, idx) => {
-        console.log('element:', element.picture);
         if (element.picture !== undefined) {
           request.append(`picture[${index}][${idx}]`, element.picture);
-          console.log(`picture[${index}][${idx}]:`, element.picture);
         } else {
           request.append(`picture[${index}][${idx}]`, undefined);
         }
@@ -89,8 +86,6 @@ export default function CurrentTierList({ params }) {
     });
     setItems(formatData);
     setTempItems(formatData);
-
-    console.log('formatData:', formatData);
   }, [data]);
 
   useEffect(() => {
