@@ -32,10 +32,6 @@ export default function SortableItem(props) {
     transform: CSS.Transform.toString(transform),
     transition,
   };
-  let bgColor = '';
-  if (props.isRow) {
-    bgColor = props.row.color;
-  }
 
   return (
     <div
@@ -45,26 +41,36 @@ export default function SortableItem(props) {
     >
       {props.isRow ? (
         <>
-          <div
-            ref={setActivatorNodeRef}
-            {...listeners}
-            {...attributes}
-            style={{
-              backgroundColor: `#${bgColor}`,
-            }}
-            className={`text-md flex h-full w-[90px] shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg px-2 text-center font-bold text-darkgrey shadow-lg `}
-          >
-            {!props.isEditable ? (
-              <Link
-                className='overflow-hidden'
-                href={`/tierlist/edit/${props?.tierListId}/${props.id}`}
+          {!props.isEditable ? (
+            <Link
+              className={`h-full w-[90px] shrink-0`}
+              href={`/tierlist/edit/${props?.tierListId}/${props.id}`}
+            >
+              <div
+                ref={setActivatorNodeRef}
+                {...listeners}
+                {...attributes}
+                style={{
+                  backgroundColor: `#${props?.row?.color}`,
+                }}
+                className={`text-md flex h-full w-full shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg px-2 text-center font-bold text-darkgrey shadow-lg `}
               >
                 {props?.row?.label}
-              </Link>
-            ) : (
-              <div className='overflow-hidden '>{props?.row?.label}</div>
-            )}
-          </div>
+              </div>
+            </Link>
+          ) : (
+            <div
+              ref={setActivatorNodeRef}
+              {...listeners}
+              {...attributes}
+              style={{
+                backgroundColor: `#${props?.row?.color}`,
+              }}
+              className={`text-md flex h-full w-[90px] shrink-0 items-center justify-center rounded-bl-lg rounded-tl-lg px-2 text-center font-bold text-darkgrey shadow-lg `}
+            >
+              {props?.row?.label}
+            </div>
+          )}
           <div className='w-full snap-x overflow-auto'>{children}</div>
         </>
       ) : (
