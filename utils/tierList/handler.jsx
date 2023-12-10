@@ -333,9 +333,9 @@ export const handleRemoveElement = (id, parentIndex, setItems) => {
       icon: 'border-0',
       actions: 'flex flex-col gap-[15px] w-1/2',
       confirmButton:
-        'bg-winered py-2 text-white font-bold w-full rounded-2xl shadow-lg border border-[#FAFEFF]',
+        'bg-winered h-[33px] text-white font-bold w-full rounded-2xl shadow-lg border border-[#FAFEFF]',
       cancelButton:
-        'bg-cherry py-2 text-white font-bold w-full rounded-2xl shadow-lg border border-[#FAFEFF]',
+        'bg-cherry h-[33px] text-white font-bold w-full rounded-2xl shadow-lg border border-[#FAFEFF]',
     },
   }).then((result) => {
     if (result.isConfirmed) {

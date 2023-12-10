@@ -195,13 +195,14 @@ export default function Spawner(props) {
       reverseButtons: true,
       customClass: {
         popup:
-          'px-5 pt-[46px] pb-[50px] flex flex-col bg-mint border border-cream rounded-lg',
+          'px-5 pt-[46px] pb-[50px] flex flex-col bg-mint border border-cream rounded-2xl',
         htmlContainer: 'mx-0',
         actions: 'flex gap-x-[12px] w-full',
+        input: 'rounded-2xl h-[33px]',
         confirmButton:
-          'bg-peach py-2 px-[20px] text-white w-[150px] font-bold rounded-full shadow-lg border border-[#FAFEFF]',
+          'bg-peach h-[33px] px-[20px] text-white w-[150px] font-bold rounded-2xl shadow-lg border border-[#FAFEFF]',
         cancelButton:
-          'bg-cherry py-2 px-[20px] text-white w-[100px] font-bold rounded-full shadow-lg border border-[#FAFEFF]',
+          'bg-cherry h-[33px] px-[20px] text-white w-[100px] font-bold rounded-2xl shadow-lg border border-[#FAFEFF]',
         validationMessage: 'my-validation-message',
       },
       preConfirm: () => {

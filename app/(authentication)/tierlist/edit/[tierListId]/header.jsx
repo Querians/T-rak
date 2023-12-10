@@ -42,7 +42,7 @@ export default function Header(props) {
     Swal.fire({
       title: 'Are you sure?',
       color: '#A73440',
-      text: `Do you really want to delete this Tier-list?`,
+      html: `<span class="text-darkgrey">Do you really want to delete this Tier-list?</span>`,
       iconHtml:
         '<Image src="/iconTrash.svg" width=65px height=65px alt="delete icon" />',
       showCancelButton: true,
@@ -52,15 +52,15 @@ export default function Header(props) {
       buttonsStyling: false,
       customClass: {
         popup:
-          'flex flex-col gap-[15px] bg-peach border border-cream rounded-lg',
+          'flex flex-col gap-[15px] bg-peach border border-cream rounded-2xl',
         title: 'p-0',
         htmlContainer: 'm-0',
         icon: 'border-0',
         actions: 'flex flex-col gap-[15px] w-1/2',
         confirmButton:
-          'bg-winered py-2 text-white font-bold w-full rounded-lg shadow-lg border border-[#FAFEFF]',
+          'bg-winered h-[33px] text-white font-bold w-full rounded-2xl shadow-lg border border-[#FAFEFF]',
         cancelButton:
-          'bg-cherry py-2 text-white font-bold w-full rounded-lg shadow-lg border border-[#FAFEFF]',
+          'bg-cherry h-[33px] text-white font-bold w-full rounded-2xl shadow-lg border border-[#FAFEFF]',
       },
     }).then(async (result) => {
       if (result.isConfirmed) {
