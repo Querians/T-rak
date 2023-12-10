@@ -22,10 +22,39 @@ export default function CurrentTierList({ params }) {
     await axfetch
       .get(`api/tierlist/show/?id=${params.tierListId}`)
       .then((res) => res.data);
+  
+  const saveTierlistData = async (data) => {
+    const reqdata = structuredClone(data);
+
+    const request = new FormData();
+
+    reqdata.map((row, index) => {
+      if (row.id == -1) {
+        reqdata[index].id = reqdata[index].rowId;
+      }
+      row.elements.map((element, idx) => {
+        if (element.picture !== undefined) {
+          request.append(`picture[${index}][${idx}]`, element.picture);
+        } else {
+          request.append(`picture[${index}][${idx}]`, undefined);
+        }
+      });
+    });
+
+    request.append('data', JSON.stringify(reqdata));
+
+    await axfetch
+      .post(`api/tierlist/modify/?id=${params.tierListId}`, request)
+      .then(() => {
+        window.location.reload();
+      });
+  };
+
   const { data, error, isSuccess, isLoading, isFetching } = useQuery({
     queryKey: ['tierListData', params.tierListId],
     queryFn: fetchTierListData,
   });
+
   const router = useRouter();
 
   const [items, setItems] = useState([]);
@@ -61,6 +90,7 @@ export default function CurrentTierList({ params }) {
     setItems(formatData);
     setTempItems(formatData);
   }, [data]);
+
   useEffect(() => {
     if (isExporting) {
       setTimeout(() => {
@@ -110,6 +140,7 @@ export default function CurrentTierList({ params }) {
         }}
         saveItems={() => {
           setItems(tempItems);
+          saveTierlistData(tempItems);
         }}
         tierListId={params.tierListId}
         tierListData={data}

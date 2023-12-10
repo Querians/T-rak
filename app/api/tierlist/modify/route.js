@@ -9,30 +9,30 @@ import { Prisma } from '@prisma/client';
 // modify tierlist
 export async function POST(request) {
   const requestUrl = new URL(request.url);
-  const rowData = await request.json();
-  // console.log(rowData);
+  const tierlistData = await request.formData();
+  const rowData = await JSON.parse(tierlistData.get('data'));
+  console.log(rowData);
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
   const { data, error } = await supabase.auth.getUser();
 
   try {
-    await Promise.all(
-      rowData.map(async (row) => {
-        await Promise.all(
-          row.elements.map(async (element) => {
-            if (
-              element.picture !== null &&
-              element.picture !== undefined &&
-              element.picture !== ''
-            ) {
-              element.picture = await uploadfile(element.picture);
-              element.toShowSrc = element.picture.path;
-            }
-          })
-        );
-      })
-    );
+    for (let i = 0; i < rowData.length; i++) {
+      for (let j = 0; j < rowData[i].elements.length; j++) {
+        console.log('ij :', i, j);
+        console.log(tierlistData.get(`picture[${i}][${j}]`));
+        const file = tierlistData.get(`picture[${i}][${j}]`) || null;
+        if (file !== null && file !== 'undefined' && file !== '') {
+          console.log(`file : ${file}`);
+          rowData[i].elements[j].picture = await uploadfile(file);
+          rowData[i].elements[j].toShowSrc =
+            await rowData[i].elements[j].picture.path;
+        } else {
+          rowData[i].elements[j].toShowSrc = null;
+        }
+      }
+    }
 
     const deleteElements = prisma.element.deleteMany({
       where: {
@@ -40,6 +40,9 @@ export async function POST(request) {
           notIn: rowData
             .map((row) => row.elements.map((element) => element.id))
             .flat(),
+        },
+        rowId: {
+          in: rowData.map((row) => row.id),
         },
       },
     });
@@ -73,10 +76,14 @@ export async function POST(request) {
               elementId: element.id,
             },
             create: {
-              pictureUrl: element.toShowSrc,
+              pictureUrl: element.toShowSrc || '',
               order: index,
               title: element.title,
-              rowId: row.id,
+              row: {
+                connect: {
+                  rowId: row.id,
+                },
+              },
             },
             update: {
               pictureUrl: element.toShowSrc || undefined,
@@ -89,16 +96,9 @@ export async function POST(request) {
       })
       .flat();
 
-    const deleteRows = prisma.row.deleteMany({
-      where: {
-        rowId: {
-          notIn: rowData.map((row) => row.id),
-        },
-      },
-    });
-
     const dbResponse = await prisma.$transaction(
-      [deleteElements, ...upsertRows, ...upsertElements, deleteRows],
+      // [deleteElements, ...upsertRows, ...upsertElements, deleteRows],
+      [deleteElements, ...upsertRows, ...upsertElements],
       {
         isolationLevel: Prisma.TransactionIsolationLevel.Serializable,
       }
