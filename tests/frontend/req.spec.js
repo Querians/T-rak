@@ -236,22 +236,7 @@ test.skip('TC_R009: User can edit tier list properties', async ({ page }) => {
   await expect(page.locator('body')).toContainText('test_tier_list_operations'); //
 });
 
-test.skip('TC_R010: User can search owned tier list', async ({ page }) => {
-  await page.goto(`${process.env.NEXT_PUBLIC_BASE_URL}`);
-  await page.getByRole('button', { name: 'Get Start!' }).click();
-  await page.getByPlaceholder('Email').click();
-  await page.getByPlaceholder('Email').fill(process.env.NEXT_PUBLIC_USER);
-  await page.getByPlaceholder('Password').click();
-  await page
-    .getByPlaceholder('Password')
-    .fill(process.env.NEXT_PUBLIC_PASSWORD);
-  await page.getByRole('button', { name: 'Sign in' }).click();
-  await expect(page.locator('body')).toContainText('Nice to see you');
-});
-
-test.skip('TC_R011: User can add new category in tierlist creation', async ({
-  page,
-}) => {
+test.only('TC_R010: User can search owned tier list', async ({ page }) => {
   await page.goto(`${process.env.NEXT_PUBLIC_BASE_URL}`);
   await page.getByRole('button', { name: 'Get Start!' }).click();
   await page.getByPlaceholder('Email').click();
@@ -271,6 +256,33 @@ test.skip('TC_R011: User can add new category in tierlist creation', async ({
   await expect(page.locator('body')).not.toContainText(
     'test_tier_list_operations'
   );
+});
+
+test.skip('TC_R011: User can add new category in tier list creation', async ({
+  page,
+}) => {
+  await page.goto(`${process.env.NEXT_PUBLIC_BASE_URL}`);
+  await page.getByRole('button', { name: 'Get Start!' }).click();
+  await page.getByPlaceholder('Email').click();
+  await page.getByPlaceholder('Email').fill(process.env.NEXT_PUBLIC_USER);
+  await page.getByPlaceholder('Password').click();
+  await page
+    .getByPlaceholder('Password')
+    .fill(process.env.NEXT_PUBLIC_PASSWORD);
+  await page.getByRole('button', { name: 'Sign in' }).click();
+  await expect(page.locator('body')).toContainText('test_tier_list_operation');
+  await page.getByRole('button', { name: 'add' }).click();
+  await page.getByPlaceholder('Tier-list Name').click();
+  // please identify target tierlist's name belowed
+  await page.getByPlaceholder('Tier-list Name').fill('uvuvwevwe');
+  await page.locator('label svg').click();
+  await page.getByLabel('Edit').setInputFiles('./tests/picture/Wendy.jpg');
+  const testCategory = generateRandomString();
+  await page.getByPlaceholder('Category').click();
+  await page.getByPlaceholder('Category').fill(testCategory);
+  await page.getByPlaceholder('Description').fill(generateRandomString());
+  await page.getByRole('button', { name: 'Save' }).click();
+  await expect(page.getByRole('main')).toContainText(testCategory);
 });
 
 test.skip('TC_R012: User can rename tier list row label', async ({ page }) => {
