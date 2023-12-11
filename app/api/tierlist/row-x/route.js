@@ -6,6 +6,14 @@ import { uploadfile } from '@/utils/uploadfile';
 import { randomUUID } from 'crypto';
 
 // update row in tierlist
+/**
+ * @param {
+ * url: string
+ * formData: FormData
+ *  data: string
+ * } request
+ * @returns {Promise<NextResponse>} JSON response
+ */
 export async function POST(request) {
   const requestUrl = new URL(request.url);
   const rowData = await request.json();

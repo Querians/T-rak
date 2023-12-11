@@ -2,6 +2,15 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 
 // create category
+/**
+ *
+ * @param {
+ * url: string
+ * formData: FormData
+ *  categoryName: string
+ * } request
+ * @returns {Promise<NextResponse>} JSON response
+ */
 export async function POST(request) {
   const formData = await request.formData();
 
@@ -44,6 +53,15 @@ export async function POST(request) {
 }
 
 // get all category
+/**
+ *
+ * @param {
+ * url: string
+ * } request
+ * @returns {Promise<NextResponse>} JSON response
+ *  id: number
+ *  name: string
+ */
 export async function GET(request) {
   try {
     const dbResponse = await prisma

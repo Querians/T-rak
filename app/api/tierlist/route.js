@@ -3,6 +3,12 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 
+// get all tierlist
+/**
+ * @function GET
+ * @param {*} request
+ * @returns {Response} response
+ */
 export async function GET(request) {
   const requestUrl = new URL(request.url);
   const cookieStore = cookies();
@@ -40,6 +46,12 @@ export async function GET(request) {
   }
 }
 
+// delete tierlist
+/**
+ * @function DELETE
+ * @param {*} request
+ * @returns {Response} response
+ */
 export async function DELETE(request) {
   const requestUrl = new URL(request.url);
   const tierlistId = requestUrl.searchParams.get('id');

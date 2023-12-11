@@ -2,6 +2,17 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
+// signin user
+/**
+ *
+ * @param {
+ * url: string
+ * formData: FormData
+ *  email: string
+ *  password: string
+ * } request
+ * @returns {Promise<NextResponse>} Redirects to the origin of the request URL
+ */
 export async function POST(request) {
   const requestUrl = new URL(request.url);
   const formData = await request.formData();

@@ -50,6 +50,18 @@ const tierlistInitial = [
 ];
 
 // create tierlist
+/**
+ * @param {
+ * url: string
+ * formData: FormData
+ *  categoryName: string
+ *  rowCount: number
+ *  name: string
+ *  description: string
+ *  coverPhoto: File
+ * } request
+ * @returns {Promise<NextResponse>} JSON response
+ */
 export async function POST(request) {
   const requestUrl = new URL(request.url);
   const formData = await request.formData();

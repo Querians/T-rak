@@ -6,6 +6,11 @@ import { uploadfile } from '@/utils/uploadfile';
 import { randomUUID } from 'crypto';
 
 // get all row in tierlist
+/**
+ *
+ * @param {Request} request
+ * @returns {Promise<NextResponse>} JSON response
+ */
 export async function GET(request) {
   const requestUrl = new URL(request.url);
   const tierlistId = requestUrl.searchParams.get('id');
